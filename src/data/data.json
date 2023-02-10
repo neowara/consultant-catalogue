@@ -1,0 +1,265 @@
+[
+  {
+    "name": "Mariana",
+    "lastname": "Manrique",
+    "picture": "https://ca.slack-edge.com/T0ABV08MB-U03DPQ4D5J5-91f67f8a0d50-512",
+    "workTitle": "UI/UX Designer",
+    "funFacts": [
+      {
+        "icon": "fa-solid fa-book",
+        "description": "Likes to read"
+      },
+      {
+        "icon": "fa-solid fa-cubes",
+        "description": "Enjoys building legos"
+      },
+      {
+        "icon": "fa-solid fa-campground",
+        "description": "Loves camping"
+      }
+    ],
+    "shortBio": "My name is <strong>Mariana Manrique Estrada</strong> and I'm a UX/UI designer living in Göteborg, Sweden. <br /><br />I'm a gal from Mexico that enjoys meeting new people and learning from them. I have a background in industrial design so I like exploring tangible intefaces. My favourite reading genres are sci-fi and fantasy.",
+    "links": [
+      {
+        "title": "Yanko Design",
+        "url": "https://www.yankodesign.com/"
+      },
+      {
+        "title": "Dribbble",
+        "url": "https://www.dribbble.com"
+      },
+      {
+        "title": "Open-source UX design resources",
+        "url": "https://www.interaction-design.org/literature"
+      }
+    ],
+    "favoriteGif": "https://media.giphy.com/media/1n4iuWZFnTeN6qvdpD/giphy.gif"
+  },
+  {
+    "name": "Frida",
+    "lastname": "Andersson",
+    "picture": "https://ca.slack-edge.com/T0ABV08MB-U02JL4ME1GT-6e597b151c3a-512",
+    "workTitle": "UI, UX",
+    "funFacts": [
+      {
+        "icon": "fa-solid fa-mitten",
+        "description": "Thai Boxer"
+      },
+      {
+        "icon": "fa-solid fa-pen-fancy",
+        "description": "Craft-lover"
+      },
+      {
+        "icon": "fa-solid fa-drumstick-bite",
+        "description": "Foodie"
+      }
+    ],
+    "shortBio": "My name is <strong>Frida Andersson</strong> and I'm a UX/UI designer living in Göteborg, Sweden. <br /><br />I’ve worked and studied in Auckland, New York and Berlin before moving back to my roots on the Swedish west coast. I’m a creative and curious person always up to trying a new craft, most lately ceramics.",
+    "links": [
+      {
+        "title": "Dribbble",
+        "url": "https://www.dribbble.com"
+      },
+      {
+        "title": "Behance",
+        "url": "https://www.behance.net/"
+      }
+    ],
+    "favoriteGif": "https://media.giphy.com/media/U4DswrBiaz0p67ZweH/giphy.gif"
+  },
+  {
+    "name": "Sebastian",
+    "lastname": "Ekstrand",
+    "picture": "https://ca.slack-edge.com/T0ABV08MB-UTWGRKFLN-e9082924eefa-512",
+    "workTitle": "UI, UX, Frontend",
+    "funFacts": [
+      {
+        "icon": "fa-solid fa-music",
+        "description": "Musician"
+      },
+      {
+        "icon": "fa-solid fa-camera",
+        "description": "Photographer"
+      },
+      {
+        "icon": "fa-solid fa-cat",
+        "description": "Cat Person"
+      }
+    ],
+    "shortBio": "My name is <strong>Sebastian Ekstrand</strong> and I'm a UX/UI designer and Front-End developer living in Mölnlycke, Sweden. <br /><br />I'm a former Long and Triple jumper on a swedish national level and nowadays a very dedicated musician that creates and produces a lot of music on my spare time.",
+    "links": [
+      {
+        "title": "Smashing Magazine",
+        "url": "https://smashingmagazine.com"
+      },
+      {
+        "title": "Dribbble",
+        "url": "https://www.dribbble.com"
+      },
+      {
+        "title": "UX Movement",
+        "url": "https://uxmovement.com"
+      }
+    ],
+    "favoriteGif": "https://media.giphy.com/media/Od0QRnzwRBYmDU3eEO/giphy.gif"
+  },
+  {
+    "name": "Sofia",
+    "lastname": "Melhus",
+    "picture": "https://ca.slack-edge.com/T0ABV08MB-UFV9L4DMJ-7c714375f729-512",
+    "workTitle": "UX/UI designer",
+    "funFacts": [
+      {
+        "icon": "fa-solid fa-dumbbell",
+        "description": "Powerlifter"
+      },
+      {
+        "icon": "fa-solid fa-cat",
+        "description": "Cat Person"
+      },
+      {
+        "icon": "fa-solid fa-pizza",
+        "description": "Pizza Enthusiast"
+      }
+    ],
+    "shortBio": "My name is <strong>Sofia Melhus</strong> and I'm a UX/UI designer living in Mölndal, Sweden. <br /><br /> Powerlifting has become a big interest the last couple of years and therefore a fair amount of my time is spent at the gym. This complements well with my other big interest of baking bread, pizza and other good stuff that can be enjoyed after some heavy lifting.",
+    "links": [
+      {
+        "title": "Leaders of Awesomeness",
+        "url": "https://leaders.centercentre.com/"
+      }
+    ],
+    "favoriteGif": "https://media.giphy.com/media/BzyTuYCmvSORqs1ABM/giphy.gif"
+  },
+  {
+    "name": "Sofia",
+    "lastname": "Ödling",
+    "picture": "https://ca.slack-edge.com/T0ABV08MB-U02SW1F9RRP-d0b98faa39fa-512",
+    "workTitle": "UI/UX Designer",
+    "funFacts": [
+      {
+        "icon": "fa-solid fa-person-snowboarding",
+        "description": "Snowboarder"
+      },
+      {
+        "icon": "fa-solid fa-bowl-rice",
+        "description": "Foodie"
+      },
+      {
+        "icon": "fa-solid fa-earth-americas",
+        "description": "Traveler"
+      }
+    ],
+    "shortBio": "My name is <strong>Sofia Ödling</strong> and I'm a UX/UI designer that lives on the east side of Gothenburg, close to Skatås forest. <br /><br />I enjoy being out in the woods and like to try new things, both when it comes to sports or food. I am originally from Norrland and have spent a lot of time up in colder parts of Sweden, therefore snowboarding is also a big interest of mine. ",
+    "links": [],
+    "favoriteGif": "https://media.giphy.com/media/b8RfbQFaOs1rO10ren/giphy.gif"
+  },
+  {
+    "name": "Elin",
+    "lastname": "Karlsson",
+    "picture": "https://ca.slack-edge.com/T0ABV08MB-UF7PYFS03-e7af9512a4b2-512",
+    "workTitle": "Product designer, UX/UI",
+    "funFacts": [
+      {
+        "icon": "fa-solid fa-lightbulb",
+        "description": "Curious"
+      },
+      {
+        "icon": "fa-solid fa-paintbrush",
+        "description": "Creative"
+      },
+      {
+        "icon": "fa-solid fa-heart",
+        "description": "Caring"
+      }
+    ],
+    "shortBio": "My name is <strong>Elin Karlsson</strong> and I'm a designer living in Hisingen, Gothenburg, Sweden. <br /><br />I'm a food lover, nature lover, all-kinds-of-animal-lover. I enjoy creating crafts & arts. Sometimes I'm a floorball player. Always curios!",
+    "links": [
+      {
+        "title": "UX Collective",
+        "url": "https://uxdesign.cc"
+      },
+      {
+        "title": "Dribbble",
+        "url": "https://www.dribbble.com"
+      },
+      {
+        "title": "Skillshare",
+        "url": "https://www.skillshare.com"
+      }
+    ],
+    "favoriteGif": "https://media.giphy.com/media/a93jwI0wkWTQs/giphy.gif"
+  },
+  {
+    "name": "Daniel Shai",
+    "lastname": "Gunnarsson",
+    "picture": "https://ca.slack-edge.com/T0ABV08MB-U5ATANLUW-d358d776aecb-512",
+    "workTitle": "Product Design, UX Design",
+    "funFacts": [
+      {
+        "icon": "fa-solid fa-beer-mug-empty",
+        "description": "Beer Brewer"
+      },
+      {
+        "icon": "fa-solid fa-headphones-simple",
+        "description": "Hobby DJ and producer"
+      },
+      {
+        "icon": "fa-solid fa-compact-disc",
+        "description": "Party organiser"
+      }
+    ],
+    "shortBio": "Howdy, the names Daniel Shai Gunnarsson, but yall can call me <strong>Daniel</strong> or <strong>Shai</strong> or any combination you like. I'm a product designer working out of Linné GBG, dreaming of moving somewhere bigger tho - Not yet decided where. <br /><br />I love creating and I just signed a contract for a nice lil venue in Sockerbruket in gothenburg - The plan is to have it as a creative hub for creators and artists alike. and I'm a UX/UI designer and Front-End developer living in Mölnlycke, Sweden. <br /><br />I'm a former Long and Triple jumper on a swedish national level and nowadays a very dedicated musician that creates and produces a lot of music on my spare time.",
+    "links": [
+      {
+        "title": "Behance",
+        "url": "https://www.behance.net/"
+      },
+      {
+        "title": "Instagram",
+        "url": "https://www.instagram.com"
+      },
+      {
+        "title": "Youtube",
+        "url": "https://www.youtube.com/"
+      }
+    ],
+    "favoriteGif": "https://media.giphy.com/media/jir4LEGA68A9y/giphy.gif"
+  },
+  {
+    "name": "Isabelle",
+    "lastname": "Björklund",
+    "picture": "https://ca.slack-edge.com/T0ABV08MB-U01BYD07HPB-62de5d333586-512",
+    "workTitle": "Product design, UX",
+    "funFacts": [
+      {
+        "icon": "fa-solid fa-utensils",
+        "description": "Restaurants"
+      },
+      {
+        "icon": "fa-solid fa-route",
+        "description": "Explore"
+      },
+      {
+        "icon": "fa-solid fa-paw",
+        "description": "Dog Person"
+      }
+    ],
+    "shortBio": "My name is <strong>Isabelle Björklund</strong> and I'm a UX designer living on Hisingen, Sweden. <br /><br />I have worked with all kinds of areas, from public transport, irrigation systems, e-com and now car industry. Loves to explore new nature areas, restaurants and activities.",
+    "links": [
+      {
+        "title": "Medium",
+        "url": "https://medium.com/"
+      },
+      {
+        "title": "Nice very nice",
+        "url": "https://www.niceverynice.com/components"
+      },
+      {
+        "title": "Godly",
+        "url": "https://godly.website"
+      }
+    ],
+    "favoriteGif": "https://media.giphy.com/media/LXfpI3nNbfCm91llsA/giphy.gif"
+  }
+]
