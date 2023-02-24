@@ -42,7 +42,7 @@ const store = new Vuex.Store({
     };
   },
   mutations: {
-    setActive(state, payload) {
+    setActive(state: any, payload) {
       state.active = payload;
     },
     toggleMenu(state, payload) {

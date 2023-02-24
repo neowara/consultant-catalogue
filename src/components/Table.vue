@@ -1,4 +1,4 @@
-# Vue table component with pagination, sorting and filtering. 
+<!-- # Vue table component with pagination, sorting and filtering. 
 # This component is used in the main page to display the list of users.
 # The table has 5 columns: Name, Work title, location, available from, and actions.
 # The table is sortable by clicking on the column header.
@@ -33,7 +33,6 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType } from '@vue/composition-api';
 
 export default  {
   name: "Table",
@@ -122,3 +121,4 @@ export default  {
 </style>
 
 
+ -->

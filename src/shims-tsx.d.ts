@@ -1,15 +1,11 @@
-import Vue, { VNode } from 'vue';
-import { ComponentRenderProxy } from '@vue/composition-api';
+import Vue, { VNode } from 'vue'
 
 declare global {
   namespace JSX {
-    interface Element extends VNode { }
-    interface ElementClass extends ComponentRenderProxy { }
-    interface ElementAttributesProperty {
-      $props: any;
-    }
+    interface Element extends VNode {}
+    interface ElementClass extends Vue {}
     interface IntrinsicElements {
-      [elem: string]: any;
+      [elem: string]: any
     }
   }
 }
