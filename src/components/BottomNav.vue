@@ -1,21 +1,11 @@
 <template>
   <div class="bottom-nav-wrapper">
-    <button
-      v-if="prev"
-      class="prev"
-      @click="Prev(prevIndex)"
-      :title="prevIndex"
-    >
+    <button v-if="prev" class="prev" :title="prevIndex" @click="Prev(prevIndex)">
       <img src="../assets/svg/arrow-right.svg" />
       <span>{{ prev.name }} {{ prev.lastname }}</span>
     </button>
     <div class="seperator" />
-    <button
-      v-if="next"
-      class="next"
-      @click="Next(nextIndex)"
-      :title="nextIndex"
-    >
+    <button v-if="next" class="next" :title="nextIndex" @click="Next(nextIndex)">
       <span>{{ next.name }} {{ next.lastname }}</span>
       <img src="../assets/svg/arrow-right.svg" />
     </button>
@@ -26,10 +16,22 @@
 export default {
   name: "BottomNav",
   props: {
-    next: Object,
-    prev: Object,
-    nextIndex: Number,
-    prevIndex: Number,
+    next: {
+      type: Object,
+      required: true,
+    },
+    prev: {
+      type: Object,
+      required: true,
+    },
+    nextIndex: {
+      type: Number,
+      required: true,
+    },
+    prevIndex: {
+      type: Number,
+      required: true,
+    },
   },
   methods: {
     Next(index) {

@@ -29,10 +29,16 @@
 
 <script>
 export default {
-  name: "Fold Out Menu",
+  name: "FoldOutMenu",
   props: {
-    persons: Array,
-    open: Boolean,
+    persons: {
+      type: Array,
+      required: true,
+    },
+    open: {
+      type: Boolean,
+      required: true,
+    },
   },
   methods: {
     CloseMenu() {

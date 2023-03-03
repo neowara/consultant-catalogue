@@ -11,7 +11,10 @@
 export default {
   name: "FunFacts",
   props: {
-    person: Object,
+    person: {
+      type: Object,
+      required: true,
+    },
   },
 };
 </script>

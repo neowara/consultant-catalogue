@@ -4,9 +4,12 @@
 
 <script>
 export default {
-  name: "Bio",
+  name: "BioComponent",
   props: {
-    person: Object,
+    person: {
+      type: Object,
+      required: true,
+    }
   },
 };
 </script>

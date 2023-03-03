@@ -14,7 +14,7 @@
 import FoldOutMenu from "./FoldOutMenu";
 
 export default {
-  name: "Header",
+  name: "HeaderComponent",
   components: {
     FoldOutMenu,
   },
@@ -24,8 +24,14 @@ export default {
     },
   },
   props: {
-    msg: String,
-    persons: Array,
+    msg: {
+      type: String,
+      required: true,
+    },
+    persons: {
+      type: Array,
+      required: true,
+    },
   },
   methods: {
     OpenMenu() {

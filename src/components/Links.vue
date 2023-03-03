@@ -1,10 +1,9 @@
 <template>
-  <div v-if="person.links.length > 0">
+<div v-if="person.links.length > 0">
     <h2><span>Design Link Tips</span></h2>
     <ul class="links-wrapper">
       <li v-for="(link, i) of person.links" :key="i">
-        <a class="link" :href="link.url"
-          ><span>{{ link.title }}</span>
+        <a class="link" :href="link.url"><span>{{ link.title }}</span>
           <img src="../assets/svg/arrow-right.svg" />
         </a>
       </li>
@@ -14,9 +13,12 @@
 
 <script>
 export default {
-  name: "Links",
+  name: "LinksComponent",
   props: {
-    person: Object,
+    person: {
+      type: Object,
+      required: true,
+    },
   },
 };
 </script>
@@ -33,6 +35,7 @@ ul.links-wrapper {
   border: 1px solid #333;
   border-radius: 0.25rem;
 }
+
 a.link {
   display: flex;
   padding: 1rem 1rem;

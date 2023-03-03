@@ -8,7 +8,10 @@
 export default {
   name: "FavoriteGif",
   props: {
-    person: Object,
+    person: {
+      type: Object,
+      required: true,
+    },
   },
 };
 </script>

@@ -15,7 +15,10 @@
 export default {
   name: "ProfileTop",
   props: {
-    person: Object,
+    person: {
+      type: Object,
+      required: true,
+    },
   },
 };
 </script>
