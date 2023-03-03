@@ -9,7 +9,6 @@ module.exports = {
     "plugin:vue/base",
     "plugin:vue/recommended",
     "@vue/typescript/recommended",
-    "plugin:cypress/recommended",
   ],
   parserOptions: {
     ecmaVersion: 2020,
