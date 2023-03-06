@@ -10,6 +10,10 @@ const mutations: MutationTree<state> = {
 
   toggleMenu(state: state, payload) {
     state.menuOpen = payload;
+  },
+
+  setConsultants(state: state, data: Array<object>) {
+    state.consultants = data;
   }
 }
 

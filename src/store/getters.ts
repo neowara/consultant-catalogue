@@ -6,6 +6,9 @@ export default {
   },
   menuOpen(state: state) {
     return state.menuOpen;
+  },
+  consultants(state: state) {
+    return state.consultants;
   }
 }
 
