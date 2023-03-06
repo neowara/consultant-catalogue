@@ -133,7 +133,7 @@ export default {
 .table td,
 .table th {
   border-bottom: 1px solid #222;
-  padding: 1rem 0;
+  padding: 1.5rem 0;
 }
 
 .table tr:hover td {
