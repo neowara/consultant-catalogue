@@ -1,27 +1,27 @@
 <template>
   <div class="home-container">
+    <TableComponent />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import TableComponent from '../components/Table.vue';
 
 export default defineComponent({
   name: 'HomePage',
   components: {
+    TableComponent,
   },
   data() {
     return {
     }
   },
   methods: {
-    goToShowDetails(id: string) {
-      this.$router.push({ name: 'ShowDetails', params: { showId: id } });
-    }
   },
   computed: {
-    showsData() {
-      return this.$store.getters.getShows;
+    activeConsultant(): number {
+      return this.$store.getters.active;
     },
   },
 })
