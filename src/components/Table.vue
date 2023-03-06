@@ -1,4 +1,4 @@
-<!-- # Vue table component with pagination, sorting and filtering. 
+# Vue table component with pagination, sorting and filtering. 
 # This component is used in the main page to display the list of users.
 # The table has 5 columns: Name, Work title, location, available from, and actions.
 # The table is sortable by clicking on the column header.
@@ -10,12 +10,6 @@
         <tr>
           # column is a string, i is the index of the column
           # write in typescript, so we need to specify the type of the variable
-          <th v-for="(column, i) of columns" :key="i" @click="sortBy(column)">
-            {{ column }}
-            <span v-if="sortKey == column" class="arrow">
-              <font-awesome-icon :icon="sortOrders[column] > 0 ? 'sort-up' : 'sort-down'" />
-            </span>
-          </th>
         </tr>
       </thead>
       <tbody>
@@ -25,59 +19,51 @@
           <td>{{ entry.location }}</td>
           <td>{{ entry.availableFrom }}</td>
           <td>
-            <button class="btn btn-primary" @click="viewProfile(entry.id)">View profile</button>
+            <button class="btn btn-primary">
+              View profile
+            </button>
           </td>
         </tr>
       </tbody>
-      </table>
+    </table>
   </div>
 </template>
 <script lang="ts">
 
-export default  {
-  name: "Table",
+export default {
+  name: "TableComponent",
   props: {
-    data: Array,
-    columns: Array,
-    filterKey: String,
+    data: {
+      type: Array,
+      required: true,
+    },
+    columns: {
+      type: Array,
+      required: true,
+    },
+    filterKey: {
+      type: String,
+      default: "",
+      required: false,
+    }
   },
   data() {
     return {
-      sortKey: "",
+      sortKey: 0,
       sortOrders: {},
+      filteredData: [
+        {
+          name: "John Doe",
+          workTitle: "Software Engineer",
+          location: "London",
+          availableFrom: "2020-01-01",
+        }
+      ],
     };
   },
   computed: {
-    filteredData() {
-      const sortKey = this.sortKey;
-      const filterKey = this.filterKey && this.filterKey.toLowerCase();
-      const order = this.sortOrders[sortKey] || 1;
-      let data = this.data;
-      if (filterKey) {
-        data = data.filter((row) => {
-          return Object.keys(row).some((key) => {
-            return String(row[key]).toLowerCase().indexOf(filterKey) > -1;
-          });
-        });
-      }
-      if (sortKey) {
-        data = data.slice().sort((a, b) => {
-          a = a[sortKey];
-          b = b[sortKey];
-          return (a === b ? 0 : a > b ? 1 : -1) * order;
-        });
-      }
-      return data;
-    },
   },
   methods: {
-    sortBy(key: string) {
-      this.sortKey = key;
-      this.sortOrders[key] = this.sortOrders[key] * -1 || 1;
-    },
-    viewProfile(id: string) {
-      this.$router.push(`/profile/${id}`);
-    },
   },
 };
 </script>
@@ -119,6 +105,3 @@ export default  {
   margin-left: 5px;
 }
 </style>
-
-
- -->
