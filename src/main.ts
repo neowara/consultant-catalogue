@@ -2,6 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import Vuex from "vuex";
 import router from "./router";
+import { store } from "./store";
 
 /* import font awesome icon component */
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -33,40 +34,6 @@ import {
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 
-Vue.use(Vuex);
-
-const store = new Vuex.Store({
-  state() {
-    return {
-      active: 0,
-      menuOpen: false
-    };
-  },
-  mutations: {
-    setActive(state: any, payload) {
-      state.active = payload;
-    },
-    toggleMenu(state, payload) {
-      state.menuOpen = payload;
-    }
-  },
-  actions: {
-    setActive(context, payload) {
-      context.commit("setActive", payload);
-    },
-    toggleMenu(context, payload) {
-      context.commit("toggleMenu", payload);
-    }
-  },
-  getters: {
-    active(state) {
-      return state.active;
-    },
-    menuOpen(state) {
-      return state.menuOpen;
-    }
-  }
-});
 
 library.add(
   faMusic,
