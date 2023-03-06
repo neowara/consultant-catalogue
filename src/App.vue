@@ -1,17 +1,22 @@
 <template>
   <div id="app">
+    <Header />
     <RouterView />
   </div>
 </template>
 
 <script lang="ts">
 import { RouterView } from "vue-router";
+
 import { defineComponent } from "vue";
+import Header from "./components/Header.vue";
+import "./assets/scss/global.scss";
 
 export default defineComponent ({
   name: "App",
   components: {
-    RouterView
+    RouterView,
+    Header
   },
   data() {
     return {

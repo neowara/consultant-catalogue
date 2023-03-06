@@ -1,0 +1,50 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+  font-family: 'Roboto', "Helvetica", sans-serif;
+  font-size: 16px;
+  word-spacing: 0px;
+  letter-spacing: 0em;
+  font-weight: 400;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+
+  @include media-large {
+    font-size: 16px;
+  }
+}
+
+h1, h2, h3, h4, h5{
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+h1{
+  font-size: var(--font-xl);
+}
+h2{
+  font-size: var(--font-l);
+}
+h3{
+  font-size: var(--font-m);
+}
+h4{
+  font-size: var(--font-n);
+}
+h5{
+  font-size: var(--font-s);
+}
+
+button {
+  font-family: inherit;
+  font: inherit;
+}
+

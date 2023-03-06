@@ -1,0 +1,98 @@
+/* prevent ios bottom bar to pop */
+@mixin viewport-bottom {
+  @include media-small-max {
+    @include touch-device {
+      padding-bottom: calc(10vh - var(--size-full));
+    }
+  }
+}
+
+@mixin media-x-small-max {
+  @media (max-width: 600px) {
+    @content;
+  }
+}
+
+@mixin media-x-small {
+  @media (min-width: 601px) {
+    @content;
+  }
+}
+
+@mixin media-small-max {
+  @media (max-width: 991px) {
+    @content;
+  }
+}
+
+@mixin media-small-only {
+  @media (min-width: 601px) and (max-width: 991px) {
+    @content;
+  }
+}
+
+@mixin media-medium {
+  @media (min-width: 601px) {
+    @content;
+  }
+}
+
+@mixin media-large {
+  @media (min-width: 992px) {
+    @content;
+  }
+}
+
+@mixin media-large-max {
+  @media (max-width: 1311px) {
+    @content;
+  }
+}
+
+@mixin media-xlarge {
+  @media (min-width: 1312px) {
+    @content;
+  }
+}
+
+@mixin media-page-max {
+  @media (max-width: 1479px) {
+    @content;
+  }
+}
+
+@mixin media-page {
+  @media (min-width: 1480px) {
+    @content;
+  }
+}
+
+@mixin touch-device {
+  @media (hover: none) {
+    @content;
+  }
+}
+
+@mixin non-touch-device {
+  @media (hover: hover) {
+    @content;
+  }
+}
+
+@mixin only-ios-device {
+  @supports (-webkit-touch-callout: none) {
+    @content;
+  }
+}
+
+@mixin without-script {
+  #__nuxt[data-server-rendered] {
+    @content;
+  }
+}
+
+@mixin with-script {
+  #__nuxt:not([data-server-rendered]) {
+    @content;
+  }
+}

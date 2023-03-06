@@ -8,20 +8,23 @@
     <table class="table">
       <thead>
         <tr>
-          # column is a string, i is the index of the column
-          # write in typescript, so we need to specify the type of the variable
+         <th>Name</th>
+         <th>Work title</th>
+         <th>Location</th>
+         <th>Available</th>
+         <th> </th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(entry, i) of filteredData" :key="i">
-          <td>{{ entry.name }}</td>
-          <td>{{ entry.workTitle }}</td>
+          <td>{{ entry.name }}<span>{{ entry.bu }}</span></td>
+          <td>{{ entry.workTitle }}<span>{{ entry.workDesc }}</span></td>
           <td>{{ entry.location }}</td>
           <td>{{ entry.availableFrom }}</td>
-          <td>
-            <button class="btn btn-primary">
-              View profile
-            </button>
+          <td class="info">
+            <p class="experience">{{entry.experienceYears}}<span>Years</span></p>
+            <p class="availability">{{entry.availability*100}}%</p>
+           <img v-if="entry.canTravel" class="can-travel" src="../assets/svg/canTravel.svg" alt="Can Travel" />
           </td>
         </tr>
       </tbody>
@@ -54,9 +57,57 @@ export default {
       filteredData: [
         {
           name: "John Doe",
+          bu: "West Tech",
           workTitle: "Software Engineer",
-          location: "London",
+          workDesc: "Super Senior",
+          location: "Göteborg",
           availableFrom: "2020-01-01",
+          experienceYears: 15,
+          availability: 1,
+          canTravel: true,
+        },
+        {
+          name: "John Doe",
+          bu: "West Tech",
+          workTitle: "Software Engineer",
+          workDesc: "Super Senior",
+          location: "Göteborg",
+          availableFrom: "2020-01-01",
+          experienceYears: 5,
+          availability: 1,
+          canTravel: true,
+        },
+        {
+          name: "John Doe",
+          bu: "West Tech",
+          workTitle: "Software Engineer",
+          workDesc: "Super Senior",
+          location: "Göteborg",
+          availableFrom: "2020-01-01",
+          experienceYears: 2,
+          availability: 0.5,
+          canTravel: false,
+        },
+        {
+          name: "John Doe",
+          bu: "West Tech",
+          workTitle: "Software Engineer",
+          workDesc: "Super Senior",
+          location: "Göteborg",
+          availableFrom: "2020-01-01",
+          experienceYears: 15,
+          availability: 0.75,
+          canTravel: false,
+        },{
+          name: "John Doe",
+          bu: "West Tech",
+          workTitle: "Software Engineer",
+          workDesc: "Super Senior",
+          location: "Göteborg",
+          availableFrom: "2020-01-01",
+          experienceYears: 3,
+          availability: 1,
+          canTravel: true,
         }
       ],
     };
@@ -81,27 +132,72 @@ export default {
 
 .table td,
 .table th {
-  border: 1px solid #ddd;
-  padding: 8px;
+  border-bottom: 1px solid #222;
+  padding: 1rem 0;
 }
 
-.table tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-.table tr:hover {
-  background-color: #ddd;
+.table tr:hover td {
+  background-color: #111;
 }
 
 .table th {
-  padding-top: 12px;
-  padding-bottom: 12px;
   text-align: left;
-  background-color: #4caf50;
-  color: white;
+  background-color: transparent;
+  color: #FF875A;
+  font-size: var(--font-s);
+  font-weight: normal;
+
+  &:hover{
+    background-color: transparent;
+  }
+}
+
+table td span{
+  display: block;
+  font-size: var(--font-s);
+  opacity: 0.4;
+}
+
+table td.info{
+  display: flex;
+  align-items: center;
+
+  gap: 1rem;
 }
 
 .arrow {
   margin-left: 5px;
+}
+
+p.availability{
+  border: 1px solid #999;
+  width: 3rem;
+  height: 3rem;
+  line-height: 0.9rem;
+  font-weight: bold;
+  margin: 0;
+  font-size: var(--font-s);
+  padding: 1rem 0.25rem;
+  text-align: center;
+  border-radius: 1.5rem;
+}
+
+
+p.experience{
+  border: 1px solid #999;
+  width: 3rem;
+  height: 3rem;
+  line-height: 1rem;
+  font-weight: bold;
+  margin: 0;
+  font-size: var(--font-n);
+  padding: 0.5rem 0.25rem;
+  text-align: center;
+  border-radius: 0.5rem;
+}
+
+img.can-travel{
+  width: 2rem;
+  height: 2rem;
 }
 </style>

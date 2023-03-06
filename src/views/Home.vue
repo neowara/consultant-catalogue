@@ -1,6 +1,9 @@
 <template>
   <div class="home-container">
-    <TableComponent />
+    <div class="inner">
+      <h1><span>Consultants</span></h1>
+      <TableComponent />
+    </div>
   </div>
 </template>
 
@@ -28,4 +31,14 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+
+@import '../assets/scss/base';
+.home-container {
+  @include main-grid;
+  padding: 3rem 0;
+}
+
+div.inner{
+  grid-column: main;
+}
 </style>

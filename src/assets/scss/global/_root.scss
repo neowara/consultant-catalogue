@@ -1,0 +1,180 @@
+:root {
+  --page-grid: 1280px;
+  --font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+
+  --color-dark-accent: rgb(90, 30, 160);
+  --color-dark-accent-raw: 90, 30, 160;
+  --color-light-accent: rgb(90, 30, 160);
+  --color-light-accent-raw: 90, 30, 160;
+
+  --bg-color: #000;
+  --text-color: #fff;
+  --color-shadow: hsla(170, 20%, 20%, 0.2);
+  --color-shadow-less: hsla(170, 20%, 20%, 0.1);
+  --border-color: #d0dddb;
+  --light-border-color: #E2E9E9;
+  --dark-border-color: hsl(180, 14%, 70%);
+
+  --left-menu-default-color: rgba(0,0,0,0.75);
+
+  --mask-bg-color: rgba(27, 23, 30, 0.5);
+  --animation-expo-ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+
+  --shadow-xsmall: 0px 1px 9px 0px var(--color-shadow-less);
+  --shadow-small: 0px 4px 10px 0px var(--color-shadow);
+  --shadow-medium: 0px 4px 20px 0px var(--color-shadow);
+  --shadow-large: 0px 4px 30px 0px var(--color-shadow);
+
+  --primary-button-bg-color: var(--color-accent);
+  --primary-button-text-color: #fff;
+  --primary-button-border-color: var(--color-accent);
+  --primary-button-border-width: 0;
+
+  --secondary-button-bg-color: rgba(0, 0, 0, 1);
+  --secondary-button-text-color: #fff;
+  --secondary-button-border-color: #000;
+  --secondary-button-border-width: 1px;
+
+  --size-quarter: 0.25rem; // 3.75px
+  --size-half: 0.5rem; // 7.5px
+  --size-full: 1rem; // 15px
+  --size-1_5: 1.5rem; // 22.5px
+  --size-double: 2rem; // 30px
+  --size-trip: 3rem; // 45px
+  --size-quad: 4rem; // 60px
+
+  /* Font size */ // mobile // desktop
+
+  --font-xxxl: 3.05rem;  // 45px
+  --font-xxl: 2.4rem;  // 36px
+  --font-xl: 1.9333rem;  // 29px
+  --font-l: 1.533rem;  // 23px
+  --font-m: 1.2rem;  // 18px
+  --font-n: 1rem;  // 15px
+  --font-s: 0.8rem;  // 12px
+  --font-xs: 0.6rem; // 9px
+
+  --animation-timing-s: 300ms;
+  --animation-timing-m: 600ms;
+  --animation-timing-l: 800ms;
+
+  --button-radius: 0.25rem;
+}
+
+h1 {
+  font-size: var(--font-xxxl);
+  margin: 0.5em 0;
+
+  span{
+    display: inline-block;
+    border-bottom: 5px solid var(--color-dark-accent);
+  }
+}
+
+h2 {
+  font-size: var(--font-xxl);
+  margin: 0.5em 0;
+}
+
+h3 {
+  font-size: var(--font-xl);
+  margin: 0.5em 0;
+}
+
+h4 {
+  font-size: var(--font-l);
+  margin: 0.5em 0;
+}
+
+h1.h1,
+h2.h1,
+h3.h1,
+h4.h1 {
+  font-size: var(--font-xxxl);
+  line-height: 1em;
+}
+
+h1.h2,
+h2.h2,
+h3.h2,
+h4.h2 {
+  font-size: var(--font-xxl);
+  line-height: 1em;
+}
+
+h1.h3,
+h2.h3,
+h3.h3,
+h4.h3 {
+  font-size: var(--font-xl);
+  line-height: 1em;
+}
+
+h1.h4,
+h2.h4,
+h3.h4,
+h4.h4 {
+  font-size: var(--font-l);
+  line-height: 1em;
+}
+
+a:focus,
+button:focus {
+  /* Some exciting button focus styles */
+  outline: 3px solid white;
+  outline-offset: 0;
+  box-shadow: 0 0 0px 6px black;
+}
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible) {
+  /* Undo all the above focused button styles
+     if the button has focus but the browser wouldn't normally
+     show default focus styles */
+  outline: none;
+  box-shadow: none;
+}
+a:focus-visible,
+button:focus-visible {
+  /* Some even *more* exciting button focus styles */
+  outline: 3px solid white;
+  outline-offset: 0;
+  box-shadow: 0 0 0px 6px black;
+}
+
+body {
+  overflow-x: hidden;
+  background-color: var(--bg-color);
+}
+
+body.slideshow {
+  overflow: hidden;
+}
+
+body.panel-is-open {
+  overflow: hidden;
+}
+
+a,
+a:visited,
+button {
+  color: black;
+}
+
+body input[type="search"] {
+  -webkit-appearance: none;
+}
+
+@keyframes zoomAnimation {
+  from {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+  }
+  to {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+}
