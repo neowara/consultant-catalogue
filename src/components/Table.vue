@@ -11,24 +11,24 @@
           <th>Name</th>
           <th>Work title</th>
           <th>Location</th>
-          <th>Available</th>
+          <th>Available from</th>
           <th> </th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(entry, i) of filteredData" :key="i" @click="$emit('tableClick')">
-          <td>{{ entry.name }}<span>{{ entry.bu }}</span></td>
-          <td>{{ entry.workTitle }}<span>{{ entry.workDesc }}</span></td>
-          <td>{{ entry.location }}</td>
-          <td>{{ entry.availableFrom }}</td>
+        <tr v-for="(data, i) of availableConsultants" :key="i" @click="$emit('tableClick')">
+          <td>{{ data.consultantDetails.name }}<span>{{ data.consultantDetails.bu }}</span></td>
+          <td>{{ data.consultantDetails.workTitleShortDesc }}</td>
+          <td>{{ data.consultantDetails.location }}</td>
+          <td>{{ data.consultantDetails.availableFrom }}</td>
           <td class="info">
             <p class="experience">
-              {{ entry.experienceYears }}<span>Years</span>
+              {{ data.consultantDetails.experienceInYears }}<span>Years</span>
             </p>
             <p class="availability">
-              {{ entry.availability * 100 }}%
+              {{ parseFloat(data.consultantDetails.availableType) }}%
             </p>
-            <img v-if="entry.canTravel" class="can-travel" src="../assets/svg/canTravel.svg" alt="Can Travel" />
+            <img v-if="data.consultantDetails.canTravel" class="can-travel" src="../assets/svg/canTravel.svg" alt="Can Travel" />
           </td>
         </tr>
       </tbody>
@@ -36,14 +36,28 @@
   </div>
 </template>
 <script lang="ts">
+import { defineComponent } from "vue";
 
-export default {
+export interface Consultant {
+ consultantDetails: {
+  name: string;
+  bu: string;
+  workTitle: string;
+  workDesc: string;
+  location: string;
+  availableFrom: string;
+  availableType: string;
+  experienceInYears: number;
+  availability: number;
+  canTravel: boolean;
+  workingTitles: Array<string>;
+  workTitleShortDesc: string;
+ };
+}
+
+export default defineComponent( {
   name: "TableComponent",
   props: {
-    data: {
-      type: Array,
-      required: true,
-    },
     columns: {
       type: Array,
       required: true,
@@ -58,69 +72,17 @@ export default {
     return {
       sortKey: 0,
       sortOrders: {},
-      filteredData: [
-        {
-          name: "John Doe",
-          bu: "West Tech",
-          workTitle: "Software Engineer",
-          workDesc: "Super Senior",
-          location: "Göteborg",
-          availableFrom: "2020-01-01",
-          experienceYears: 15,
-          availability: 1,
-          canTravel: true,
-        },
-        {
-          name: "John Doe",
-          bu: "West Tech",
-          workTitle: "Software Engineer",
-          workDesc: "Super Senior",
-          location: "Göteborg",
-          availableFrom: "2020-01-01",
-          experienceYears: 5,
-          availability: 1,
-          canTravel: true,
-        },
-        {
-          name: "John Doe",
-          bu: "West Tech",
-          workTitle: "Software Engineer",
-          workDesc: "Super Senior",
-          location: "Göteborg",
-          availableFrom: "2020-01-01",
-          experienceYears: 2,
-          availability: 0.5,
-          canTravel: false,
-        },
-        {
-          name: "John Doe",
-          bu: "West Tech",
-          workTitle: "Software Engineer",
-          workDesc: "Super Senior",
-          location: "Göteborg",
-          availableFrom: "2020-01-01",
-          experienceYears: 15,
-          availability: 0.75,
-          canTravel: false,
-        }, {
-          name: "John Doe",
-          bu: "West Tech",
-          workTitle: "Software Engineer",
-          workDesc: "Super Senior",
-          location: "Göteborg",
-          availableFrom: "2020-01-01",
-          experienceYears: 3,
-          availability: 1,
-          canTravel: true,
-        }
-      ],
+      filteredData: [],
     };
   },
   computed: {
+    availableConsultants(): Array<Consultant> {
+      return this.$store.state.consultants;
+    },
   },
   methods: {
   },
-};
+});
 </script>
 
 <style scoped lang="scss">
