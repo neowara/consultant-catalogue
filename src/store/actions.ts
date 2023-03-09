@@ -1,5 +1,5 @@
 import { ActionTree } from "vuex";
-import axios, { } from 'axios';
+import axios from 'axios';
 
 import { state } from "./state"
 
@@ -15,16 +15,15 @@ const actions: ActionTree<state, state> = {
   async getConsultants(context, param: number) {
     try {
       const result = await axios({
-        method: 'get',
+        method: "get",
         url: context.state.APIAdress,
       });
-      context.commit("setConsultants", result.data);
-    } catch (error) {
-      console.log(error);
-    }
+    console.log(result);
+    context.commit("setConsultants", result.data);
+  } catch(error) {
+    console.log(error);
   }
-
-
+}
 }
 
-export default actions;
+export default actions; axios;
