@@ -8,23 +8,27 @@
     <table class="table">
       <thead>
         <tr>
-         <th>Name</th>
-         <th>Work title</th>
-         <th>Location</th>
-         <th>Available</th>
-         <th> </th>
+          <th>Name</th>
+          <th>Work title</th>
+          <th>Location</th>
+          <th>Available</th>
+          <th> </th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(entry, i) of filteredData" :key="i">
+        <tr v-for="(entry, i) of filteredData" :key="i" @click="$emit('tableClick')">
           <td>{{ entry.name }}<span>{{ entry.bu }}</span></td>
           <td>{{ entry.workTitle }}<span>{{ entry.workDesc }}</span></td>
           <td>{{ entry.location }}</td>
           <td>{{ entry.availableFrom }}</td>
           <td class="info">
-            <p class="experience">{{entry.experienceYears}}<span>Years</span></p>
-            <p class="availability">{{entry.availability*100}}%</p>
-           <img v-if="entry.canTravel" class="can-travel" src="../assets/svg/canTravel.svg" alt="Can Travel" />
+            <p class="experience">
+              {{ entry.experienceYears }}<span>Years</span>
+            </p>
+            <p class="availability">
+              {{ entry.availability * 100 }}%
+            </p>
+            <img v-if="entry.canTravel" class="can-travel" src="../assets/svg/canTravel.svg" alt="Can Travel" />
           </td>
         </tr>
       </tbody>
@@ -98,7 +102,7 @@ export default {
           experienceYears: 15,
           availability: 0.75,
           canTravel: false,
-        },{
+        }, {
           name: "John Doe",
           bu: "West Tech",
           workTitle: "Software Engineer",
@@ -147,18 +151,18 @@ export default {
   font-size: var(--font-s);
   font-weight: normal;
 
-  &:hover{
+  &:hover {
     background-color: transparent;
   }
 }
 
-table td span{
+table td span {
   display: block;
   font-size: var(--font-s);
   opacity: 0.4;
 }
 
-table td.info{
+table td.info {
   display: flex;
   align-items: center;
 
@@ -169,7 +173,7 @@ table td.info{
   margin-left: 5px;
 }
 
-p.availability{
+p.availability {
   border: 1px solid #999;
   width: 3rem;
   height: 3rem;
@@ -183,7 +187,7 @@ p.availability{
 }
 
 
-p.experience{
+p.experience {
   border: 1px solid #999;
   width: 3rem;
   height: 3rem;
@@ -196,7 +200,7 @@ p.experience{
   border-radius: 0.5rem;
 }
 
-img.can-travel{
+img.can-travel {
   width: 2rem;
   height: 2rem;
 }

@@ -2,7 +2,7 @@
   <div class="home-container">
     <div class="inner">
       <h1><span>Consultants</span></h1>
-      <TableComponent />
+      <TableComponent @tableClick="goToProfile(activeConsultant)" />
     </div>
   </div>
 </template>
@@ -21,6 +21,9 @@ export default defineComponent({
     }
   },
   methods: {
+    goToProfile(id: number) {
+      this.$router.push({ name: 'ConsultantDetails'});
+    }
   },
   computed: {
     activeConsultant(): number {
