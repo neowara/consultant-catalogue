@@ -39,7 +39,6 @@ export default defineComponent({
   name: 'ConsultantView',
   components: {
     Bio,
-    Header,
     ProfileTop,
     FunFacts,
     Links,
