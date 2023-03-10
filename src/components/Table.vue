@@ -16,11 +16,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(data, i) of availableConsultants" :key="i" @click="$emit('tableClick')">
+        <tr v-for="(data, i) of availableConsultants" :key="i" @click="$emit('tableClick', i)">
           <td>{{ data.consultantDetails.name }}<span>{{ data.consultantDetails.bu }}</span></td>
           <td>{{ data.consultantDetails.workTitleShortDesc }}</td>
           <td>{{ data.consultantDetails.location }}</td>
-          <td>{{ data.consultantDetails.availableFrom }}</td>
+          <td>{{ data.consultantDetails.availableFrom.split(' ')[0] }}</td>
           <td class="info">
             <p class="experience">
               {{ data.consultantDetails.experienceInYears }}<span>Years</span>
@@ -58,10 +58,6 @@ export interface Consultant {
 export default defineComponent( {
   name: "TableComponent",
   props: {
-    columns: {
-      type: Array,
-      required: true,
-    },
     filterKey: {
       type: String,
       default: "",
