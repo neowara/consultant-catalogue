@@ -1,7 +1,7 @@
-# Vue table component with pagination, sorting and filtering. 
-# This component is used in the main page to display the list of users.
-# The table has 5 columns: Name, Work title, location, available from, and actions.
-# The table is sortable by clicking on the column header.
+# Vue table component with pagination, sorting and filtering. # This component
+is used in the main page to display the list of users. # The table has 5
+columns: Name, Work title, location, available from, and actions. # The table is
+sortable by clicking on the column header.
 
 <template>
   <div class="table-wrapper">
@@ -12,15 +12,18 @@
           <th>Work title</th>
           <th>Location</th>
           <th>Available from</th>
-          <th> </th>
+          <th></th>
         </tr>
       </thead>
-      <tbody>
-        <tr v-for="(data, i) of availableConsultants" :key="i" @click="$emit('tableClick', i)">
-          <td>{{ data.consultantDetails.name }}<span>{{ data.consultantDetails.bu }}</span></td>
+      <tbody v-for="(data, i) of availableConsultants" :key="i">
+        <tr @click="$emit('tableClick', i)" @mouseover="expandNumber = i">
+          <td>
+            {{ data.consultantDetails.name
+            }}<span>{{ data.consultantDetails.bu }}</span>
+          </td>
           <td>{{ data.consultantDetails.workTitleShortDesc }}</td>
           <td>{{ data.consultantDetails.location }}</td>
-          <td>{{ data.consultantDetails.availableFrom.split(' ')[0] }}</td>
+          <td>{{ data.consultantDetails.availableFrom.split(" ")[0] }}</td>
           <td class="info">
             <p class="experience">
               {{ data.consultantDetails.experienceInYears }}<span>Years</span>
@@ -28,7 +31,20 @@
             <p class="availability">
               {{ parseFloat(data.consultantDetails.availableType) }}%
             </p>
-            <img v-if="data.consultantDetails.canTravel" class="can-travel" src="../assets/svg/canTravel.svg" alt="Can Travel" />
+            <img
+              v-if="data.consultantDetails.canTravel"
+              class="can-travel"
+              src="../assets/svg/canTravel.svg"
+              alt="Can Travel"
+            />
+          </td>
+          <td>
+            <img width="30" src="../assets/svg/Arrow.svg" alt="arrow" />
+          </td>
+        </tr>
+        <tr v-if="expandNumber === i && data.consultantDetails.consultantBio">
+          <td colspan="5">
+            {{ data.consultantDetails.consultantBio.cvLink }}
           </td>
         </tr>
       </tbody>
@@ -39,36 +55,42 @@
 import { defineComponent } from "vue";
 
 export interface Consultant {
- consultantDetails: {
-  name: string;
-  bu: string;
-  workTitle: string;
-  workDesc: string;
-  location: string;
-  availableFrom: string;
-  availableType: string;
-  experienceInYears: number;
-  availability: number;
-  canTravel: boolean;
-  workingTitles: Array<string>;
-  workTitleShortDesc: string;
- };
+  consultantDetails: {
+    name: string;
+    bu: string;
+    workTitle: string;
+    workDesc: string;
+    location: string;
+    availableFrom: string;
+    availableType: string;
+    experienceInYears: number;
+    availability: number;
+    canTravel: boolean;
+    workingTitles: Array<string>;
+    workTitleShortDesc: string;
+    consultantBio: {
+      cvLink: string;
+      ingress: string;
+      profilePic: string;
+    };
+  };
 }
 
-export default defineComponent( {
+export default defineComponent({
   name: "TableComponent",
   props: {
     filterKey: {
       type: String,
       default: "",
       required: false,
-    }
+    },
   },
   data() {
     return {
       sortKey: 0,
       sortOrders: {},
       filteredData: [],
+      expandNumber: 0,
     };
   },
   computed: {
@@ -105,7 +127,7 @@ export default defineComponent( {
 .table th {
   text-align: left;
   background-color: transparent;
-  color: #FF875A;
+  color: #ff875a;
   font-size: var(--font-s);
   font-weight: normal;
 
@@ -143,7 +165,6 @@ p.availability {
   text-align: center;
   border-radius: 1.5rem;
 }
-
 
 p.experience {
   border: 1px solid #999;
