@@ -1,13 +1,13 @@
 <template>
-  <div v-if="person" class="profile-top-wrapper">
+  <div v-if="consultantDetails" class="profile-top-wrapper">
     <div class="title-wrapper">
       <h1>
-        <span>{{ person.name }}</span> <span>{{ person.lastname }}</span>
+        {{ consultantDetails.name }}
       </h1>
-      <h3>{{ person.workTitle }}</h3>
+      <h3>{{ consultantDetails.workTitleShortDesc }}</h3>
     </div>
     <div class="overlay" />
-    <img class="profile-pic" :src="person.picture" />
+    <img v-if="consultantDetails.consultantBio" class="profile-pic" :src="consultantDetails.consultantBio.profilePic" />
   </div>
 </template>
 
@@ -15,7 +15,7 @@
 export default {
   name: "ProfileTop",
   props: {
-    person: {
+    consultantDetails: {
       type: Object,
       required: true,
     },
@@ -46,11 +46,9 @@ div.overlay {
   bottom: 5rem;
   right: 0;
   z-index: 1;
-  background: linear-gradient(
-    0deg,
-    rgba(18, 18, 18, 1) 0%,
-    rgba(18, 18, 18, 0) 100%
-  );
+  background: linear-gradient(0deg,
+      rgba(18, 18, 18, 1) 0%,
+      rgba(18, 18, 18, 0) 100%);
 }
 
 div.title-wrapper {

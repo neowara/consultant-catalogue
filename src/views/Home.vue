@@ -2,7 +2,7 @@
   <div class="home-container">
     <div class="inner">
       <h1><span>Consultants</span></h1>
-      <TableComponent @tableClick="goToProfile(activeConsultant)" />
+      <TableComponent @tableClick="$event => goToProfile($event)" />
     </div>
   </div>
 </template>
@@ -21,8 +21,9 @@ export default defineComponent({
     }
   },
   methods: {
-    goToProfile(id: number) {
-      this.$router.push({ name: 'ConsultantDetails'});
+    goToProfile(id: string) {
+      this.$store.dispatch("setActive", id);
+      this.$router.push({ name: 'ConsultantDetails', params: { id } });
     }
   },
   computed: {

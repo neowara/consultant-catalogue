@@ -4,7 +4,7 @@
   <div>
     <div>
       <Header :msg="'Hello'" :persons="getAllPerson()" @selected-person="setNewPerson" />
-      <ProfileTop :person="getPerson(activeIndex)" />
+      <ProfileTop :consultantDetails="getPerson(activeIndex)" />
       <FunFacts :person="getPerson(activeIndex)" />
       <Bio :person="getPerson(activeIndex)" />
       <Links :person="getPerson(activeIndex)" />
@@ -24,8 +24,6 @@
 </template>
 
 <script lang="ts">
-import persons from ".././data/data.json";
-
 import { defineComponent } from 'vue';
 import Bio from ".././components/Bio.vue";
 import Header from ".././components/Header.vue";
@@ -34,6 +32,7 @@ import FunFacts from ".././components/FunFacts.vue";
 import Links from ".././components/Links.vue";
 import FavoriteGif from ".././components/FavoriteGif.vue";
 import BottomNav from ".././components/BottomNav.vue";
+import { Consultant } from ".././components/Table.vue";
 
 export default defineComponent({
   name: 'ConsultantView',
@@ -53,34 +52,37 @@ export default defineComponent({
     activeIndex() {
       return this.$store.getters.active;
     },
+    availableConsultants(): Array<Consultant> {
+      return this.$store.state.consultants;
+    },
   },
   methods: {
     setNewPerson(newPerson:  string | number) {
       this.$store.dispatch("setActive", newPerson);
     },
     getAllPerson() {
-      return persons;
+      return this.availableConsultants;
     },
     getPerson(newPerson: number) {
-      return persons[newPerson];
+      return this.availableConsultants[newPerson].consultantDetails;
     },
     getNextPerson(index: string) {
-      const len = persons.length;
+      const len = this.availableConsultants.length;
       const newNumber = (parseInt(index) + (1 % len) + len) % len;
-      return persons[newNumber];
+      return this.availableConsultants[newNumber];
     },
     getPrevPerson(index: string) {
-      const len = persons.length;
+      const len = this.availableConsultants.length;
       const newNumber = (parseInt(index) + (-1 % len) + len) % len;
-      return persons[newNumber];
+      return this.availableConsultants[newNumber];
     },
     getPrevIndex(index: string) {
-      const len = persons.length;
+      const len = this.availableConsultants.length;
       const newNumber = (parseInt(index) + (-1 % len) + len) % len;
       return newNumber;
     },
     getNextIndex(index: string) {
-      const len = persons.length;
+      const len = this.availableConsultants.length;
       const newNumber = (parseInt(index) + (1 % len) + len) % len;
       return newNumber;
     },
