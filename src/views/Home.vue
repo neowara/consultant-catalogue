@@ -35,7 +35,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import '../assets/scss/base/base';
 
 .home-container {
   @include main-grid;

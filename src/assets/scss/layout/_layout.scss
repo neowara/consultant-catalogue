@@ -5,3 +5,74 @@ body {
 main {
   background-color: var(--bg-color);
 }
+
+
+@mixin main-grid {
+  display: grid;
+  min-width: 100vw;
+  width: 100%;
+  grid-template-columns:
+    [full-start] 1fr [page-start] 1rem [main-start] minmax(0, var(--page-grid))
+    [main-end] 1rem [page-end] 1fr [full-end];
+  @include media-large {
+    grid-template-columns:
+      [full-start] 1fr [page-start] 2rem [main-start] minmax(
+        0,
+        var(--page-grid)
+      )
+      [main-end] 2rem [page-end] 1fr [full-end];
+  }
+}
+
+@mixin section {
+  display: grid;
+  grid-template-columns: auto var(--page-grid) auto;
+  padding-bottom: var(--size-full);
+  > * {
+    grid-column-start: 2;
+    grid-column-end: span 1;
+    padding: var(--size-full);
+    @include media-large {
+      padding: var(--size-full) var(--size-double);
+    }
+  }
+}
+
+@mixin container {
+  @include main-grid;
+  > .container {
+    grid-column: main;
+  }
+}
+
+@mixin grid {
+  @include main-grid;
+
+  > * {
+    grid-column: main;
+  }
+
+  > .breakout {
+    grid-column: full;
+  }
+
+  > .page {
+    grid-column: page;
+  }
+}
+
+.main-layout {
+  min-height: 100vh;
+  height: 100%;
+
+  & > nav {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    height: 100%;
+
+    @media only screen and (max-width: 500px) {
+      display: none;
+    }
+  }
+}
