@@ -6,7 +6,6 @@
       </h1>
       <h3>{{ consultantDetails.workTitleShortDesc }}</h3>
     </div>
-    <div class="overlay" />
     <img v-if="consultantDetails.consultantBio" class="profile-pic" :src="consultantDetails.consultantBio.profilePic" />
   </div>
 </template>
@@ -36,6 +35,9 @@ img.profile-pic {
   display: block;
   width: 100%;
   height: auto;
+  max-width: 500px;
+  max-height: 400px;
+  padding: 50px 70px;
 }
 
 div.overlay {
@@ -52,14 +54,18 @@ div.overlay {
 }
 
 div.title-wrapper {
-  position: absolute;
-  z-index: 2;
-  bottom: 0;
-  width: 90%;
-  padding: 0 5%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  order: 2;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
-  align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: flex-start;
+  justify-content: center;
 
   h1 {
     display: flex;
@@ -82,6 +88,7 @@ div.title-wrapper {
 
   h3 {
     font-weight: 400;
+    color: #9747FF;
   }
 }
 </style>

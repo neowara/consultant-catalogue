@@ -1,9 +1,8 @@
 /* Contains mixin and functions, no css */
-@import "./base/svg";
-@import "./base/mediaqueries";
-@import "./base/typography";
-@import "./base/layout";
-@import "./base/animations";
+@import "svg";
+@import "mediaqueries";
+@import "layout";
+@import "animations";
 
 @mixin reset-list {
   list-style: none;

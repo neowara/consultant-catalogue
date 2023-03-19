@@ -35,8 +35,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+@import '../assets/scss/base/base';
 
-@import '../assets/scss/base';
 .home-container {
   @include main-grid;
   padding: 3rem 0;

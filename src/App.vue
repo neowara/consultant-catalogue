@@ -10,7 +10,6 @@ import { RouterView } from "vue-router";
 
 import { defineComponent } from "vue";
 import Header from "./components/Header.vue";
-import "./assets/scss/global.scss";
 
 export default defineComponent ({
   name: "App",
