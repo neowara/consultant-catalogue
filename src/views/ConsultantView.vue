@@ -3,19 +3,34 @@
 <template>
   <div class="consultant-details-wrapper">
       <ProfileTop :consultantDetails="getPerson(activeIndex)" />
-      <h1><span>Profile</span></h1>
+      <h2><a id="profile"><span>Profile</span></a></h2>
+      <div class="profile-wrapper">
+        <table>
+          <tr><th>Years of Experience:</th><td>{{ getPerson(activeIndex).experienceInYears }}</td></tr>
+          <tr><th>Languages:</th><td>Swedish, English</td></tr>
+          <tr><th>Location:</th><td>{{ getPerson(activeIndex).location }}</td></tr>
+          <tr><th>Available from:</th><td>{{ getPerson(activeIndex).availableFrom }}</td></tr>
+          <tr><th>Available till:</th><td>{{ getPerson(activeIndex).availableTill }}</td></tr>
+          <tr><th>Availability:</th><td>{{ getPerson(activeIndex).availableType }}</td></tr>
+          <tr><th>Can Travel:</th><td>{{ getPerson(activeIndex).canTravel }}</td></tr>
+          <tr><th></th><td>{{ getPerson(activeIndex).canTravelComment }}</td></tr>
+          <tr><th>Business Unit:</th><td>{{ getPerson(activeIndex).businessArea }}</td></tr>
+        </table>
+      </div>
+      <h2><a id="about"><span>About me</span></a></h2>
+      <div class="about" v-html="fakeText"></div>
+      <h2><a id="skillset"><span>Skillset</span></a></h2>
+      <div class="tag-wrapper" >
+          <TagComponent v-for="(skill, index) in getPerson(activeIndex).workingTitles" :key="index" :text="skill"  />
+      </div>
+      <h2><a id="full-cv"><span>Full CV</span></a></h2>
+      <div class="full-cv-wrapper">
+        <a :href="getPerson(activeIndex).consultantBio.cvLink" target="_blank">Link to full CV</a>
+      </div>
+      <h2><a id="contact-info"><span>Contact information</span></a></h2>
       <div class="tag-wrapper">
-        <TagComponent icon="bars-progress" :text="getPerson(activeIndex).experienceInYears + ' years'" />
         <TagComponent icon="phone" :text="'042141234'" />
         <TagComponent icon="envelope" :text="'lorem@ipsum.com'" />
-        <TagComponent icon="car" text="Can drive" />
-        <TagComponent icon="gauge" text="100%" />
-      </div>
-      <div class="bio-wrapper">
-        <Bio :content="fakeText" backgroundColor="white" />
-        <Bio :content="fakeText" backgroundColor="#d8e6f0" />
-        <Bio :content="fakeText" backgroundColor="#ff875a" />
-        <Bio :content="fakeText" backgroundColor="#eeedef" />
       </div>
   </div>
 </template>
@@ -30,7 +45,6 @@ import TagComponent from ".././components/TagComponent.vue";
 export default defineComponent({
   name: 'ConsultantView',
   components: {
-    Bio,
     ProfileTop,
     TagComponent
   },
@@ -84,9 +98,16 @@ export default defineComponent({
 <style lang="scss">
 .consultant-details-wrapper {
   @include main-grid;
+  padding-bottom: 3rem;
 
-  h1 {
+  h2 {
     grid-column: main;
+    margin: 5rem 0 1rem;
+    color: white;
+
+    a{
+      color: white;
+    }
   }
 
   .tag-wrapper {
@@ -102,6 +123,30 @@ export default defineComponent({
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+  }
+
+  div.about, div.profile-wrapper, div.full-cv-wrapper{
+    grid-column: main;
+  }
+
+  div.profile-wrapper{
+    table{
+      th{
+        opacity: 0.6;
+        padding-right: 1rem;
+        text-align: left;
+        font-weight: 300;
+      }
+      td{
+        font-weight: 500;
+      }
+
+    }
+  }
+  div.full-cv-wrapper{
+    a{
+      color: white;
+    }
   }
 }
 </style>

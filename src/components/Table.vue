@@ -16,7 +16,7 @@ sortable by clicking on the column header.
         </tr>
       </thead>
       <tbody v-for="(data, i) of availableConsultants" :key="i">
-        <tr @click="$emit('tableClick', i)" @mouseover="expandNumber = i">
+        <tr @click="$emit('tableClick', i)">
           <td>
             {{ data.consultantDetails.name
             }}<span>{{ data.consultantDetails.bu }}</span>
@@ -39,7 +39,7 @@ sortable by clicking on the column header.
             />
           </td>
           <td>
-            <img width="30" src="../assets/svg/Arrow.svg" alt="arrow" />
+            <img class="arrow" width="30" src="../assets/svg/Arrow.svg" alt="arrow" />
           </td>
         </tr>
         <tr v-if="expandNumber === i && data.consultantDetails.consultantBio">
@@ -57,15 +57,17 @@ import { defineComponent } from "vue";
 export interface Consultant {
   consultantDetails: {
     name: string;
-    bu: string;
+    businessArea: string;
     workTitle: string;
     workDesc: string;
     location: string;
     availableFrom: string;
+    availableTill: string;
     availableType: string;
     experienceInYears: number;
     availability: number;
     canTravel: boolean;
+    canTravelComment: string;
     workingTitles: Array<string>;
     workTitleShortDesc: string;
     consultantBio: {
@@ -151,6 +153,11 @@ table td.info {
 
 .arrow {
   margin-left: 5px;
+}
+
+img.arrow{
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 p.availability {

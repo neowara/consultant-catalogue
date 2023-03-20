@@ -1,6 +1,6 @@
 <template>
   <div class="tag">
-    <div class="tag__icon">
+    <div v-if="icon" class="tag__icon">
       <font-awesome-icon :icon="icon" color="black" />
     </div>
     <div class="tag__text">
@@ -17,7 +17,8 @@ export default defineComponent({
   props: {
     icon: {
       type: String,
-      required: true,
+      required: false,
+      default: "",
     },
     text: {
       type: String,
@@ -31,10 +32,13 @@ export default defineComponent({
 .tag {
   display: flex;
   align-items: center;
-  background-color: #f2f2f2;
-  border-radius: 0.5rem;
-  padding: 0 10px;
-  margin-right: 10px;
+  color: #ddd;
+  background-color: #000;
+  border: 1px solid #aaa;
+  border-radius: 1.5rem;
+  height: 3rem;
+  padding: 0 1rem;
+  margin-right: 0.5rem;
   max-width: fit-content;
 
   &__icon {
@@ -43,6 +47,10 @@ export default defineComponent({
     justify-content: center;
     width: 2rem;
     height: 2rem;
+    
+    svg{
+      color: #ddd;
+    }
   }
 
   &__text {
@@ -51,7 +59,7 @@ export default defineComponent({
     justify-content: center;
     font-size: 0.8rem;
     font-weight: 500;
-    color: #222;
+    color: #ddd;
     white-space: nowrap;
 
     p {
