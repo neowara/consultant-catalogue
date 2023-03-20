@@ -9,6 +9,7 @@ main {
 
 @mixin main-grid {
   display: grid;
+  padding: 50px 30px;
   min-width: 100vw;
   width: 100%;
   grid-template-columns:

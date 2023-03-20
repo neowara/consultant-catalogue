@@ -1,6 +1,6 @@
 :root {
   --page-grid: 1280px;
-  --font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  --font-family: $font-family;
 
   --color-dark-accent: rgb(90, 30, 160);
   --color-dark-accent-raw: 90, 30, 160;

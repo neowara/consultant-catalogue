@@ -28,7 +28,7 @@ export default {
   display: flex;
   width: 100%;
   position: relative;
-  padding-bottom: 5rem;
+  grid-column: main;
 }
 
 img.profile-pic {
@@ -37,7 +37,6 @@ img.profile-pic {
   height: auto;
   max-width: 500px;
   max-height: 400px;
-  padding: 50px 70px;
 }
 
 div.overlay {
@@ -58,6 +57,7 @@ div.title-wrapper {
   display: -ms-flexbox;
   display: flex;
   order: 2;
+  padding-left: 50px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
@@ -70,13 +70,13 @@ div.title-wrapper {
   h1 {
     display: flex;
     flex-direction: column;
-    font-family: Inter;
-    font-weight: 800;
+    font-weight: 400;
     font-variation-settings: "slnt" -10;
-    text-transform: uppercase;
     align-items: center;
-    font-size: 3rem;
+    font-size: 6rem;
     margin: 0;
+    max-width: 500px;
+    line-height: 85px;
 
     span {
       display: inline-flex;
@@ -89,6 +89,7 @@ div.title-wrapper {
   h3 {
     font-weight: 400;
     color: #9747FF;
+    font-size: 30px;
   }
 }
 </style>

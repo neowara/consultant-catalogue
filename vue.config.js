@@ -1,6 +1,8 @@
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
-  transpileDependencies: true,
+  transpileDependencies: [
+    /\bvue-awesome\b/
+  ],
   // Load the global scss file
   css: {
     loaderOptions: {
