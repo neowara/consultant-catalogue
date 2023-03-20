@@ -8,9 +8,15 @@
         <TagComponent icon="bars-progress" :text="getPerson(activeIndex).experienceInYears + ' years'" />
         <TagComponent icon="phone" :text="'042141234'" />
         <TagComponent icon="envelope" :text="'lorem@ipsum.com'" />
+        <TagComponent icon="car" text="Can drive" />
+        <TagComponent icon="gauge" text="100%" />
       </div>
-      <FunFacts :person="getPerson(activeIndex)" />
-      <Bio :person="getPerson(activeIndex)" />
+      <div class="bio-wrapper">
+        <Bio :content="fakeText" backgroundColor="white" />
+        <Bio :content="fakeText" backgroundColor="#d8e6f0" />
+        <Bio :content="fakeText" backgroundColor="#ff875a" />
+        <Bio :content="fakeText" backgroundColor="#eeedef" />
+      </div>
   </div>
 </template>
 
@@ -18,7 +24,6 @@
 import { defineComponent } from 'vue';
 import Bio from ".././components/Bio.vue";
 import ProfileTop from ".././components/ProfileTop.vue";
-import FunFacts from ".././components/FunFacts.vue";
 import { Consultant } from ".././components/Table.vue";
 import TagComponent from ".././components/TagComponent.vue";
 
@@ -27,11 +32,11 @@ export default defineComponent({
   components: {
     Bio,
     ProfileTop,
-    FunFacts,
     TagComponent
   },
   data() {
     return {
+      fakeText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vitae lacinia felis. Mauris sagittis quam non lacinia blandit. Suspendisse eget risus ac eros condimentum porta a quis eros. Nullam in tristique augue. Aliquam erat volutpat. Curabitur vitae quam ut risus sagittis feugiat. Integer id magna nec mauris facilisis facilisis eget ac tortor. Mauris vulputate scelerisque velit, eu luctus sem luctus in. Sed urna massa, posuere eu hendrerit vitae, pretium a risus. Integer nec dolor in lacus fermentum molestie. Quisque in purus eget felis vehicula iaculis id eget orci."
     }
   },
   computed: {
@@ -90,6 +95,13 @@ export default defineComponent({
     align-items: center;
     height: fit-content;
     justify-content: flex-start;
+  }
+
+  .bio-wrapper {
+    grid-column: main;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
 }
 </style>
