@@ -1,68 +1,17 @@
 import Vue from "vue";
 import App from "./App.vue";
-import Vuex from "vuex";
 import router from "./router";
 import { store } from "./store";
 
-/* import font awesome icon component */
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import {
-  faMusic,
-  faCamera,
-  faCat,
-  faBook,
-  faCubes,
-  faCampground,
-  faPenFancy,
-  faDrumstickBite,
-  faDumbbell,
-  faPizzaSlice,
-  faMitten,
-  faLightbulb,
-  faPaintBrush,
-  faHeart,
-  faPersonSnowboarding,
-  faBowlRice,
-  faEarthAmericas,
-  faBeerMugEmpty,
-  faHeadphonesSimple,
-  faCompactDisc,
-  faUtensils,
-  faRoute,
-  faPaw
-} from "@fortawesome/free-solid-svg-icons";
+import { library, IconPack, IconDefinition } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { far } from '@fortawesome/free-regular-svg-icons'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-import { library } from "@fortawesome/fontawesome-svg-core";
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
-
-library.add(
-  faMusic,
-  faCamera,
-  faCat,
-  faBook,
-  faCubes,
-  faCampground,
-  faMitten,
-  faPenFancy,
-  faDrumstickBite,
-  faDumbbell,
-  faPizzaSlice,
-  faLightbulb,
-  faPaintBrush,
-  faHeart,
-  faPersonSnowboarding,
-  faBowlRice,
-  faEarthAmericas,
-  faBeerMugEmpty,
-  faHeadphonesSimple,
-  faCompactDisc,
-  faUtensils,
-  faRoute,
-  faPaw
-);
-
-/* add font awesome icon component */
-Vue.component("font-awesome-icon", FontAwesomeIcon);
+library.add(fas as IconPack, far as IconPack, fab as IconPack)
 
 Vue.config.productionTip = false;
 
@@ -71,10 +20,3 @@ new Vue({
   router: router,
   render: (h) => h(App)
 }).$mount("#app");
-
-/* new Vue({
-  el: "#app",
-  components: { App },
-  template: "<App/>",
-  store: store
-}); */

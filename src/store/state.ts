@@ -6,7 +6,7 @@ export interface state {
 }
 
 export const state: state = {
-  APIAdress: "http://available-consultantsapi.azurewebsites.net/AvailableConsultants",
+  APIAdress: "https://available-consultantsapi.azurewebsites.net/api/AvailableConsultants?",
   active: 0,
   menuOpen: false,
   consultants: []

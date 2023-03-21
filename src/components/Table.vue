@@ -1,7 +1,7 @@
-# Vue table component with pagination, sorting and filtering. 
-# This component is used in the main page to display the list of users.
-# The table has 5 columns: Name, Work title, location, available from, and actions.
-# The table is sortable by clicking on the column header.
+# Vue table component with pagination, sorting and filtering. # This component
+is used in the main page to display the list of users. # The table has 5
+columns: Name, Work title, location, available from, and actions. # The table is
+sortable by clicking on the column header.
 
 <template>
   <div class="table-wrapper">
@@ -11,24 +11,40 @@
           <th>Name</th>
           <th>Work title</th>
           <th>Location</th>
-          <th>Available</th>
-          <th> </th>
+          <th>Available from</th>
+          <th></th>
         </tr>
       </thead>
-      <tbody>
-        <tr v-for="(entry, i) of filteredData" :key="i" @click="$emit('tableClick')">
-          <td>{{ entry.name }}<span>{{ entry.bu }}</span></td>
-          <td>{{ entry.workTitle }}<span>{{ entry.workDesc }}</span></td>
-          <td>{{ entry.location }}</td>
-          <td>{{ entry.availableFrom }}</td>
+      <tbody v-for="(data, i) of availableConsultants" :key="i">
+        <tr @click="$emit('tableClick', i)">
+          <td>
+            {{ data.consultantDetails.name
+            }}<span>{{ data.consultantDetails.bu }}</span>
+          </td>
+          <td>{{ data.consultantDetails.workTitleShortDesc }}</td>
+          <td>{{ data.consultantDetails.location }}</td>
+          <td>{{ data.consultantDetails.availableFrom.split(" ")[0] }}</td>
           <td class="info">
             <p class="experience">
-              {{ entry.experienceYears }}<span>Years</span>
+              {{ data.consultantDetails.experienceInYears }}<span>Years</span>
             </p>
             <p class="availability">
-              {{ entry.availability * 100 }}%
+              {{ parseFloat(data.consultantDetails.availableType) }}%
             </p>
-            <img v-if="entry.canTravel" class="can-travel" src="../assets/svg/canTravel.svg" alt="Can Travel" />
+            <img
+              v-if="data.consultantDetails.canTravel"
+              class="can-travel"
+              src="../assets/svg/canTravel.svg"
+              alt="Can Travel"
+            />
+          </td>
+          <td>
+            <img class="arrow" width="30" src="../assets/svg/Arrow.svg" alt="arrow" />
+          </td>
+        </tr>
+        <tr v-if="expandNumber === i && data.consultantDetails.consultantBio">
+          <td colspan="5">
+            {{ data.consultantDetails.consultantBio.cvLink }}
           </td>
         </tr>
       </tbody>
@@ -36,91 +52,57 @@
   </div>
 </template>
 <script lang="ts">
+import { defineComponent } from "vue";
 
-export default {
+export interface Consultant {
+  consultantDetails: {
+    name: string;
+    businessArea: string;
+    workTitle: string;
+    workDesc: string;
+    location: string;
+    availableFrom: string;
+    availableTill: string;
+    availableType: string;
+    experienceInYears: number;
+    availability: number;
+    canTravel: boolean;
+    canTravelComment: string;
+    workingTitles: Array<string>;
+    workTitleShortDesc: string;
+    consultantBio: {
+      cvLink: string;
+      ingress: string;
+      profilePic: string;
+    };
+  };
+}
+
+export default defineComponent({
   name: "TableComponent",
   props: {
-    data: {
-      type: Array,
-      required: true,
-    },
-    columns: {
-      type: Array,
-      required: true,
-    },
     filterKey: {
       type: String,
       default: "",
       required: false,
-    }
+    },
   },
   data() {
     return {
       sortKey: 0,
       sortOrders: {},
-      filteredData: [
-        {
-          name: "John Doe",
-          bu: "West Tech",
-          workTitle: "Software Engineer",
-          workDesc: "Super Senior",
-          location: "Göteborg",
-          availableFrom: "2020-01-01",
-          experienceYears: 15,
-          availability: 1,
-          canTravel: true,
-        },
-        {
-          name: "John Doe",
-          bu: "West Tech",
-          workTitle: "Software Engineer",
-          workDesc: "Super Senior",
-          location: "Göteborg",
-          availableFrom: "2020-01-01",
-          experienceYears: 5,
-          availability: 1,
-          canTravel: true,
-        },
-        {
-          name: "John Doe",
-          bu: "West Tech",
-          workTitle: "Software Engineer",
-          workDesc: "Super Senior",
-          location: "Göteborg",
-          availableFrom: "2020-01-01",
-          experienceYears: 2,
-          availability: 0.5,
-          canTravel: false,
-        },
-        {
-          name: "John Doe",
-          bu: "West Tech",
-          workTitle: "Software Engineer",
-          workDesc: "Super Senior",
-          location: "Göteborg",
-          availableFrom: "2020-01-01",
-          experienceYears: 15,
-          availability: 0.75,
-          canTravel: false,
-        }, {
-          name: "John Doe",
-          bu: "West Tech",
-          workTitle: "Software Engineer",
-          workDesc: "Super Senior",
-          location: "Göteborg",
-          availableFrom: "2020-01-01",
-          experienceYears: 3,
-          availability: 1,
-          canTravel: true,
-        }
-      ],
+      filteredData: [],
+      expandNumber: 0,
     };
   },
   computed: {
+    availableConsultants(): Array<Consultant> {
+      return this.$store.state.consultants;
+    },
   },
   methods: {
   },
-};
+});
 </script>
 
 <style scoped lang="scss">
@@ -142,12 +124,13 @@ export default {
 
 .table tr:hover td {
   background-color: #111;
+  cursor: pointer;
 }
 
 .table th {
   text-align: left;
   background-color: transparent;
-  color: #FF875A;
+  color: #ff875a;
   font-size: var(--font-s);
   font-weight: normal;
 
@@ -173,6 +156,11 @@ table td.info {
   margin-left: 5px;
 }
 
+img.arrow{
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
 p.availability {
   border: 1px solid #999;
   width: 3rem;
@@ -185,7 +173,6 @@ p.availability {
   text-align: center;
   border-radius: 1.5rem;
 }
-
 
 p.experience {
   border: 1px solid #999;

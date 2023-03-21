@@ -1,89 +1,108 @@
 <template>
-  <div v-if="person" class="profile-top-wrapper">
+  <div v-if="consultantDetails" class="profile-top-wrapper">
     <div class="title-wrapper">
       <h1>
-        <span>{{ person.name }}</span> <span>{{ person.lastname }}</span>
+        {{ consultantDetails.name }}
+        <span>{{ consultantDetails.workTitleShortDesc }}</span>
       </h1>
-      <h3>{{ person.workTitle }}</h3>
     </div>
-    <div class="overlay" />
-    <img class="profile-pic" :src="person.picture" />
+    <!--<img v-if="consultantDetails.consultantBio" class="profile-pic" :src="consultantDetails.consultantBio.profilePic" />-->
+    <div class="image-wrapper">
+      <img v-if="consultantDetails.consultantBio" class="profile-pic" src="https://previews.dropbox.com/p/thumb/AB3kX4pDvTLfM6fzEXwyS8zHUJd1Piy2dK7BmCt0m-lqs3DSnqCA8kCdVOzYUFmjXl-T5FRWJYAbCvPw-vxztBGPy3nl3Obq7jT8TyuHevgwaIvy_hc_tbzcX91-FA9WLGfqG4f3R-ar8FY8ArwwvypY7chqZfyIDLnuPHwsv2yQGAAn8RWBv1zKAxWlNmgkwjbll9BdLekoFMHfwgh-Ud-LiXs1b1hHNznBHvWVypiSqymix1uFOVvxToKnUW-9qgWewKkDwYj6qipZfNToaBsjn4p6uH1uShNwVIaqEiKq5j4DIwQcL9Isg-wn7XycyQ4_RB4tK1SlCrmt-_2N4hlcnoJwZrmdDOQXbQrOtVH_LLH1cY29OZIPcPTXDSIsvyA/p.jpeg" />
+    </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Consultant } from './Table.vue';
+
 export default {
   name: "ProfileTop",
   props: {
-    person: {
+    consultantDetails: {
       type: Object,
       required: true,
     },
-  },
+  }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .profile-top-wrapper {
-  display: flex;
+  display: grid;
   width: 100%;
+  grid-template-columns: 3fr 2fr;
   position: relative;
-  padding-bottom: 5rem;
+  padding: 0rem 0 2rem;
 }
 
+div.image-wrapper{
+  max-width: 45rem;
+  max-height: 70rem;
+  display: block;
+  width: 100%;
+  order: 2;
+  position: relative;
+}
 img.profile-pic {
   display: block;
   width: 100%;
+  order: 2;
   height: auto;
 }
 
-div.overlay {
+div.image-wrapper::after{
+  content: " ";
   display: block;
   position: absolute;
   height: 40%;
   left: 0;
-  bottom: 5rem;
+  bottom: 0;
   right: 0;
   z-index: 1;
-  background: linear-gradient(
-    0deg,
-    rgba(18, 18, 18, 1) 0%,
-    rgba(18, 18, 18, 0) 100%
-  );
+  background: linear-gradient(0deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0) 100%);
 }
 
+
 div.title-wrapper {
-  position: absolute;
-  z-index: 2;
-  bottom: 0;
-  width: 90%;
-  padding: 0 5%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  order: 1;
+  flex: 1;
+  padding-top: 4rem;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: space-between;
 
   h1 {
     display: flex;
     flex-direction: column;
-    font-family: Inter;
-    font-weight: 800;
+    font-weight: 700;
     font-variation-settings: "slnt" -10;
-    text-transform: uppercase;
     align-items: center;
-    font-size: 3rem;
+    font-size: 6rem;
     margin: 0;
+    max-width: 35rem;
+    line-height: 5.5rem;
 
-    span {
-      display: inline-flex;
-      padding: 0rem 0.5rem;
-      background-color: var(--color-annevo-orange);
-      margin: 0.25rem;
+    span{
+      display: block;
+      margin: 0;
+      flex: 1;
+      width: 100%;
+      font-weight: 300;
+      color: var(--color-light-accent);
+      font-size: 2rem;
+      letter-spacing: normal;
+      border: 0;
+      margin-top: 1rem;
+      line-height: 2rem;
     }
   }
 
-  h3 {
-    font-weight: 400;
-  }
 }
 </style>
