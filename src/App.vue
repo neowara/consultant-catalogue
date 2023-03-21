@@ -26,7 +26,8 @@ export default defineComponent ({
   methods: {
     async getConsultants(): Promise<void> {
       await this.$store.dispatch("getConsultants", this.selectedConsultant);
-      this.availableConsultants = this.$store.state.consultants;
+      localStorage.setItem("consultants", JSON.stringify(this.$store.state.consultants));
+      this.availableConsultants = localStorage.getItem("consultants") ? JSON.parse(localStorage.getItem("consultants") || "") : [];
     },
   },
   computed: {
