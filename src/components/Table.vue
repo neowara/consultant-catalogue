@@ -124,6 +124,7 @@ export default defineComponent({
 
 .table tr:hover td {
   background-color: #111;
+  cursor: pointer;
 }
 
 .table th {
