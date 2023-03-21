@@ -3,15 +3,8 @@
     <div class="title-wrapper">
       <h1>
         {{ consultantDetails.name }}
+        <span>{{ consultantDetails.workTitleShortDesc }}</span>
       </h1>
-      <h3>{{ consultantDetails.workTitleShortDesc }}</h3>
-      <ul class="anchor-links">
-        <li><a href="#profile">Profile</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#skillset">Skillset</a></li>
-        <li><a href="#full-cv">Full CV</a></li>
-        <li><a href="#contact-info">Contact info</a></li>
-      </ul>
     </div>
     <!--<img v-if="consultantDetails.consultantBio" class="profile-pic" :src="consultantDetails.consultantBio.profilePic" />-->
     <div class="image-wrapper">
@@ -20,7 +13,9 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Consultant } from './Table.vue';
+
 export default {
   name: "ProfileTop",
   props: {
@@ -28,23 +23,23 @@ export default {
       type: Object,
       required: true,
     },
-  },
+  }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .profile-top-wrapper {
-  display: flex;
+  display: grid;
   width: 100%;
+  grid-template-columns: 3fr 2fr;
   position: relative;
-  grid-column: main;
   padding: 0rem 0 2rem;
 }
 
 div.image-wrapper{
-  max-width: 35rem;
-  max-height: 60rem;
+  max-width: 45rem;
+  max-height: 70rem;
   display: block;
   width: 100%;
   order: 2;
@@ -78,9 +73,10 @@ div.title-wrapper {
   display: flex;
   order: 1;
   flex: 1;
+  padding-top: 4rem;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: space-between;
 
   h1 {
     display: flex;
@@ -90,37 +86,23 @@ div.title-wrapper {
     align-items: center;
     font-size: 6rem;
     margin: 0;
-    max-width: 25rem;
-    line-height: 85px;
+    max-width: 35rem;
+    line-height: 5.5rem;
 
-    span {
-      display: inline-flex;
-      padding: 0rem 0.5rem;
-      background-color: var(--color-annevo-orange);
-      margin: 0.25rem;
+    span{
+      display: block;
+      margin: 0;
+      flex: 1;
+      width: 100%;
+      font-weight: 300;
+      color: var(--color-light-accent);
+      font-size: 2rem;
+      letter-spacing: normal;
+      border: 0;
+      margin-top: 1rem;
+      line-height: 2rem;
     }
   }
 
-  h3 {
-    font-weight: 300;
-    color: #9747FF;
-    font-size: 30px;
-  }
-
-  ul.anchor-links{
-    list-style: none;
-    padding: 3rem 0 0;
-    display: flex;
-    gap: 1.5rem;
-
-    a{
-      color: #ccc;
-      text-decoration: none;
-
-      &:hover{
-        color: #fff;
-      }
-    }
-  }
 }
 </style>

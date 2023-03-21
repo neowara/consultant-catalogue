@@ -2,36 +2,63 @@
 
 <template>
   <div class="consultant-details-wrapper">
+    <ProfileSection :usePadding="false">
       <ProfileTop :consultantDetails="getPerson(activeIndex)" />
-      <h2><a id="profile"><span>Profile</span></a></h2>
+    </ProfileSection>
+    <div class="sticky">
+      <div>
+      <ul class="anchor-links">
+        <li><a href="#profile">Profile</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skillset">Skillset</a></li>
+        <li v-if="getPerson(activeIndex).consultantBio.cvLink"><a href="#full-cv">Full CV</a></li>
+        <!--<li><a href="#contact-info">Contact info</a></li>-->
+      </ul>
+      <!-- Will Be used later when design is more finished
+      <ul class="info">
+        <li><p class="experience">{{ getPerson(activeIndex).experienceInYears }}<span>Years</span></p></li>
+        <li><p class="availability">{{ getPerson(activeIndex).availableType }}</p></li>
+        <li v-if="getPerson(activeIndex).canTravel"><img
+              class="can-travel"
+              src="../assets/svg/canTravel.svg"
+              alt="Can Travel"
+            /></li>
+      </ul>
+      -->
+    </div>
+    </div>
+    <ProfileSection bgTheme="bg1" anchor="profile" title="Profile">
       <div class="profile-wrapper">
         <table>
           <tr><th>Years of Experience:</th><td>{{ getPerson(activeIndex).experienceInYears }}</td></tr>
           <tr><th>Languages:</th><td>Swedish, English</td></tr>
           <tr><th>Location:</th><td>{{ getPerson(activeIndex).location }}</td></tr>
-          <tr><th>Available from:</th><td>{{ getPerson(activeIndex).availableFrom }}</td></tr>
-          <tr><th>Available till:</th><td>{{ getPerson(activeIndex).availableTill }}</td></tr>
+          <tr><th>Available from:</th><td>{{ new Date(getPerson(activeIndex).availableFrom).toLocaleDateString() }}</td></tr>
+          <tr><th>Available till:</th><td>{{ new Date(getPerson(activeIndex).availableTill).toLocaleDateString() }}</td></tr>
           <tr><th>Availability:</th><td>{{ getPerson(activeIndex).availableType }}</td></tr>
           <tr><th>Can Travel:</th><td>{{ getPerson(activeIndex).canTravel }}</td></tr>
           <tr><th></th><td>{{ getPerson(activeIndex).canTravelComment }}</td></tr>
           <tr><th>Business Unit:</th><td>{{ getPerson(activeIndex).businessArea }}</td></tr>
         </table>
       </div>
-      <h2><a id="about"><span>About me</span></a></h2>
-      <div class="about" v-html="fakeText"></div>
-      <h2><a id="skillset"><span>Skillset</span></a></h2>
+    </ProfileSection>
+    <ProfileSection anchor="about" title="About Me"><div class="about" v-html="fakeText"></div></ProfileSection>
+    <ProfileSection bgTheme="bg2" anchor="skillset" title="Skillset">
       <div class="tag-wrapper" >
           <TagComponent v-for="(skill, index) in getPerson(activeIndex).workingTitles" :key="index" :text="skill"  />
       </div>
-      <h2><a id="full-cv"><span>Full CV</span></a></h2>
+    </ProfileSection>
+    <ProfileSection v-if="getPerson(activeIndex).consultantBio.cvLink" anchor="full-cv" title="Full CV">
       <div class="full-cv-wrapper">
         <a :href="getPerson(activeIndex).consultantBio.cvLink" target="_blank">Link to full CV</a>
       </div>
-      <h2><a id="contact-info"><span>Contact information</span></a></h2>
+    </ProfileSection>
+    <!--<ProfileSection bgTheme="bg1" anchor="contact-info" title="Contact information">
       <div class="tag-wrapper">
         <TagComponent icon="phone" :text="'042141234'" />
         <TagComponent icon="envelope" :text="'lorem@ipsum.com'" />
       </div>
+    </ProfileSection>-->
   </div>
 </template>
 
@@ -39,6 +66,7 @@
 import { defineComponent } from 'vue';
 import Bio from ".././components/Bio.vue";
 import ProfileTop from ".././components/ProfileTop.vue";
+import ProfileSection from ".././components/ProfileSection.vue";
 import { Consultant } from ".././components/Table.vue";
 import TagComponent from ".././components/TagComponent.vue";
 
@@ -46,7 +74,8 @@ export default defineComponent({
   name: 'ConsultantView',
   components: {
     ProfileTop,
-    TagComponent
+    TagComponent,
+    ProfileSection
   },
   data() {
     return {
@@ -69,7 +98,7 @@ export default defineComponent({
       return this.availableConsultants;
     },
     getPerson(newPerson: number) {
-      return this.availableConsultants[newPerson].consultantDetails;
+      return this.availableConsultants[newPerson]?.consultantDetails ?? null;
     },
     getNextPerson(index: string) {
       const len = this.availableConsultants.length;
@@ -102,7 +131,7 @@ export default defineComponent({
 
   h2 {
     grid-column: main;
-    margin: 5rem 0 1rem;
+    margin: 0rem 0 1rem;
     color: white;
 
     a{
@@ -125,20 +154,17 @@ export default defineComponent({
     flex-wrap: wrap;
   }
 
-  div.about, div.profile-wrapper, div.full-cv-wrapper{
-    grid-column: main;
-  }
-
   div.profile-wrapper{
     table{
       th{
         opacity: 0.6;
-        padding-right: 1rem;
         text-align: left;
         font-weight: 300;
+        padding: 0.25rem 0;
+        padding-right: 1.5rem;
       }
       td{
-        font-weight: 500;
+        font-weight: 700;
       }
 
     }
@@ -147,6 +173,86 @@ export default defineComponent({
     a{
       color: white;
     }
+  }
+
+  div.sticky{
+    grid-column: full;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    padding: 1rem;
+    background-color: black;
+    @include main-grid;
+
+    div{
+      grid-column: main;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+
+  ul.anchor-links{
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 1.5rem;
+
+    a{
+      color: #ccc;
+      text-decoration: none;
+
+      &:hover{
+        color: #fff;
+      }
+    }
+  }
+
+  ul.info{
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+  }
+
+
+  p.availability {
+    border: 1px solid #999;
+    width: 3rem;
+    height: 3rem;
+    line-height: 1rem;
+    font-weight: bold;
+    margin: 0;
+    font-size: var(--font-s);
+    padding: 1rem 0.25rem;
+    text-align: center;
+    border-radius: 1.5rem;
+  }
+
+  p.experience {
+    border: 1px solid #999;
+    width: 3rem;
+    height: 3rem;
+    line-height: 1rem;
+    font-weight: bold;
+    margin: 0;
+    font-size: var(--font-m);
+    padding: 0.5rem 0.25rem;
+    text-align: center;
+    border-radius: 0.5rem;
+
+    span {
+      display: block;
+      font-size: var(--font-s);
+      opacity: 0.4;
+    }
+  }
+
+  img.can-travel {
+    width: 3rem;
+    height: 3rem;
   }
 }
 </style>
