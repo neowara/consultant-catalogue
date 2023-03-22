@@ -7,7 +7,7 @@
       v-model="searchTerm"
       type="text"
       placeholder="Search by Name or Work Title"
-      @keyup.enter="search"
+      @keyup="search"
     />
   </div>
 </template>
@@ -25,13 +25,8 @@ export default defineComponent({
     };
   },
   methods: {
-    search(nameKey: string, myArray: Array<Consultant>) {
-      for (let i = 0; i < myArray.length; i++) {
-        if (myArray[i].consultantDetails.name === nameKey) {
-          console.log(myArray[i]);
-          return myArray[i];
-        }
-      }
+    search(payload: KeyboardEvent) {
+      this.$emit("search", this.searchTerm);
     },
     },
     computed: {

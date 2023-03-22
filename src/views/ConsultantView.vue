@@ -68,7 +68,7 @@
 <div class="about" v-html="getPerson(activeIndex).consultantBio?.ingress"></div>
 </template>
       <template #right>
-        <div v-if="getPerson(activeIndex).consultantBio" class="full-cv-wrapper">
+        <div v-if="getPerson(activeIndex).consultantBio?.cvLink" class="full-cv-wrapper">
           <a :href="getPerson(activeIndex).consultantBio.cvLink" target="_blank" class="full-cv-link"><span>Link to full CV</span></a>
         </div>
       </template>

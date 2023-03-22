@@ -5,7 +5,7 @@ sortable by clicking on the column header.
 
 <template>
   <div class="table-wrapper">
-    <SearchComponent @search="search" />
+    <SearchComponent @search="searchFor" />
     <table class="table">
       <thead>
         <tr>
@@ -91,18 +91,46 @@ export default defineComponent({
       sortOrders: {},
       filteredData: [],
       expandNumber: 0,
+      searchTerm: "",
     };
   },
   computed: {
     availableConsultants(): Array<Consultant> {
+      let tempConsultants = [];
       if (localStorage.getItem("consultants")) {
-        return JSON.parse(localStorage.getItem("consultants") || "");
+        tempConsultants = JSON.parse(localStorage.getItem("consultants") || "");
       } else {
-        return this.$store.state.consultants;
+        tempConsultants = this.$store.state.consultants;
       }
+
+      const searchString = this.$data.searchTerm.toLowerCase();
+
+      if (this.$data.searchTerm.length >= 2 || this.$data.searchTerm.length === 0) {
+        const filteredConsultants = tempConsultants.filter((item: Consultant) => {
+
+            const consultantName = item.consultantDetails.name.toLowerCase();
+            const consultantTitles = item.consultantDetails.workingTitles.join(",").toLowerCase();
+            const Extra = item.consultantDetails.workTitleShortDesc.toLowerCase();
+            const mixedString = consultantName + " " + consultantTitles + " " + Extra;
+
+            if(mixedString.indexOf(searchString) === -1){
+              return false;
+            }
+            else{
+              return true;
+            }
+          }
+        );
+        return filteredConsultants;
+      }
+
+      return tempConsultants;
     },
   },
   methods: {
+    searchFor(searchString: string) {
+      this.$data.searchTerm = searchString;
+    },
   },
 });
 </script>

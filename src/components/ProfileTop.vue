@@ -6,7 +6,6 @@
         <span>{{ consultantDetails.workTitleShortDesc }}</span>
       </h1>
     </div>
-   
     <div class="image-wrapper">
        <img v-if="consultantDetails.consultantBio" class="profile-pic" :src="consultantDetails.consultantBio.profilePic" />
     </div>
@@ -108,7 +107,7 @@ div.title-wrapper {
       letter-spacing: normal;
       border: 0;
       margin-top: 1rem;
-      line-height: 2rem;
+      line-height: 2.4rem;
     }
   }
 
