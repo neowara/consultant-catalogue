@@ -26,7 +26,7 @@ sortable by clicking on the column header.
           <td>{{ data.consultantDetails.location }}</td>
           <td>{{ data.consultantDetails.availableFrom.split(" ")[0] }}</td>
           <td class="info">
-            <p class="experience">
+            <p class="experience" :class="data.consultantDetails.experienceInYears > 5 && 'gold'">
               {{ data.consultantDetails.experienceInYears }}<span>Years</span>
             </p>
             <p class="availability">
@@ -190,6 +190,11 @@ p.experience {
   padding: 0.65rem 0.25rem;
   text-align: center;
   border-radius: 0.25rem;
+
+  &.gold{
+    color: #D8BE7E;
+    border-color: #D8BE7E;
+  }
 
   span {
     display: block;

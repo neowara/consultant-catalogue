@@ -6,9 +6,9 @@
         <span>{{ consultantDetails.workTitleShortDesc }}</span>
       </h1>
     </div>
-    <!--<img v-if="consultantDetails.consultantBio" class="profile-pic" :src="consultantDetails.consultantBio.profilePic" />-->
+   
     <div class="image-wrapper">
-      <img v-if="consultantDetails.consultantBio" class="profile-pic" src="https://previews.dropbox.com/p/thumb/AB3kX4pDvTLfM6fzEXwyS8zHUJd1Piy2dK7BmCt0m-lqs3DSnqCA8kCdVOzYUFmjXl-T5FRWJYAbCvPw-vxztBGPy3nl3Obq7jT8TyuHevgwaIvy_hc_tbzcX91-FA9WLGfqG4f3R-ar8FY8ArwwvypY7chqZfyIDLnuPHwsv2yQGAAn8RWBv1zKAxWlNmgkwjbll9BdLekoFMHfwgh-Ud-LiXs1b1hHNznBHvWVypiSqymix1uFOVvxToKnUW-9qgWewKkDwYj6qipZfNToaBsjn4p6uH1uShNwVIaqEiKq5j4DIwQcL9Isg-wn7XycyQ4_RB4tK1SlCrmt-_2N4hlcnoJwZrmdDOQXbQrOtVH_LLH1cY29OZIPcPTXDSIsvyA/p.jpeg" />
+       <img v-if="consultantDetails.consultantBio" class="profile-pic" :src="consultantDetails.consultantBio.profilePic" />
     </div>
   </div>
 </template>
