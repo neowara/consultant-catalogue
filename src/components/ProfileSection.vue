@@ -53,6 +53,7 @@ section.full-width {
 
   .inner{
     grid-column: main;
+    position: relative;
   }
 
   &.bg1{

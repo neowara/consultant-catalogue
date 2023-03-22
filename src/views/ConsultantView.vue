@@ -3,6 +3,12 @@
 <template>
   <div class="consultant-details-wrapper">
     <ProfileSection :usePadding="false">
+      <div class="breadcrumb">
+        <ul>
+          <li><router-link to="/">Consultant list</router-link></li>
+          <li><p>{{ getPerson(activeIndex).name }}</p></li>
+        </ul>
+      </div>
       <ProfileTop :consultantDetails="getPerson(activeIndex)" />
     </ProfileSection>
     <div class="sticky">
@@ -179,7 +185,7 @@ export default defineComponent({
     grid-column: full;
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 2;
     padding: 1rem;
     background-color: black;
     @include main-grid;
@@ -253,6 +259,56 @@ export default defineComponent({
   img.can-travel {
     width: 3rem;
     height: 3rem;
+  }
+}
+
+div.breadcrumb{
+  padding: 1rem 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+
+  ul{
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    padding: 0;
+    margin: 0;
+
+    li{
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    li::after{
+      display: flex;
+      content: " ";
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      display: inline-block;
+      padding: 2px;
+      margin: 0;
+      transform: rotate(-45deg);
+      -webkit-transform: rotate(-45deg);
+    }
+
+    li:last-child::after{
+      display: none;
+    }
+
+    p{
+      margin: 0;
+      opacity: 0.5;
+    }
+
+
+    a, a:visited {
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+    }
   }
 }
 </style>

@@ -34,7 +34,9 @@ export default {
   width: 100%;
   grid-template-columns: 3fr 2fr;
   position: relative;
-  padding: 0rem 0 2rem;
+  padding: 0;
+  margin-bottom: -5rem;
+  z-index: 3;
 }
 
 div.image-wrapper{
@@ -48,7 +50,7 @@ div.image-wrapper{
 img.profile-pic {
   display: block;
   width: 100%;
-  order: 2;
+  order: 3;
   height: auto;
 }
 
@@ -73,10 +75,10 @@ div.title-wrapper {
   display: flex;
   order: 1;
   flex: 1;
-  padding-top: 4rem;
+  padding: 4rem 0;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: center;
 
   h1 {
     display: flex;
