@@ -36,23 +36,28 @@ export default {
   gap: 2rem;
   position: relative;
   padding: 0;
-  margin-bottom: -5rem;
   z-index: 3;
 }
 
 div.image-wrapper{
-  max-width: 45rem;
-  max-height: 70rem;
   display: block;
   width: 100%;
+  padding-bottom: 133%;
   order: 2;
   position: relative;
+  overflow: hidden;
 }
 img.profile-pic {
   display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
   width: 100%;
   order: 3;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
 }
 
 div.image-wrapper::after{

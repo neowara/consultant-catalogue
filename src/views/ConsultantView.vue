@@ -59,7 +59,7 @@
       <template #left><div class="about" v-html="fakeText"></div></template>
       <template #right>
         <div class="full-cv-wrapper">
-          <a :href="getPerson(activeIndex).consultantBio.cvLink" target="_blank">Link to full CV</a>
+          <a :href="getPerson(activeIndex).consultantBio.cvLink" target="_blank" class="full-cv-link"><span>Link to full CV</span></a>
         </div>
       </template>
     </ProfileSplitSection>
@@ -208,7 +208,7 @@ export default defineComponent({
     list-style: none;
     padding: 0;
     display: flex;
-    gap: 1.5rem;
+    gap: 2rem;
 
     a{
       color: #ccc;
@@ -315,6 +315,33 @@ div.breadcrumb{
       font-weight: bold;
       text-decoration: none;
     }
+  }
+}
+
+a.full-cv-link{
+  display: inline-flex;
+  align-items: center;
+  width: auto;
+  flex: auto;
+  background-color: var(--color-dark-accent);
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover{
+    background-color: var(--color-light-accent);
+  }
+
+  &::after{
+    display: flex;
+    content: " ";
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 2px;
+    margin-left: 0.5rem;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
   }
 }
 </style>

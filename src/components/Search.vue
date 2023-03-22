@@ -7,9 +7,6 @@
       placeholder="Search"
       @keyup.enter="search"
     />
-    <button @click="search">
-Search
-</button>
   </div>
 </template>
 
