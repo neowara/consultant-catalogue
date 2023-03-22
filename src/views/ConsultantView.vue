@@ -6,7 +6,7 @@
       <div class="breadcrumb">
         <ul>
           <li><router-link to="/">Consultant list</router-link></li>
-          <li><p>{{ getPerson(activeIndex).name }}</p></li>
+          <li><p>{{ getPerson(activeIndex).name ?? "" }}</p></li>
         </ul>
       </div>
       <ProfileTop :consultantDetails="getPerson(activeIndex)" />
@@ -15,8 +15,8 @@
       <div>
       <ul class="anchor-links">
         <li><a href="#profile">Profile</a></li>
-        <li><a href="#about">About</a></li>
         <li><a href="#skillset">Skillset</a></li>
+        <li><a href="#about">About</a></li>
         <li v-if="getPerson(activeIndex).consultantBio.cvLink"><a href="#full-cv">Full CV</a></li>
         <!--<li><a href="#contact-info">Contact info</a></li>-->
       </ul>
@@ -33,32 +33,36 @@
       -->
     </div>
     </div>
-    <ProfileSection bgTheme="bg1" anchor="profile" title="Profile">
-      <div class="profile-wrapper">
-        <table>
-          <tr><th>Years of Experience:</th><td>{{ getPerson(activeIndex).experienceInYears }}</td></tr>
-          <tr><th>Languages:</th><td>Swedish, English</td></tr>
-          <tr><th>Location:</th><td>{{ getPerson(activeIndex).location }}</td></tr>
-          <tr><th>Available from:</th><td>{{ new Date(getPerson(activeIndex).availableFrom).toLocaleDateString() }}</td></tr>
-          <tr><th>Available till:</th><td>{{ new Date(getPerson(activeIndex).availableTill).toLocaleDateString() }}</td></tr>
-          <tr><th>Availability:</th><td>{{ getPerson(activeIndex).availableType }}</td></tr>
-          <tr><th>Can Travel:</th><td>{{ getPerson(activeIndex).canTravel }}</td></tr>
-          <tr><th></th><td>{{ getPerson(activeIndex).canTravelComment }}</td></tr>
-          <tr><th>Business Unit:</th><td>{{ getPerson(activeIndex).businessArea }}</td></tr>
-        </table>
-      </div>
-    </ProfileSection>
-    <ProfileSection anchor="about" title="About Me"><div class="about" v-html="fakeText"></div></ProfileSection>
-    <ProfileSection bgTheme="bg2" anchor="skillset" title="Skillset">
-      <div class="tag-wrapper" >
+    <ProfileSplitSection bgTheme="bg1" anchor="profile" anchor2="skillset" title="Profile" title2="Skillset">
+      <template #left>
+        <div class="profile-wrapper">
+          <table>
+            <tr><th>Years of Experience:</th><td>{{ getPerson(activeIndex).experienceInYears }}</td></tr>
+            <tr><th>Languages:</th><td>Swedish, English</td></tr>
+            <tr><th>Location:</th><td>{{ getPerson(activeIndex).location }}</td></tr>
+            <tr><th>Available from:</th><td>{{ new Date(getPerson(activeIndex).availableFrom).toLocaleDateString() }}</td></tr>
+            <tr><th>Available till:</th><td>{{ new Date(getPerson(activeIndex).availableTill).toLocaleDateString() }}</td></tr>
+            <tr><th>Availability:</th><td>{{ getPerson(activeIndex).availableType }}</td></tr>
+            <tr><th>Can Travel:</th><td>{{ getPerson(activeIndex).canTravel ? "Yes" : "No" }}</td></tr>
+            <tr v-if="getPerson(activeIndex).canTravelComment"><th></th><td>{{ getPerson(activeIndex).canTravelComment }}</td></tr>
+            <tr><th>Business Unit:</th><td>{{ getPerson(activeIndex).businessArea }}</td></tr>
+          </table>
+        </div>
+      </template>
+      <template #right>
+        <div class="tag-wrapper" >
           <TagComponent v-for="(skill, index) in getPerson(activeIndex).workingTitles" :key="index" :text="skill"  />
-      </div>
-    </ProfileSection>
-    <ProfileSection v-if="getPerson(activeIndex).consultantBio.cvLink" anchor="full-cv" title="Full CV">
-      <div class="full-cv-wrapper">
-        <a :href="getPerson(activeIndex).consultantBio.cvLink" target="_blank">Link to full CV</a>
-      </div>
-    </ProfileSection>
+        </div>
+      </template>
+    </ProfileSplitSection>
+    <ProfileSplitSection anchor="about" anchor2="full-cv" title="About Me" title2="Full CV">
+      <template #left><div class="about" v-html="fakeText"></div></template>
+      <template #right>
+        <div class="full-cv-wrapper">
+          <a :href="getPerson(activeIndex).consultantBio.cvLink" target="_blank">Link to full CV</a>
+        </div>
+      </template>
+    </ProfileSplitSection>
     <!--<ProfileSection bgTheme="bg1" anchor="contact-info" title="Contact information">
       <div class="tag-wrapper">
         <TagComponent icon="phone" :text="'042141234'" />
@@ -73,6 +77,7 @@ import { defineComponent } from 'vue';
 import Bio from ".././components/Bio.vue";
 import ProfileTop from ".././components/ProfileTop.vue";
 import ProfileSection from ".././components/ProfileSection.vue";
+import ProfileSplitSection from ".././components/ProfileSplitSection.vue";
 import { Consultant } from ".././components/Table.vue";
 import TagComponent from ".././components/TagComponent.vue";
 
@@ -81,7 +86,8 @@ export default defineComponent({
   components: {
     ProfileTop,
     TagComponent,
-    ProfileSection
+    ProfileSection,
+    ProfileSplitSection
   },
   data() {
     return {
@@ -185,7 +191,7 @@ export default defineComponent({
     grid-column: full;
     position: sticky;
     top: 0;
-    z-index: 2;
+    z-index: 10;
     padding: 1rem;
     background-color: black;
     @include main-grid;

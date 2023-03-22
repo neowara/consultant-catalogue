@@ -33,6 +33,7 @@ export default {
   display: grid;
   width: 100%;
   grid-template-columns: 3fr 2fr;
+  gap: 2rem;
   position: relative;
   padding: 0;
   margin-bottom: -5rem;

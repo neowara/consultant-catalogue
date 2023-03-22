@@ -13,7 +13,7 @@ sortable by clicking on the column header.
           <th>Work title</th>
           <th>Location</th>
           <th>Available from</th>
-          <th></th>
+          <th width="160"></th>
         </tr>
       </thead>
       <tbody v-for="(data, i) of availableConsultants" :key="i">
@@ -22,7 +22,7 @@ sortable by clicking on the column header.
             {{ data.consultantDetails.name
             }}<span>{{ data.consultantDetails.businessArea }}</span>
           </td>
-          <td>{{ data.consultantDetails.workTitleShortDesc }}</td>
+          <td>{{ data.consultantDetails.workingTitles.join(", ") }}<span>{{ data.consultantDetails.workTitleShortDesc }}</span></td>
           <td>{{ data.consultantDetails.location }}</td>
           <td>{{ data.consultantDetails.availableFrom.split(" ")[0] }}</td>
           <td class="info">
@@ -123,6 +123,10 @@ export default defineComponent({
   padding: 1.5rem 0;
 }
 
+.table th {
+  padding: 0.75rem 0;
+}
+
 .table tr:hover td {
   background-color: #111;
   cursor: pointer;
@@ -182,14 +186,21 @@ p.experience {
   line-height: 1rem;
   font-weight: bold;
   margin: 0;
-  font-size: var(--font-n);
-  padding: 0.5rem 0.25rem;
+  font-size: 1.25rem;
+  padding: 0.65rem 0.25rem;
   text-align: center;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
+
+  span {
+    display: block;
+    font-size: var(--font-xs);
+    line-height: 0.8rem;
+    opacity: 0.4;
+  }
 }
 
 img.can-travel {
-  width: 2rem;
-  height: 2rem;
+  width: 1.75rem;
+  height: 1.75rem;
 }
 </style>
