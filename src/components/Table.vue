@@ -5,6 +5,7 @@ sortable by clicking on the column header.
 
 <template>
   <div class="table-wrapper">
+    <SearchComponent @search="search" />
     <table class="table">
       <thead>
         <tr>
@@ -19,7 +20,7 @@ sortable by clicking on the column header.
         <tr @click="$emit('tableClick', i)">
           <td>
             {{ data.consultantDetails.name
-            }}<span>{{ data.consultantDetails.bu }}</span>
+            }}<span>{{ data.consultantDetails.businessArea }}</span>
           </td>
           <td>{{ data.consultantDetails.workTitleShortDesc }}</td>
           <td>{{ data.consultantDetails.location }}</td>
@@ -38,14 +39,6 @@ sortable by clicking on the column header.
               alt="Can Travel"
             />
           </td>
-          <td>
-            <img class="arrow" width="30" src="../assets/svg/Arrow.svg" alt="arrow" />
-          </td>
-        </tr>
-        <tr v-if="expandNumber === i && data.consultantDetails.consultantBio">
-          <td colspan="5">
-            {{ data.consultantDetails.consultantBio.cvLink }}
-          </td>
         </tr>
       </tbody>
     </table>
@@ -53,6 +46,7 @@ sortable by clicking on the column header.
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
+import SearchComponent from "./Search.vue";
 
 export interface Consultant {
   consultantDetails: {
@@ -80,6 +74,9 @@ export interface Consultant {
 
 export default defineComponent({
   name: "TableComponent",
+  components: {
+    SearchComponent,
+  },
   props: {
     filterKey: {
       type: String,
@@ -97,7 +94,11 @@ export default defineComponent({
   },
   computed: {
     availableConsultants(): Array<Consultant> {
-      return this.$store.state.consultants;
+      if (localStorage.getItem("consultants")) {
+        return JSON.parse(localStorage.getItem("consultants") || "");
+      } else {
+        return this.$store.state.consultants;
+      }
     },
   },
   methods: {

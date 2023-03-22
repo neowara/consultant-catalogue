@@ -25,9 +25,13 @@ export default defineComponent ({
   },
   methods: {
     async getConsultants(): Promise<void> {
-      await this.$store.dispatch("getConsultants", this.selectedConsultant);
-      localStorage.setItem("consultants", JSON.stringify(this.$store.state.consultants));
-      this.availableConsultants = localStorage.getItem("consultants") ? JSON.parse(localStorage.getItem("consultants") || "") : [];
+      if (localStorage.getItem("consultants")) {
+        this.availableConsultants = JSON.parse(localStorage.getItem("consultants") || "");
+      } else {
+        await this.$store.dispatch("getConsultants");
+        localStorage.setItem("consultants", JSON.stringify(this.$store.state.consultants));
+        this.availableConsultants = localStorage.getItem("consultants") ? JSON.parse(localStorage.getItem("consultants") || "") : [];
+      }
     },
   },
   computed: {
