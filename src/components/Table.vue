@@ -97,7 +97,11 @@ export default defineComponent({
   },
   computed: {
     availableConsultants(): Array<Consultant> {
-      return this.$store.state.consultants;
+      if (localStorage.getItem("consultants")) {
+        return JSON.parse(localStorage.getItem("consultants") || "");
+      } else {
+        return this.$store.state.consultants;
+      }
     },
   },
   methods: {
