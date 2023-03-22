@@ -65,7 +65,7 @@ Consultant list
     </ProfileSplitSection>
     <ProfileSplitSection anchor="about" anchor2="full-cv" title="About Me" title2="Full CV">
       <template #left>
-<div class="about" v-html="fakeText"></div>
+<div class="about" v-html="getPerson(activeIndex).consultantBio?.ingress"></div>
 </template>
       <template #right>
         <div v-if="getPerson(activeIndex).consultantBio" class="full-cv-wrapper">
@@ -99,11 +99,6 @@ export default defineComponent({
     ProfileSection,
     ProfileSplitSection
   },
-  data() {
-    return {
-      fakeText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vitae lacinia felis. Mauris sagittis quam non lacinia blandit. Suspendisse eget risus ac eros condimentum porta a quis eros. Nullam in tristique augue. Aliquam erat volutpat. Curabitur vitae quam ut risus sagittis feugiat. Integer id magna nec mauris facilisis facilisis eget ac tortor. Mauris vulputate scelerisque velit, eu luctus sem luctus in. Sed urna massa, posuere eu hendrerit vitae, pretium a risus. Integer nec dolor in lacus fermentum molestie. Quisque in purus eget felis vehicula iaculis id eget orci."
-    }
-  },
   computed: {
     activeIndex() {
       return this.$store.getters.active;
@@ -111,6 +106,9 @@ export default defineComponent({
     availableConsultants(): Array<Consultant> {
       return this.$store.state.consultants;
     },
+  },
+  mounted(){
+    window.scrollTo(0,0);
   },
   methods: {
     setNewPerson(newPerson: string | number) {
@@ -120,7 +118,6 @@ export default defineComponent({
       return this.availableConsultants;
     },
     getPerson(newPerson: number) {
-      console.log(this.availableConsultants[0].consultantDetails)
       return this.availableConsultants[newPerson]?.consultantDetails ?? null;
     },
     getNextPerson(index: string) {
