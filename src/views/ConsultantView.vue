@@ -6,10 +6,10 @@
       <div class="breadcrumb">
         <ul>
           <li>
-<router-link to="/">
-Consultant list
-</router-link>
-</li>
+            <router-link to="/">
+              Consultant list
+            </router-link>
+          </li>
           <li><p>{{ getPerson(activeIndex).name ?? "" }}</p></li>
         </ul>
       </div>
@@ -22,8 +22,8 @@ Consultant list
         <li><a href="#skillset">Skillset</a></li>
         <li><a href="#about">About</a></li>
         <li v-if="getPerson(activeIndex).consultantBio?.cvLink">
-<a href="#full-cv">Full CV</a>
-</li>
+        <a href="#full-cv">CV</a>
+        </li>
         <!--<li><a href="#contact-info">Contact info</a></li>-->
       </ul>
       <!-- Will Be used later when design is more finished
@@ -63,7 +63,7 @@ Consultant list
         </div>
       </template>
     </ProfileSplitSection>
-    <ProfileSplitSection anchor="about" anchor2="full-cv" title="About Me" title2="Full CV">
+    <ProfileSplitSection anchor="about" anchor2="full-cv" title="About Me" title2="CV">
       <template #left>
 <div class="about" v-html="getPerson(activeIndex).consultantBio?.ingress"></div>
 </template>
@@ -223,6 +223,7 @@ export default defineComponent({
     a {
       color: #ccc;
       text-decoration: none;
+      font-size: var(--font-m);
 
       &:hover {
         color: #fff;

@@ -73,7 +73,7 @@ section.full-width {
     position: relative;
     display: grid;
     grid-template-columns: 3fr 2fr;
-    gap: 2rem;
+    gap: 3rem;
   }
 
   &.bg1{
