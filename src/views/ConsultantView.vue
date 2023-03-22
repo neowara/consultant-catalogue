@@ -21,7 +21,7 @@ Consultant list
         <li><a href="#profile">Profile</a></li>
         <li><a href="#skillset">Skillset</a></li>
         <li><a href="#about">About</a></li>
-        <li v-if="getPerson(activeIndex).consultantBio.cvLink">
+        <li v-if="getPerson(activeIndex).consultantBio?.cvLink">
 <a href="#full-cv">Full CV</a>
 </li>
         <!--<li><a href="#contact-info">Contact info</a></li>-->
@@ -68,7 +68,7 @@ Consultant list
 <div class="about" v-html="fakeText"></div>
 </template>
       <template #right>
-        <div class="full-cv-wrapper">
+        <div v-if="getPerson(activeIndex).consultantBio" class="full-cv-wrapper">
           <a :href="getPerson(activeIndex).consultantBio.cvLink" target="_blank" class="full-cv-link"><span>Link to full CV</span></a>
         </div>
       </template>
