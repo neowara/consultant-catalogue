@@ -5,7 +5,11 @@
     <ProfileSection :usePadding="false">
       <div class="breadcrumb">
         <ul>
-          <li><router-link to="/">Consultant list</router-link></li>
+          <li>
+<router-link to="/">
+Consultant list
+</router-link>
+</li>
           <li><p>{{ getPerson(activeIndex).name ?? "" }}</p></li>
         </ul>
       </div>
@@ -17,7 +21,9 @@
         <li><a href="#profile">Profile</a></li>
         <li><a href="#skillset">Skillset</a></li>
         <li><a href="#about">About</a></li>
-        <li v-if="getPerson(activeIndex).consultantBio.cvLink"><a href="#full-cv">Full CV</a></li>
+        <li v-if="getPerson(activeIndex).consultantBio.cvLink">
+<a href="#full-cv">Full CV</a>
+</li>
         <!--<li><a href="#contact-info">Contact info</a></li>-->
       </ul>
       <!-- Will Be used later when design is more finished
@@ -29,9 +35,9 @@
               src="../assets/svg/canTravel.svg"
               alt="Can Travel"
             /></li>
-      </ul>
-      -->
-    </div>
+        </ul>
+        -->
+      </div>
     </div>
     <ProfileSplitSection bgTheme="bg1" anchor="profile" anchor2="skillset" title="Profile" title2="Skillset">
       <template #left>
@@ -44,19 +50,23 @@
             <tr><th>Available till:</th><td>{{ new Date(getPerson(activeIndex).availableTill).toLocaleDateString() }}</td></tr>
             <tr><th>Availability:</th><td>{{ getPerson(activeIndex).availableType }}</td></tr>
             <tr><th>Can Travel:</th><td>{{ getPerson(activeIndex).canTravel ? "Yes" : "No" }}</td></tr>
-            <tr v-if="getPerson(activeIndex).canTravelComment"><th></th><td>{{ getPerson(activeIndex).canTravelComment }}</td></tr>
+            <tr v-if="getPerson(activeIndex).canTravelComment">
+<th></th><td>{{ getPerson(activeIndex).canTravelComment }}</td>
+</tr>
             <tr><th>Business Unit:</th><td>{{ getPerson(activeIndex).businessArea }}</td></tr>
           </table>
         </div>
       </template>
       <template #right>
-        <div class="tag-wrapper" >
-          <TagComponent v-for="(skill, index) in getPerson(activeIndex).workingTitles" :key="index" :text="skill"  />
+        <div class="tag-wrapper">
+          <TagComponent v-for="(skill, index) in getPerson(activeIndex).workingTitles" :key="index" :text="skill" />
         </div>
       </template>
     </ProfileSplitSection>
     <ProfileSplitSection anchor="about" anchor2="full-cv" title="About Me" title2="Full CV">
-      <template #left><div class="about" v-html="fakeText"></div></template>
+      <template #left>
+<div class="about" v-html="fakeText"></div>
+</template>
       <template #right>
         <div class="full-cv-wrapper">
           <a :href="getPerson(activeIndex).consultantBio.cvLink" target="_blank" class="full-cv-link"><span>Link to full CV</span></a>
@@ -67,8 +77,8 @@
       <div class="tag-wrapper">
         <TagComponent icon="phone" :text="'042141234'" />
         <TagComponent icon="envelope" :text="'lorem@ipsum.com'" />
-      </div>
-    </ProfileSection>-->
+        </div>
+      </ProfileSection>-->
   </div>
 </template>
 
@@ -103,13 +113,14 @@ export default defineComponent({
     },
   },
   methods: {
-    setNewPerson(newPerson:  string | number) {
+    setNewPerson(newPerson: string | number) {
       this.$store.dispatch("setActive", newPerson);
     },
     getAllPerson() {
       return this.availableConsultants;
     },
     getPerson(newPerson: number) {
+      console.log(this.availableConsultants[0].consultantDetails)
       return this.availableConsultants[newPerson]?.consultantDetails ?? null;
     },
     getNextPerson(index: string) {
@@ -146,7 +157,7 @@ export default defineComponent({
     margin: 0rem 0 1rem;
     color: white;
 
-    a{
+    a {
       color: white;
     }
   }
@@ -166,28 +177,30 @@ export default defineComponent({
     flex-wrap: wrap;
   }
 
-  div.profile-wrapper{
-    table{
-      th{
+  div.profile-wrapper {
+    table {
+      th {
         opacity: 0.6;
         text-align: left;
         font-weight: 300;
         padding: 0.25rem 0;
         padding-right: 1.5rem;
       }
-      td{
+
+      td {
         font-weight: 700;
       }
 
     }
   }
-  div.full-cv-wrapper{
-    a{
+
+  div.full-cv-wrapper {
+    a {
       color: white;
     }
   }
 
-  div.sticky{
+  div.sticky {
     grid-column: full;
     position: sticky;
     top: 0;
@@ -196,7 +209,7 @@ export default defineComponent({
     background-color: black;
     @include main-grid;
 
-    div{
+    div {
       grid-column: main;
       display: flex;
       justify-content: space-between;
@@ -204,29 +217,29 @@ export default defineComponent({
   }
 
 
-  ul.anchor-links{
+  ul.anchor-links {
     list-style: none;
     padding: 0;
     display: flex;
     gap: 2rem;
 
-    a{
+    a {
       color: #ccc;
       text-decoration: none;
 
-      &:hover{
+      &:hover {
         color: #fff;
       }
     }
   }
 
-  ul.info{
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      gap: 1.5rem;
-      align-items: center;
+  ul.info {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
   }
 
 

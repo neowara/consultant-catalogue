@@ -82,6 +82,7 @@ export default defineComponent({
       type: String,
       default: "",
       required: false,
+      search: "",
     },
   },
   data() {

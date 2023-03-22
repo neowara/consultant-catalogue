@@ -13,7 +13,9 @@ const mutations: MutationTree<state> = {
   },
 
   setConsultants(state: state, data: Array<object>) {
-    state.consultants = data;
+    console.log("Setting consultants")
+    localStorage.setItem("consultants", JSON.stringify(data));
+    state.consultants = JSON.parse(localStorage.getItem("consultants") || "[]");
   }
 }
 

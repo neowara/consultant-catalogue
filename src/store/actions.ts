@@ -21,7 +21,10 @@ const actions: ActionTree<state, state> = {
         url: context.state.APIAdress,
       });
       console.log(result);
-      context.commit("setConsultants", result.data);
+      if (!localStorage.getItem("consultants") || JSON.stringify(result.data) !== localStorage.getItem("consultants") ){
+        localStorage.setItem("consultants", JSON.stringify(result.data));
+        context.commit("setConsultants", result.data);
+      }
     } catch (error) {
       console.log(error);
     }

@@ -10,6 +10,7 @@ import { RouterView } from "vue-router";
 
 import { defineComponent } from "vue";
 import Header from "./components/Header.vue";
+import { state } from "./store/state";
 
 export default defineComponent ({
   name: "App",
@@ -19,24 +20,18 @@ export default defineComponent ({
   },
   data() {
     return {
-      availableConsultants: [] as Array<object>,
+      availableConsultants: JSON.parse(localStorage.getItem("consultants") || "") || state.consultants,
       selectedConsultant: Number,
     };
   },
   methods: {
     async getConsultants(): Promise<void> {
-      if (localStorage.getItem("consultants")) {
-        this.availableConsultants = JSON.parse(localStorage.getItem("consultants") || "");
-      } else {
-        await this.$store.dispatch("getConsultants");
-        localStorage.setItem("consultants", JSON.stringify(this.$store.state.consultants));
-        this.availableConsultants = localStorage.getItem("consultants") ? JSON.parse(localStorage.getItem("consultants") || "") : [];
-      }
+      await this.$store.dispatch("getConsultants");
     },
   },
   computed: {
     consultantData(): object {
-      return this.$store.getters.consultantData;
+      return this.$store.getters.consultants;
     }
   },
   mounted() {
