@@ -29,14 +29,15 @@ sortable by clicking on the column header.
           <td>{{ data.consultantDetails.location }}</td>
           <td>{{ data.consultantDetails.availableFrom.split(" ")[0] }}</td>
           <td class="info">
-            <p class="experience" :class="data.consultantDetails.experienceInYears > 5 && 'gold'">
+            <p class="experience" :class="data.consultantDetails.experienceInYears > 5 && 'gold'" title="Years of Experience">
               {{ data.consultantDetails.experienceInYears }}<span>Years</span>
             </p>
-            <p class="availability">
+            <p class="availability" title="Availability">
               {{ parseFloat(data.consultantDetails.availableType) }}%
             </p>
             <img 
               v-if="data.consultantDetails.canTravel" class="can-travel" src="../assets/svg/canTravel.svg"
+              title="Can Travel"
               alt="Can Travel"
 />
           </td>
