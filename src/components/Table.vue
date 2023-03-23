@@ -5,7 +5,7 @@ sortable by clicking on the column header.
 
 <template>
   <div class="table-wrapper">
-    <SearchComponent @search="search" />
+    <SearchComponent @search="handleSearch" />
     <table class="table">
       <thead>
         <tr>
@@ -16,13 +16,16 @@ sortable by clicking on the column header.
           <th width="160"></th>
         </tr>
       </thead>
-      <tbody v-for="(data, i) of availableConsultants" :key="i">
-        <tr @click="$emit('tableClick', i)">
+      <tbody v-for="(data, index) of searchResults" :key="index" :class="index">
+        <tr @click="$emit('tableClick', data)">
           <td>
             {{ data.consultantDetails.name
             }}<span>{{ data.consultantDetails.businessArea }}</span>
           </td>
-          <td>{{ data.consultantDetails.workingTitles.join(", ") }}<span>{{ data.consultantDetails.workTitleShortDesc }}</span></td>
+          <td>
+            {{ data.consultantDetails.workingTitles.join(", ") }}<span>{{ data.consultantDetails.workTitleShortDesc
+            }}</span>
+          </td>
           <td>{{ data.consultantDetails.location }}</td>
           <td>{{ data.consultantDetails.availableFrom.split(" ")[0] }}</td>
           <td class="info">
@@ -32,12 +35,10 @@ sortable by clicking on the column header.
             <p class="availability">
               {{ parseFloat(data.consultantDetails.availableType) }}%
             </p>
-            <img
-              v-if="data.consultantDetails.canTravel"
-              class="can-travel"
-              src="../assets/svg/canTravel.svg"
+            <img 
+              v-if="data.consultantDetails.canTravel" class="can-travel" src="../assets/svg/canTravel.svg"
               alt="Can Travel"
-            />
+/>
           </td>
         </tr>
       </tbody>
@@ -50,6 +51,7 @@ import SearchComponent from "./Search.vue";
 
 export interface Consultant {
   consultantDetails: {
+    id: string;
     name: string;
     businessArea: string;
     workTitle: string;
@@ -78,31 +80,25 @@ export default defineComponent({
     SearchComponent,
   },
   props: {
-    filterKey: {
-      type: String,
-      default: "",
-      required: false,
-      search: "",
-    },
   },
   data() {
     return {
-      sortKey: 0,
-      sortOrders: {},
-      filteredData: [],
-      expandNumber: 0,
+      searchTerm: "",
+      searchResults: [] as Array<Consultant>,
     };
   },
   computed: {
     availableConsultants(): Array<Consultant> {
-      if (localStorage.getItem("consultants")) {
-        return JSON.parse(localStorage.getItem("consultants") || "");
-      } else {
-        return this.$store.state.consultants;
-      }
+      return this.$store.getters.consultants;
     },
   },
   methods: {
+    handleSearch(a) {
+      this.searchResults = a;
+    }
+  },
+  mounted() {
+    this.handleSearch(this.availableConsultants);
   },
 });
 </script>
@@ -162,7 +158,7 @@ table td.info {
   margin-left: 5px;
 }
 
-img.arrow{
+img.arrow {
   width: 1.25rem;
   height: 1.25rem;
 }
@@ -192,7 +188,7 @@ p.experience {
   text-align: center;
   border-radius: 0.25rem;
 
-  &.gold{
+  &.gold {
     color: #D8BE7E;
     border-color: #D8BE7E;
   }

@@ -10,75 +10,106 @@
               Consultant list
             </router-link>
           </li>
-          <li><p>{{ getPerson(activeIndex).name ?? "" }}</p></li>
+          <li>
+            <p>{{ activeIndex.consultantDetails.name ?? "" }}</p>
+          </li>
         </ul>
       </div>
-      <ProfileTop :consultantDetails="getPerson(activeIndex)" />
+      <ProfileTop :consultantDetails="activeIndex.consultantDetails" />
     </ProfileSection>
     <div class="sticky">
       <div>
-      <ul class="anchor-links">
-        <li><a href="#profile">Profile</a></li>
-        <li><a href="#skillset">Skillset</a></li>
-        <li><a href="#about">About</a></li>
-        <li v-if="getPerson(activeIndex).consultantBio?.cvLink">
-        <a href="#full-cv">CV</a>
-        </li>
-        <!--<li><a href="#contact-info">Contact info</a></li>-->
+        <ul class="anchor-links">
+          <li><a href="#profile">Profile</a></li>
+          <li><a href="#skillset">Skillset</a></li>
+          <li><a href="#about">About</a></li>
+          <li v-if="activeIndex.consultantDetails.consultantBio?.cvLink">
+            <a href="#full-cv">CV</a>
+          </li>
+          <!--<li><a href="#contact-info">Contact info</a></li>-->
       </ul>
       <!-- Will Be used later when design is more finished
       <ul class="info">
-        <li><p class="experience">{{ getPerson(activeIndex).experienceInYears }}<span>Years</span></p></li>
-        <li><p class="availability">{{ getPerson(activeIndex).availableType }}</p></li>
-        <li v-if="getPerson(activeIndex).canTravel"><img
+        <li><p class="experience">{{ activeIndex.consultantDetails.experienceInYears }}<span>Years</span></p></li>
+        <li><p class="availability">{{ activeIndex.consultantDetails.availableType }}</p></li>
+        <li v-if="activeIndex.consultantDetails.canTravel"><img
               class="can-travel"
               src="../assets/svg/canTravel.svg"
               alt="Can Travel"
             /></li>
-        </ul>
-        -->
+          </ul>
+          -->
       </div>
     </div>
     <ProfileSplitSection bgTheme="bg1" anchor="profile" anchor2="skillset" title="Profile" title2="Skillset">
       <template #left>
         <div class="profile-wrapper">
           <table>
-            <tr><th>Years of Experience:</th><td>{{ getPerson(activeIndex).experienceInYears }}</td></tr>
-            <tr><th>Languages:</th><td>Swedish, English</td></tr>
-            <tr><th>Location:</th><td>{{ getPerson(activeIndex).location }}</td></tr>
-            <tr><th>Available from:</th><td>{{ new Date(getPerson(activeIndex).availableFrom).toLocaleDateString() }}</td></tr>
-            <tr><th>Available till:</th><td>{{ new Date(getPerson(activeIndex).availableTill).toLocaleDateString() }}</td></tr>
-            <tr><th>Availability:</th><td>{{ getPerson(activeIndex).availableType }}</td></tr>
-            <tr><th>Can Travel:</th><td>{{ getPerson(activeIndex).canTravel ? "Yes" : "No" }}</td></tr>
-            <tr v-if="getPerson(activeIndex).canTravelComment">
-<th></th><td>{{ getPerson(activeIndex).canTravelComment }}</td>
-</tr>
-            <tr><th>Business Unit:</th><td>{{ getPerson(activeIndex).businessArea }}</td></tr>
+            <tr>
+              <th>Years of Experience:</th>
+              <td>{{ activeIndex.consultantDetails.experienceInYears }}</td>
+            </tr>
+            <tr>
+              <th>Languages:</th>
+              <td>Swedish, English</td>
+            </tr>
+            <tr>
+              <th>Location:</th>
+              <td>{{ activeIndex.consultantDetails.location }}</td>
+            </tr>
+            <tr>
+              <th>Available from:</th>
+              <td>{{ new Date(activeIndex.consultantDetails.availableFrom).toLocaleDateString() }}</td>
+            </tr>
+            <tr>
+              <th>Available till:</th>
+              <td>{{ new Date(activeIndex.consultantDetails.availableTill).toLocaleDateString() }}</td>
+            </tr>
+            <tr>
+              <th>Availability:</th>
+              <td>{{ activeIndex.consultantDetails.availableType }}</td>
+            </tr>
+            <tr>
+              <th>Can Travel:</th>
+              <td>{{ activeIndex.consultantDetails.canTravel ? "Yes" : "No" }}</td>
+            </tr>
+            <tr v-if="activeIndex.consultantDetails.canTravelComment">
+              <th></th>
+              <td>{{ activeIndex.consultantDetails.canTravelComment }}</td>
+            </tr>
+            <tr>
+              <th>Business Unit:</th>
+              <td>{{ activeIndex.consultantDetails.businessArea }}</td>
+            </tr>
           </table>
         </div>
       </template>
       <template #right>
         <div class="tag-wrapper">
-          <TagComponent v-for="(skill, index) in getPerson(activeIndex).workingTitles" :key="index" :text="skill" />
+          <TagComponent
+v-for="(skill, index) in activeIndex.consultantDetails.workingTitles" :key="index"
+            :text="skill"
+/>
         </div>
       </template>
     </ProfileSplitSection>
     <ProfileSplitSection anchor="about" anchor2="full-cv" title="About Me" title2="CV">
       <template #left>
-<div class="about" v-html="getPerson(activeIndex).consultantBio?.ingress"></div>
-</template>
+        <div class="about" v-html="activeIndex.consultantDetails.consultantBio?.ingress"></div>
+      </template>
       <template #right>
-        <div v-if="getPerson(activeIndex).consultantBio" class="full-cv-wrapper">
-          <a :href="getPerson(activeIndex).consultantBio.cvLink" target="_blank" class="full-cv-link"><span>Link to full CV</span></a>
+        <div v-if="activeIndex.consultantDetails.consultantBio" class="full-cv-wrapper">
+          <a :href="activeIndex.consultantDetails.consultantBio.cvLink" target="_blank" class="full-cv-link"><span>Link to
+              full CV</span></a>
         </div>
       </template>
-    </ProfileSplitSection>
-    <!--<ProfileSection bgTheme="bg1" anchor="contact-info" title="Contact information">
+  </ProfileSplitSection>
+  <!--<ProfileSection bgTheme="bg1" anchor="contact-info" title="Contact information">
       <div class="tag-wrapper">
         <TagComponent icon="phone" :text="'042141234'" />
         <TagComponent icon="envelope" :text="'lorem@ipsum.com'" />
-        </div>
-      </ProfileSection>-->
+          </div>
+        </ProfileSection>-->
   </div>
 </template>
 
@@ -107,38 +138,15 @@ export default defineComponent({
       return this.$store.state.consultants;
     },
   },
-  mounted(){
-    window.scrollTo(0,0);
+  mounted() {
+    window.scrollTo(0, 0);
   },
   methods: {
-    setNewPerson(newPerson: string | number) {
-      this.$store.dispatch("setActive", newPerson);
-    },
     getAllPerson() {
       return this.availableConsultants;
     },
-    getPerson(newPerson: number) {
-      return this.availableConsultants[newPerson]?.consultantDetails ?? null;
-    },
-    getNextPerson(index: string) {
-      const len = this.availableConsultants.length;
-      const newNumber = (parseInt(index) + (1 % len) + len) % len;
-      return this.availableConsultants[newNumber];
-    },
-    getPrevPerson(index: string) {
-      const len = this.availableConsultants.length;
-      const newNumber = (parseInt(index) + (-1 % len) + len) % len;
-      return this.availableConsultants[newNumber];
-    },
-    getPrevIndex(index: string) {
-      const len = this.availableConsultants.length;
-      const newNumber = (parseInt(index) + (-1 % len) + len) % len;
-      return newNumber;
-    },
-    getNextIndex(index: string) {
-      const len = this.availableConsultants.length;
-      const newNumber = (parseInt(index) + (1 % len) + len) % len;
-      return newNumber;
+    getPerson(id: string) {
+      return this.availableConsultants[id]?.consultantDetails ?? null;
     },
   },
 })
@@ -279,27 +287,27 @@ export default defineComponent({
   }
 }
 
-div.breadcrumb{
+div.breadcrumb {
   padding: 1rem 0;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 10;
 
-  ul{
+  ul {
     list-style: none;
     display: flex;
     gap: 1rem;
     padding: 0;
     margin: 0;
 
-    li{
+    li {
       display: flex;
       align-items: center;
       gap: 1rem;
     }
 
-    li::after{
+    li::after {
       display: flex;
       content: " ";
       border: solid white;
@@ -311,17 +319,18 @@ div.breadcrumb{
       -webkit-transform: rotate(-45deg);
     }
 
-    li:last-child::after{
+    li:last-child::after {
       display: none;
     }
 
-    p{
+    p {
       margin: 0;
       opacity: 0.5;
     }
 
 
-    a, a:visited {
+    a,
+    a:visited {
       color: white;
       font-weight: bold;
       text-decoration: none;
@@ -329,7 +338,7 @@ div.breadcrumb{
   }
 }
 
-a.full-cv-link{
+a.full-cv-link {
   display: inline-flex;
   align-items: center;
   width: auto;
@@ -339,11 +348,11 @@ a.full-cv-link{
   text-decoration: none;
   cursor: pointer;
 
-  &:hover{
+  &:hover {
     background-color: var(--color-light-accent);
   }
 
-  &::after{
+  &::after {
     display: flex;
     content: " ";
     border: solid white;

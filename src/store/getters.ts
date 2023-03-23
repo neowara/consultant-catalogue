@@ -9,6 +9,6 @@ export default {
   },
   consultants(state: state) {
     return state.consultants;
-  }
+  },
 }
 

@@ -1,13 +1,13 @@
 export interface state {
   APIAdress: string,
-  active: number,
+  active: object,
   menuOpen: boolean,
-  consultants: Array<object>
+  consultants: Array<object>,
 }
 
 export const state: state = {
   APIAdress: "https://available-consultantsapi.azurewebsites.net/api/AvailableConsultants?",
-  active: 0,
+  active: {},
   menuOpen: false,
-  consultants: []
+  consultants: [],
 }

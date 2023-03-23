@@ -13,15 +13,14 @@ const actions: ActionTree<state, state> = {
   },
 
   async getConsultants(context, param: number) {
-    console.log("Getting API");
     try {
-      console.log("Getting API 1A");
       const result = await axios({
         method: "get",
         url: context.state.APIAdress,
       });
-      console.log(result);
-      if (!localStorage.getItem("consultants") || JSON.stringify(result.data) !== localStorage.getItem("consultants") ){
+      context.commit("setConsultants", result.data);
+
+      if (JSON.stringify(result.data) !== localStorage.getItem("consultants")) {
         localStorage.setItem("consultants", JSON.stringify(result.data));
         context.commit("setConsultants", result.data);
       }

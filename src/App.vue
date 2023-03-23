@@ -12,7 +12,7 @@ import { defineComponent } from "vue";
 import Header from "./components/Header.vue";
 import { state } from "./store/state";
 
-export default defineComponent ({
+export default defineComponent({
   name: "App",
   components: {
     RouterView,
@@ -20,8 +20,6 @@ export default defineComponent ({
   },
   data() {
     return {
-      availableConsultants: JSON.parse(localStorage.getItem("consultants") || "") || state.consultants,
-      selectedConsultant: Number,
     };
   },
   methods: {

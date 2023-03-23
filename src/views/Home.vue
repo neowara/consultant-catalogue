@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import TableComponent from '../components/Table.vue';
+import TableComponent, { Consultant } from '../components/Table.vue';
 
 export default defineComponent({
   name: 'HomePage',
@@ -21,9 +21,9 @@ export default defineComponent({
     }
   },
   methods: {
-    goToProfile(id: string) {
-      this.$store.dispatch("setActive", id);
-      this.$router.push({ name: 'ConsultantDetails', params: { id } });
+    goToProfile(user: Consultant) {
+      this.$store.dispatch("setActive", user);
+      this.$router.push({ name: 'ConsultantDetails', params: { id: user.consultantDetails.id } });
     }
   },
   computed: {
@@ -35,13 +35,12 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-
 .home-container {
   @include main-grid;
   padding: 3rem 0;
 }
 
-div.inner{
+div.inner {
   grid-column: main;
 }
 </style>
