@@ -29,6 +29,7 @@ export default defineComponent({
     ...mapGetters(["keyword"]),
   },
   mounted() {
+    this.$store.dispatch("getConsultants");
   },
 });
 </script>
