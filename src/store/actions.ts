@@ -28,6 +28,9 @@ const actions: ActionTree<state, state> = {
       console.log(error);
     }
   },
+  setKeyword(context, payload) {
+    context.commit("setKeyword", payload);
+  }
 };
 
 export default actions;

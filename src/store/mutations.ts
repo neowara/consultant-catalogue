@@ -1,6 +1,6 @@
 import { MutationTree } from 'vuex';
 
-import { state } from "./state"
+import { Consultant, state } from "./state"
 
 const mutations: MutationTree<state> = {
 
@@ -15,7 +15,7 @@ const mutations: MutationTree<state> = {
 // If there is, then the state will be set to the data that is in local storage. 
 // If there is no consultant in local storage, then the state will be set to the data that is passed into the function.
 // then the data is set to local storage as well.
-  setConsultants(state: state, data: Array<object>) {
+  setConsultants(state: state, data: Array<Consultant>) {
     if (localStorage.getItem("consultants")) {
       state.consultants = JSON.parse(localStorage.getItem("consultants") as string);
     } else {
@@ -23,6 +23,10 @@ const mutations: MutationTree<state> = {
       localStorage.setItem("consultants", JSON.stringify(data));
     }
   },
+
+  setKeyword(state: state, payload) {
+    state.keyword = payload;
+  }
 }
 
 export default mutations;

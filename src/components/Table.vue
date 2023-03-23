@@ -5,7 +5,7 @@ sortable by clicking on the column header.
 
 <template>
   <div class="table-wrapper">
-    <SearchComponent @search="handleSearch" />
+    <SearchComponent />
     <table class="table">
       <thead>
         <tr>
@@ -16,7 +16,7 @@ sortable by clicking on the column header.
           <th width="160"></th>
         </tr>
       </thead>
-      <tbody v-for="(data, index) of searchResults" :key="index" :class="index">
+      <tbody v-for="(data, index) of filterByName" :key="index" :class="index">
         <tr @click="$emit('tableClick', data)">
           <td>
             {{ data.consultantDetails.name
@@ -29,17 +29,19 @@ sortable by clicking on the column header.
           <td>{{ data.consultantDetails.location }}</td>
           <td>{{ data.consultantDetails.availableFrom.split(" ")[0] }}</td>
           <td class="info">
-            <p class="experience" :class="data.consultantDetails.experienceInYears > 5 && 'gold'" title="Years of Experience">
+            <p 
+              class="experience" :class="data.consultantDetails.experienceInYears > 5 && 'gold'"
+              title="Years of Experience"
+              >
               {{ data.consultantDetails.experienceInYears }}<span>Years</span>
             </p>
             <p class="availability" title="Availability">
               {{ parseFloat(data.consultantDetails.availableType) }}%
             </p>
             <img 
-              v-if="data.consultantDetails.canTravel" class="can-travel" src="../assets/svg/canTravel.svg"
-              title="Can Travel"
-              alt="Can Travel"
-/>
+                v-if="data.consultantDetails.canTravel" class="can-travel" src="../assets/svg/canTravel.svg"
+                title="Can Travel" alt="Can Travel" 
+              />
           </td>
         </tr>
       </tbody>
@@ -49,6 +51,7 @@ sortable by clicking on the column header.
 <script lang="ts">
 import { defineComponent } from "vue";
 import SearchComponent from "./Search.vue";
+import { mapGetters } from "vuex";
 
 export interface Consultant {
   consultantDetails: {
@@ -84,22 +87,12 @@ export default defineComponent({
   },
   data() {
     return {
-      searchTerm: "",
-      searchResults: [] as Array<Consultant>,
     };
   },
   computed: {
-    availableConsultants(): Array<Consultant> {
-      return this.$store.getters.consultants;
-    },
+    ...mapGetters(["filterByName"]),
   },
   methods: {
-    handleSearch(a) {
-      this.searchResults = a;
-    }
-  },
-  mounted() {
-    this.handleSearch(this.availableConsultants);
   },
 });
 </script>

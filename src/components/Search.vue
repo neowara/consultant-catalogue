@@ -2,49 +2,31 @@
 <template>
   <div class="search-wrapper">
     <label for="Search"><img src="../assets/svg/search.svg" /></label>
-    <input id="Search" v-model="keyword" type="text" placeholder="Search by Name or Work Title" @keyup="handleSearch()" />
+    <input id="Search" v-model="searchTerm" type="text" placeholder="Search by Name or Work Title" @keydown="search" />
   </div>
 </template>
 
 <script lang="ts">
-
 import { defineComponent } from "vue";
-import { Consultant } from "./Table.vue";
 
 export default defineComponent({
   name: "SearchComponent",
   data() {
     return {
-      keyword: "",
+      searchTerm: "",
     };
   },
   props: {
   },
   methods: {
-    handleSearch() {
-      this.$emit("search", this.filterByName);
+    search() {
+      this.$store.commit("setKeyword", this.searchTerm);
     },
   },
   computed: {
-    availableConsultants(): Array<Consultant> {
-      return this.$store.state.consultants;
-    },
-    filterByName(): Array<Consultant> {
-      return this.$store.state.consultants.filter(consultant => {
-        // Loop through each property in the consultantDetails object.
-        for (const key in consultant.consultantDetails) {
-          // Check if the property is not null or undefined.
-          if (consultant.consultantDetails[key]) {
-            // Check if the name or workingTitles property contains the keyword.
-            if (consultant.consultantDetails.name.toLowerCase().includes(this.keyword.toLowerCase())
-              || consultant.consultantDetails.workingTitles.filter(titles => titles.toLowerCase().includes(this.keyword.toLowerCase())).length > 0) {
-              return true;
-            }
-          }
-        }
-        return false;
-      });
-    },
+  },
+  created() {
+    this.$store.commit("setKeyword", this.searchTerm);
   },
 });
 </script>

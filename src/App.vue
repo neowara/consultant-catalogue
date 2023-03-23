@@ -7,10 +7,9 @@
 
 <script lang="ts">
 import { RouterView } from "vue-router";
-
+import { mapGetters } from "vuex";
 import { defineComponent } from "vue";
 import Header from "./components/Header.vue";
-import { state } from "./store/state";
 
 export default defineComponent({
   name: "App",
@@ -23,17 +22,13 @@ export default defineComponent({
     };
   },
   methods: {
-    async getConsultants(): Promise<void> {
-      await this.$store.dispatch("getConsultants");
-    },
   },
   computed: {
-    consultantData(): object {
-      return this.$store.getters.consultants;
-    }
+    ...mapGetters(["consultants"]),
+    ...mapGetters(["filterByName"]),
+    ...mapGetters(["keyword"]),
   },
   mounted() {
-    this.getConsultants();
   },
 });
 </script>
