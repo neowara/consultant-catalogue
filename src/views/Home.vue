@@ -2,6 +2,7 @@
   <div class="home-container">
     <div class="inner">
       <h1><span>Consultants</span></h1>
+      <p class="count-indicator">Found in database: {{ availableConsultantsCount }}</p>
       <TableComponent @tableClick="$event => goToProfile($event)" />
     </div>
   </div>
@@ -30,6 +31,9 @@ export default defineComponent({
     activeConsultant(): number {
       return this.$store.getters.active;
     },
+    availableConsultantsCount(): Number {
+      return this.$store.state.consultants.length;
+    },
   },
 })
 </script>
@@ -43,5 +47,10 @@ export default defineComponent({
 
 div.inner{
   grid-column: main;
+}
+
+p.count-indicator{
+  margin: 0;
+  opacity: 0.33;
 }
 </style>
