@@ -62,6 +62,7 @@ section.full-width {
   h2{
     padding-top: 4rem;
     font-size: var(--font-xl);
+
   }
 
   &.padding{
@@ -74,6 +75,10 @@ section.full-width {
     display: grid;
     grid-template-columns: 3fr 2fr;
     gap: 3rem;
+
+    @media only screen and (max-width: 500px) {
+        grid-template-columns: 1fr;
+      }
   }
 
   &.bg1{

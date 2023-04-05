@@ -6,6 +6,22 @@ sortable by clicking on the column header.
 <template>
   <div class="table-wrapper">
     <SearchComponent />
+    <ul class="responsive-table-wrapper">
+      <ResponsiveTableRow v-for="(data, index) of filterByName" 
+      :key="index"
+      :name="data.consultantDetails.name"
+      :businessArea="data.consultantDetails.businessArea"
+      :workingTitles="data.consultantDetails.workingTitles"
+      :workTitleShortDesc="data.consultantDetails.workTitleShortDesc"
+      :city="data.consultantDetails.location"
+      :availableFrom="data.consultantDetails.availableFrom"
+      :experienceInYears="data.consultantDetails.experienceInYears"
+      :canTravel="data.consultantDetails.canTravel"
+      :availableType="data.consultantDetails.availableType"
+      :id="data.consultantDetails.id"
+      />
+    </ul>
+
     <table class="table">
       <thead>
         <tr>
@@ -52,37 +68,15 @@ sortable by clicking on the column header.
 import { defineComponent } from "vue";
 import SearchComponent from "./Search.vue";
 import { mapGetters } from "vuex";
+import ResponsiveTableRow from "./ResponsiveTableRow.vue";
 
-export interface Consultant {
-  consultantDetails: {
-    id: string;
-    name: string;
-    businessArea: string;
-    workTitle: string;
-    workDesc: string;
-    location: string;
-    availableFrom: string;
-    availableTill: string;
-    availableType: string;
-    experienceInYears: number;
-    availability: number;
-    canTravel: boolean;
-    canTravelComment: string;
-    workingTitles: Array<string>;
-    workTitleShortDesc: string;
-    consultantBio: {
-      cvLink: string;
-      ingress: string;
-      profilePic: string;
-    };
-  };
-}
 
 export default defineComponent({
   name: "TableComponent",
   components: {
     SearchComponent,
-  },
+    ResponsiveTableRow
+},
   props: {
   },
   data() {
@@ -98,9 +92,15 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+
+.responsive-table-wrapper{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 .table-wrapper {
   width: 100%;
-  overflow-x: auto;
+  overflow: visible;
 }
 
 .table {

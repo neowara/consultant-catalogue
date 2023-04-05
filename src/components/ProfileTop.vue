@@ -1,26 +1,33 @@
 <template>
-  <div v-if="consultantDetails" class="profile-top-wrapper">
+  <div v-if="name" class="profile-top-wrapper">
     <div class="title-wrapper">
       <h1>
-        {{ consultantDetails.name }}
-        <span>{{ consultantDetails.workTitleShortDesc }}</span>
+        {{ name }}
+        <span>{{ desc }}</span>
       </h1>
     </div>
-   
     <div class="image-wrapper">
-       <img v-if="consultantDetails.consultantBio" class="profile-pic" :src="consultantDetails.consultantBio.profilePic" />
+       <img v-if="picture" class="profile-pic" :src="picture" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Consultant } from './Table.vue';
+import { IConsultantDetails } from '@/types/consultant';
 
 export default {
   name: "ProfileTop",
   props: {
-    consultantDetails: {
-      type: Object,
+    name: {
+      type: String,
+      required: true,
+    },
+    desc: {
+      type: String,
+      required: true,
+    },
+    picture: {
+      type: String,
       required: true,
     },
   }
@@ -29,6 +36,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+
 .profile-top-wrapper {
   display: grid;
   width: 100%;
@@ -37,6 +45,12 @@ export default {
   position: relative;
   padding: 0;
   z-index: 3;
+
+  @media only screen and (max-width: 500px) {
+    grid-template-columns: 1fr;
+    min-height: 136vw;
+  }
+
 }
 
 div.image-wrapper{
@@ -46,6 +60,14 @@ div.image-wrapper{
   order: 2;
   position: relative;
   overflow: hidden;
+
+  @media only screen and (max-width: 500px) {
+    position: absolute;
+    left: -1rem;
+    width: calc(100% + 2rem);
+    top: 3.5rem;
+    z-index: 0;
+  }
 }
 img.profile-pic {
   display: block;
@@ -86,6 +108,13 @@ div.title-wrapper {
   align-items: flex-start;
   justify-content: center;
 
+  @media only screen and (max-width: 500px) {
+    position: relative;
+    z-index: 1;
+    justify-content: flex-end;
+    padding: 0 0 1.5rem;
+  }
+
   h1 {
     display: flex;
     flex-direction: column;
@@ -96,6 +125,12 @@ div.title-wrapper {
     margin: 0;
     max-width: 35rem;
     line-height: 5.5rem;
+
+    @media only screen and (max-width: 500px) {
+      font-size: 4rem;
+      line-height: 3.5rem;
+      text-shadow: 0 0.25rem 0.25rem rgba(0,0,0,0.5);
+    }
 
     span{
       display: block;
@@ -109,6 +144,13 @@ div.title-wrapper {
       border: 0;
       margin-top: 1rem;
       line-height: 2rem;
+
+      @media only screen and (max-width: 500px) {
+        font-size: 1.25rem;
+        line-height: 1.5rem;
+        text-shadow: 0 0.25rem 0.25rem rgba(0,0,0,0.5);
+      }
+
     }
   }
 

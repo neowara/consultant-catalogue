@@ -8,6 +8,10 @@ const actions: ActionTree<state, state> = {
     context.commit("setActive", payload);
   },
 
+  setActiveId(context, payload) {
+    context.commit("setActiveId", payload);
+  },
+
   toggleMenu(context, payload) {
     context.commit("toggleMenu", payload);
   },
@@ -30,7 +34,7 @@ const actions: ActionTree<state, state> = {
   },
   setKeyword(context, payload) {
     context.commit("setKeyword", payload);
-  }
+  },
 };
 
 export default actions;

@@ -69,3 +69,9 @@
     }
   }
 }
+
+@mixin media-small-max {
+  @media (max-width: 991px) {
+    @content;
+  }
+}

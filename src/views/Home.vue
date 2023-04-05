@@ -8,8 +8,9 @@
 </template>
 
 <script lang="ts">
+import { IConsultant } from '@/types/consultant';
 import { defineComponent } from 'vue';
-import TableComponent, { Consultant } from '../components/Table.vue';
+import TableComponent from '../components/Table.vue';
 
 export default defineComponent({
   name: 'HomePage',
@@ -21,7 +22,7 @@ export default defineComponent({
     }
   },
   methods: {
-    goToProfile(user: Consultant) {
+    goToProfile(user: IConsultant) {
       this.$store.dispatch("setActive", user);
       this.$router.push({ name: 'ConsultantDetails', params: { id: user.consultantDetails.id } });
     }

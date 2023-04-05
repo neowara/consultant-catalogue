@@ -15,7 +15,7 @@
           </li>
         </ul>
       </div>
-      <ProfileTop :consultantDetails="activeIndex.consultantDetails" />
+      <ProfileTop :desc="activeIndex.consultantDetails.workTitleShortDesc" :picture="activeIndex.consultantDetails.consultantBio.profilePic" :name="activeIndex.consultantDetails.name" />
     </ProfileSection>
     <div class="sticky">
       <div>
@@ -26,19 +26,7 @@
           <li v-if="activeIndex.consultantDetails.consultantBio?.cvLink">
             <a href="#full-cv">CV</a>
           </li>
-          <!--<li><a href="#contact-info">Contact info</a></li>-->
-      </ul>
-      <!-- Will Be used later when design is more finished
-      <ul class="info">
-        <li><p class="experience">{{ activeIndex.consultantDetails.experienceInYears }}<span>Years</span></p></li>
-        <li><p class="availability">{{ activeIndex.consultantDetails.availableType }}</p></li>
-        <li v-if="activeIndex.consultantDetails.canTravel"><img
-              class="can-travel"
-              src="../assets/svg/canTravel.svg"
-              alt="Can Travel"
-            /></li>
-          </ul>
-          -->
+        </ul>
       </div>
     </div>
     <ProfileSplitSection bgTheme="bg1" anchor="profile" anchor2="skillset" title="Profile" title2="Skillset">
@@ -104,12 +92,6 @@ v-for="(skill, index) in activeIndex.consultantDetails.workingTitles" :key="inde
         </div>
       </template>
   </ProfileSplitSection>
-  <!--<ProfileSection bgTheme="bg1" anchor="contact-info" title="Contact information">
-      <div class="tag-wrapper">
-        <TagComponent icon="phone" :text="'042141234'" />
-        <TagComponent icon="envelope" :text="'lorem@ipsum.com'" />
-          </div>
-        </ProfileSection>-->
   </div>
 </template>
 
@@ -119,8 +101,8 @@ import Bio from ".././components/Bio.vue";
 import ProfileTop from ".././components/ProfileTop.vue";
 import ProfileSection from ".././components/ProfileSection.vue";
 import ProfileSplitSection from ".././components/ProfileSplitSection.vue";
-import { Consultant } from ".././components/Table.vue";
 import TagComponent from ".././components/TagComponent.vue";
+import { IConsultant } from '@/types/consultant';
 
 export default defineComponent({
   name: 'ConsultantView',
@@ -131,28 +113,33 @@ export default defineComponent({
     ProfileSplitSection
   },
   computed: {
-    activeIndex() {
-      return this.$store.getters.active;
+    activeIndex():IConsultant {
+      const id = this.$route.params.id;
+      if(id){
+        const consultant = this.$store.state.consultants?.find((obj) => {
+          return (obj as IConsultant).consultantDetails.id === id;
+        });
+        return consultant;
+      }
+      else{
+        return this.$store.getters.active;
+      }
     },
-    availableConsultants(): Array<Consultant> {
+    availableConsultants(): Array<IConsultant> {
       return this.$store.state.consultants;
     },
   },
   mounted() {
     window.scrollTo(0, 0);
+    this.$store.dispatch("setActiveId", this.$route.params.id);
   },
   methods: {
-    getAllPerson() {
-      return this.availableConsultants;
-    },
-    getPerson(id: string) {
-      return this.availableConsultants[id]?.consultantDetails ?? null;
-    },
   },
 })
 </script>
 
 <style lang="scss">
+
 .consultant-details-wrapper {
   @include main-grid;
   padding-bottom: 3rem;
@@ -210,7 +197,7 @@ export default defineComponent({
     position: sticky;
     top: 0;
     z-index: 10;
-    padding: 1rem;
+    padding: 1rem 0;
     background-color: black;
     @include main-grid;
 
@@ -219,6 +206,11 @@ export default defineComponent({
       display: flex;
       justify-content: space-between;
     }
+
+    @media only screen and (max-width: 500px) {
+        padding: 0.25rem 0;
+        margin-bottom: 1rem;
+      }
   }
 
 
