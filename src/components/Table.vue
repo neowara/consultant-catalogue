@@ -21,47 +21,6 @@ sortable by clicking on the column header.
       :id="data.consultantDetails.id"
       />
     </ul>
-
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Work title</th>
-          <th>Location</th>
-          <th>Available from</th>
-          <th width="160"></th>
-        </tr>
-      </thead>
-      <tbody v-for="(data, index) of filterByName" :key="index" :class="index">
-        <tr @click="$emit('tableClick', data)">
-          <td>
-            {{ data.consultantDetails.name
-            }}<span>{{ data.consultantDetails.businessArea }}</span>
-          </td>
-          <td>
-            {{ data.consultantDetails.workingTitles.join(", ") }}<span>{{ data.consultantDetails.workTitleShortDesc
-            }}</span>
-          </td>
-          <td>{{ data.consultantDetails.location }}</td>
-          <td>{{ data.consultantDetails.availableFrom.split(" ")[0] }}</td>
-          <td class="info">
-            <p 
-              class="experience" :class="data.consultantDetails.experienceInYears > 5 && 'gold'"
-              title="Years of Experience"
-              >
-              {{ data.consultantDetails.experienceInYears }}<span>Years</span>
-            </p>
-            <p class="availability" title="Availability">
-              {{ parseFloat(data.consultantDetails.availableType) }}%
-            </p>
-            <img 
-                v-if="data.consultantDetails.canTravel" class="can-travel" src="../assets/svg/canTravel.svg"
-                title="Can Travel" alt="Can Travel" 
-              />
-          </td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </template>
 <script lang="ts">
