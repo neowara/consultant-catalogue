@@ -16,18 +16,18 @@
     </div>
     <div class="badges">
       <p 
-              class="experience" :class="parseInt(experienceInYears) > 5 && 'gold'"
-              title="Years of Experience"
-              >
-              {{ experienceInYears }}<span>Years</span>
-            </p>
-            <p class="availability" title="Availability">
-              {{ parseFloat(availableType) }}%
-            </p>
-            <img 
-                v-if="canTravel" class="can-travel" src="../assets/svg/canTravel.svg"
-                title="Can Travel" alt="Can Travel" 
-              />
+      class="experience" :class="parseInt(experienceInYears) > 5 && 'gold'"
+      title="Years of Experience"
+      >
+      {{ experienceInYears }}<span>Years</span>
+      </p>
+      <p class="availability" title="Availability">
+        {{ parseFloat(availableType) }}%
+      </p>
+      <img 
+        v-if="canTravel" class="can-travel" src="../assets/svg/canTravel.svg"
+        title="Can Travel" alt="Can Travel" 
+      />
     </div>
   </li>
 </template>
@@ -79,8 +79,7 @@ export default defineComponent({
     canTravel:{
       type: Boolean,
       required: true,
-    }
-
+    },
   },
 
   computed: {

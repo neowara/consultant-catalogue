@@ -7,6 +7,7 @@ sortable by clicking on the column header.
   <div class="table-wrapper">
     <SearchComponent />
     <ul class="responsive-table-wrapper">
+      <ResponsiveTitleRow />
       <ResponsiveTableRow v-for="(data, index) of filterByName" 
       :key="index"
       :name="data.consultantDetails.name"
@@ -28,13 +29,15 @@ import { defineComponent } from "vue";
 import SearchComponent from "./Search.vue";
 import { mapGetters } from "vuex";
 import ResponsiveTableRow from "./ResponsiveTableRow.vue";
+import ResponsiveTitleRow from "./ResponsiveTitleRow.vue";
 
 
 export default defineComponent({
   name: "TableComponent",
   components: {
     SearchComponent,
-    ResponsiveTableRow
+    ResponsiveTableRow,
+    ResponsiveTitleRow
 },
   props: {
   },
