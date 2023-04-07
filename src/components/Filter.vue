@@ -18,9 +18,9 @@
             <label :for="'filter-' + index">{{ filter }}</label>
           </li>
           <!--- Double up for now to make more options to make modal scrollable -->
-          <li v-for="(filter, index) in filterTypes" :key="index">
-            <input :id="'filter-' + index" v-model="selectedFilters" type="checkbox" :value="selectedFilters">
-            <label :for="'filter-' + index">{{ filter }}</label>
+          <li v-for="(filter, index) in filterTypes" :key="index+5">
+            <input :id="'filter-' + index+5" v-model="selectedFilters" type="checkbox" :value="selectedFilters">
+            <label :for="'filter-' + index+5">{{ filter }}</label>
           </li>
         </ul>
       </div>

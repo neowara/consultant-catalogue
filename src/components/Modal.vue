@@ -45,7 +45,7 @@ export default defineComponent({
 	top: 0;
 	width: 100%;
 	height: 100%;
-	background-color: rgba(0,0,0, 0.3);
+	background-color: rgba(0,0,0, 0.4);
 	backdrop-filter: blur(0.25rem);
 	display: flex;
 	justify-content: center;
@@ -58,7 +58,7 @@ export default defineComponent({
 		height: 100%;
 		left: 0;
 		top: 0;
-		background-color: rgba(var(--color-dark-accent-raw), 0.3);
+		background-color: rgba(var(--color-dark-accent-raw), 0.2);
 	}
 
 	.modal-content {
