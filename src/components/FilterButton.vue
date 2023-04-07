@@ -1,5 +1,5 @@
 <template>
-  <button class="filter-btn" @click="clickAction">
+  <button class="filter-btn" @click="clickAction(filter)">
         <span>{{ filter }}</span>
         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" view-box="0 0 24 24"><path fill="#fff" fill-rule="evenodd" d="M13 4.5a.5.5 0 0 1 .5.5v5.5H19a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-5.5V19a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-5.5H5a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 1 .5-.5h5.5V5a.5.5 0 0 1 .5-.5h2Z"/></svg>
       </button>
@@ -15,8 +15,8 @@ export default {
     },
   },
   methods: {
-    clickAction() {
-      this.$emit("click");
+    clickAction(name) {
+      this.$emit("click", name);
     },
   },
 };

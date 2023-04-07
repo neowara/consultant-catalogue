@@ -2,7 +2,7 @@
   <div class="filter-container">
     <ul class="filter-list">
     <li v-for="(filter, index) in filterTypes" :key="index" class="btn-wrapper">
-      <FilterButton :filter="filter" @click="showModal = true" />
+      <FilterButton :filter="filter" @click="(name) => openModal(name)" />
       <!--<button class="filter-button" @click="showModal = true">
         {{ filter }}
 
@@ -89,6 +89,11 @@ export default defineComponent({
     };
   },
   methods: {
+    openModal(name){
+      console.log(name);
+      this.showModal = true;
+      this.modalTitle = name;
+    },
     applyFilters() {
     },
     resetFilters() {
