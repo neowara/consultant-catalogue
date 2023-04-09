@@ -120,7 +120,7 @@ div.title-wrapper {
     flex-direction: column;
     font-weight: 700;
     font-variation-settings: "slnt" -10;
-    align-items: center;
+    align-items: flex-start;
     font-size: 6rem;
     margin: 0;
     max-width: 35rem;

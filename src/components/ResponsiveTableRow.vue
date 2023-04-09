@@ -4,14 +4,14 @@
       <router-link :to="`consultant/${id}`">{{ name }}
       <span>{{ businessArea }}</span></router-link>
     </div>
-    <div class="titles">
+    <div class="titles" @click="goToConsultant">
       {{ workingTitles.join(", ") }} 
       <span>{{ workTitleShortDesc }}</span>
     </div>
-    <div class="city">
+    <div class="city" @click="goToConsultant">
       {{ city }} 
     </div>
-    <div class="available">
+    <div class="available" @click="goToConsultant">
       {{ new Date(availableFrom).toLocaleDateString() }} 
     </div>
     <div class="badges">
@@ -86,6 +86,9 @@ export default defineComponent({
     //...mapGetters(["filterByName"]),
   },
   methods: {
+    goToConsultant() {
+      this.$router.push({ path: `/consultant/${this.id}` })
+    },
   },
 });
 
