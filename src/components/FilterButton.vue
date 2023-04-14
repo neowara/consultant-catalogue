@@ -1,7 +1,7 @@
 <template>
   <div class="btn-wrapper">
     <div v-if="buttonType === 'clickable'" class="btn-with-plus">
-      <button class="filter-btn" @click="clickAction(buttonType)">
+      <button class="filter-btn" @click="showModal = true" @change="onChange($event)">
         <span>{{ buttonText }}</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -16,16 +16,46 @@
           />
         </svg>
       </button>
+
+      <modal
+        v-if="showModal"
+        :title="buttonText"
+        :fullscreen="true"
+        @close="showModal = false"
+      >
+        <div class="filter-modal-content">
+          <ul class="filter-list">
+            <li v-for="(filter, index) in value" :key="index">
+              <input
+                :id="index.toString()"
+                :value="filter"
+                type="checkbox"
+              />
+              <label :for="'filter-' + index.toString()">{{ filter }}</label>
+            </li>
+          </ul>
+        </div>
+
+        <div class="filter-actions">
+          <button class="filter-button primary" @click="applyFilters">
+            Apply Filters
+          </button>
+          <button class="filter-button" @click="resetFilters">
+            Reset Filters
+          </button>
+        </div>
+      </modal>
     </div>
 
     <div v-if="buttonType === 'checkbox'" class="btn-with-chkmrk">
       <label for="checkBtn">{{ buttonText }}</label>
       <input
         id="checkBtn"
+        :value="value"
         type="checkbox"
         class="filter-btn"
         name="checkBtn"
-        @click="clickAction(buttonType)"
+        @change="onChange($event)"
       />
     </div>
   </div>
@@ -33,8 +63,18 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import Modal from "@/components/Modal.vue";
+
 export default defineComponent({
   name: "FilterButton",
+  components: {
+    Modal,
+  },
+  data() {
+    return {
+      showModal: false,
+    };
+  },
   props: {
     buttonType: {
       type: String,
@@ -44,10 +84,28 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    value: {
+      type: [String, Number, Boolean, Array, Object],
+      required: false,
+      default: () => {},
+    },
   },
   methods: {
     clickAction(name: unknown) {
       this.$emit("click", name);
+    },
+    onChange(event) {
+      let value = undefined;
+      if (event.target.type === "checkbox") {
+        value = event.target.checked;
+      } else {
+        value = event.target.value;
+      }
+      this.$emit("input", value);
+    },
+    applyFilters() {
+    },
+    resetFilters() {
     },
   },
 });

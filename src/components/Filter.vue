@@ -3,45 +3,16 @@
     <ul class="filter-list">
       <li v-for="(filter, index) in filters" :key="index" class="btn-wrapper">
         <FilterButton
+          v-model="selectedFilters[0][filter]"
           :buttonText="filter.name"
           :buttonType="filter.btnType" @click="(name) => openModal(filter.btnType, filter.options)"
         />
       </li>
     </ul>
-    <modal
-      :title="modalTitle"
-      :show="showModal"
-      :fullscreen="true"
-      @close="showModal = false"
-    >
-      <div class="filter-modal-content">
-        <ul class="filter-list">
-          <li v-for="(filter, index) in filters" :key="index">
-            <input
-              :id="'filter-' + index"
-              v-model="selectedFilters"
-              type="checkbox"
-              :value="selectedFilters"
-            />
-            <label :for="'filter-' + index">{{ filter }}</label>
-          </li>
-        </ul>
-      </div>
-
-      <div class="filter-actions">
-        <button class="filter-button primary" @click="applyFilters">
-          Apply Filters
-        </button>
-        <button class="filter-button" @click="resetFilters">
-          Reset Filters
-        </button>
-      </div>
-    </modal>
   </div>
 </template>
 
 <script lang="ts">
-import Modal from "@/components/Modal.vue";
 import FilterButton from "@/components/FilterButton.vue";
 import { defineComponent } from "vue";
 import { mapGetters } from "vuex";
@@ -57,7 +28,6 @@ export interface selectedFilters {
 export default defineComponent({
   name: "FilterComponent",
   components: {
-    Modal,
     FilterButton,
   },
   props: {
@@ -75,27 +45,24 @@ export default defineComponent({
     return {
       showModal: false,
       modalTitle: "Filters",
-      selectedFilters: Array<selectedFilters>(),
+      selectedFilters: Array<selectedFilters>(
+        {
+          location: [
+
+          ],
+          businessArea: [],
+          workingTitles: [],
+          canTravel: false,
+          availableType: [],
+        }
+      ),
       filterWord: "",
     };
   },
   methods: {
-    openModal(name: string, item: any) {
-      if(name === "clickable") {
-        this.showModal = true;
-        this.modalTitle = name;
-      } else {
-        for (let i = 0; i < item.length; i++) {
-          console.log(item[i]);
-            this.selectedFilters.push(item);
-        }
-      }
-    },
     setKeyword() {
       this.$store.commit("setKeyword", this.filterWord);
     },
-    applyFilters() {},
-    resetFilters() {},
   },
   computed: {
     ...mapGetters(["filters"]),

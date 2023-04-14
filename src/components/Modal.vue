@@ -3,8 +3,9 @@
 	The event is handled in the parent component. The parent component then closes the modal. */
 
 <template>
-	<div v-if="show" class="modal">
+	<div class="modal">
 		<div class="modal-overlay" @click="$emit('close')"></div>
+
 		<div class="modal-content">
 			<header class="modal-header">
 				<h2>{{ title }}</h2>
@@ -12,6 +13,7 @@
 					<img src="../assets/svg/close.svg" alt="Close" />
 				</button>
 			</header>
+
 			<div class="modal-body">
 				<slot></slot>
 			</div>
@@ -29,7 +31,7 @@ export default defineComponent({
 			type: String,
 			required: true
 		},
-		show: {
+		showModal: {
 			type: Boolean,
 			default: false
 		}
