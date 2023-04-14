@@ -8,18 +8,19 @@ sortable by clicking on the column header.
     <SearchComponent />
     <ul class="responsive-table-wrapper">
       <ResponsiveTitleRow />
-      <ResponsiveTableRow v-for="(data, index) of filterByName" 
-      :key="index"
-      :name="data.consultantDetails.name"
-      :businessArea="data.consultantDetails.businessArea"
-      :workingTitles="data.consultantDetails.workingTitles"
-      :workTitleShortDesc="data.consultantDetails.workTitleShortDesc"
-      :city="data.consultantDetails.location"
-      :availableFrom="data.consultantDetails.availableFrom"
-      :experienceInYears="data.consultantDetails.experienceInYears"
-      :canTravel="data.consultantDetails.canTravel"
-      :availableType="data.consultantDetails.availableType"
-      :id="data.consultantDetails.id"
+      <ResponsiveTableRow
+        v-for="(data, index) of filterByName"
+        :id="data.consultantDetails.id"
+        :key="index"
+        :name="data.consultantDetails.name"
+        :businessArea="data.consultantDetails.businessArea"
+        :workingTitles="data.consultantDetails.workingTitles"
+        :workTitleShortDesc="data.consultantDetails.workTitleShortDesc"
+        :city="data.consultantDetails.location"
+        :availableFrom="data.consultantDetails.availableFrom"
+        :experienceInYears="data.consultantDetails.experienceInYears"
+        :canTravel="data.consultantDetails.canTravel"
+        :availableType="data.consultantDetails.availableType"
       />
     </ul>
   </div>
@@ -31,31 +32,26 @@ import { mapGetters } from "vuex";
 import ResponsiveTableRow from "./ResponsiveTableRow.vue";
 import ResponsiveTitleRow from "./ResponsiveTitleRow.vue";
 
-
 export default defineComponent({
   name: "TableComponent",
   components: {
     SearchComponent,
     ResponsiveTableRow,
-    ResponsiveTitleRow
-},
-  props: {
+    ResponsiveTitleRow,
   },
+  props: {},
   data() {
-    return {
-    };
+    return {};
   },
   computed: {
     ...mapGetters(["filterByName"]),
   },
-  methods: {
-  },
+  methods: {},
 });
 </script>
 
 <style scoped lang="scss">
-
-.responsive-table-wrapper{
+.responsive-table-wrapper {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -145,8 +141,8 @@ p.experience {
   border-radius: 0.25rem;
 
   &.gold {
-    color: #D8BE7E;
-    border-color: #D8BE7E;
+    color: #d8be7e;
+    border-color: #d8be7e;
   }
 
   span {

@@ -9,31 +9,30 @@
 </template>
 
 <script lang="ts">
-
 export default {
   name: "ProfileSection",
   props: {
     bgTheme: {
       type: String,
       required: false,
-      default: ""
+      default: "",
     },
     anchor: {
       type: String,
       required: false,
-      default: undefined
+      default: undefined,
     },
     title: {
       type: String,
       required: false,
-      default: undefined
+      default: undefined,
     },
     usePadding: {
       type: Boolean,
       required: false,
       default: true,
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -42,24 +41,24 @@ section.full-width {
   grid-column: full;
   @include main-grid;
 
-  h2{
+  h2 {
     padding-top: 4rem;
     font-size: var(--font-xl);
   }
 
-  &.padding{
+  &.padding {
     padding: 0rem 0 4rem 0;
   }
 
-  .inner{
+  .inner {
     grid-column: main;
     position: relative;
   }
 
-  &.bg1{
+  &.bg1 {
     background-color: rgba(var(--color-dark-accent-raw), 0.15);
   }
-  &.bg2{
+  &.bg2 {
     background-color: #111;
   }
 }

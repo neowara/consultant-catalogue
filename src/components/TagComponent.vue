@@ -47,8 +47,8 @@ export default defineComponent({
     justify-content: center;
     width: 2rem;
     height: 2rem;
-    
-    svg{
+
+    svg {
       color: #ddd;
     }
   }

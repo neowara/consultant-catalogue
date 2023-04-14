@@ -1,5 +1,9 @@
 <template>
-  <div class="bio-container" :style="{'--bg-color': backgroundColor }" v-html="content"></div>
+  <div
+    class="bio-container"
+    :style="{ '--bg-color': backgroundColor }"
+    v-html="content"
+  ></div>
 </template>
 
 <script>

@@ -9,18 +9,15 @@
 </template>
 
 <script>
-
 export default {
   name: "HeaderComponent",
-  components: {
-  },
+  components: {},
   computed: {
     menuOpen() {
       return this.$store.getters.menuOpen;
     },
   },
-  props: {
-  },
+  props: {},
   methods: {
     OpenMenu() {
       this.$store.dispatch("toggleMenu", true);
@@ -30,7 +27,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
 header {
   @include main-grid;
   padding: 1.5rem 0;
@@ -48,7 +44,7 @@ a {
     height: auto;
   }
 }
-div.inner{
+div.inner {
   grid-column: main;
 }
 </style>
