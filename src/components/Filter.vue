@@ -3,7 +3,7 @@
     <ul class="filter-list">
       <li v-for="(filter, index) in filters" :key="index" class="btn-wrapper">
         <FilterButton
-          v-model="selectedFilters[0][filter]"
+          v-model="filter.options"
           :buttonText="filter.name"
           :buttonType="filter.btnType" @click="(name) => openModal(filter.btnType, filter.options)"
         />
