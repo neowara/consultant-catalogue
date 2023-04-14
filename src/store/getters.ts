@@ -14,7 +14,10 @@ export default {
   keyword(state: state) {
     return state.keyword;
   },
-  filterByName(state: state): IConsultant[] {
+  filters(state: state) {
+    return state.filters;
+  },
+  filterByName(state: state, filterType: string): IConsultant[] {
     return state.consultants.filter((consultant) => {
       // Loop through each property in the consultantDetails object.
       for (const key in consultant.consultantDetails) {
@@ -24,10 +27,17 @@ export default {
           if (
             consultant.consultantDetails.name
               .toLowerCase()
-              .includes(state.keyword.toLowerCase()) ||
+              .includes(state.keyword.toLowerCase())
+          ) {
+            return true;
+          } else if (
             consultant.consultantDetails.workingTitles.filter((titles) =>
               titles.toLowerCase().includes(state.keyword.toLowerCase())
             ).length > 0
+          ) {
+            return true;
+          } else if (
+            consultant.consultantDetails.canTravel.toString() === state.keyword
           ) {
             return true;
           }
