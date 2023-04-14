@@ -1,13 +1,25 @@
-//Simple search component with a text input and a button. The component emits an event when the button is clicked. The event is handled in the parent component. The parent component then filters the list of consultants based on the search term.
+//Simple search component with a text input and a button. The component emits an
+event when the button is clicked. The event is handled in the parent component.
+The parent component then filters the list of consultants based on the search
+term.
 <template>
   <div class="search-container">
     <div>
-      <FilterComponent :buttonText="'Filter Consultants'" :filters="filterOptions"></FilterComponent>
+      <FilterComponent
+        :buttonText="'Filter Consultants'"
+        :filters="filterOptions"
+      ></FilterComponent>
     </div>
 
     <div class="search-wrapper">
       <label for="Search"><img src="../assets/svg/search.svg" /></label>
-      <input id="Search" v-model="searchTerm" type="text" placeholder="Search by Name or Work Title" @keydown="search" />
+      <input
+        id="Search"
+        v-model="searchTerm"
+        type="text"
+        placeholder="Search by Name or Work Title"
+        @keydown="search"
+      />
     </div>
   </div>
 </template>
@@ -15,7 +27,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import FilterComponent from "./Filter.vue";
-
 
 export default defineComponent({
   name: "SearchComponent",
@@ -25,20 +36,15 @@ export default defineComponent({
   data() {
     return {
       searchTerm: "",
-      filterOptions: [
-        location
-      ]
     };
   },
-  props: {
-  },
+  props: {},
   methods: {
     search() {
       this.$store.commit("setKeyword", this.searchTerm);
     },
   },
-  computed: {
-  },
+  computed: {},
   created() {
     this.$store.commit("setKeyword", this.searchTerm);
   },
