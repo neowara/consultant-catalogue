@@ -7,7 +7,6 @@ term.
     <div>
       <FilterComponent
         :buttonText="'Filter Consultants'"
-        :filters="filterOptions"
       ></FilterComponent>
     </div>
 

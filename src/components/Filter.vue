@@ -46,6 +46,14 @@ import FilterButton from "@/components/FilterButton.vue";
 import { defineComponent } from "vue";
 import { mapGetters } from "vuex";
 
+export interface selectedFilters {
+  location: Array<string>;
+  businessArea: Array<string>;
+  workingTitles: Array<string>;
+  canTravel: boolean;
+  availableType: Array<string>;
+}
+
 export default defineComponent({
   name: "FilterComponent",
   components: {
@@ -67,7 +75,7 @@ export default defineComponent({
     return {
       showModal: false,
       modalTitle: "Filters",
-      selectedFilters: Array<string>(),
+      selectedFilters: Array<selectedFilters>(),
       filterWord: "",
     };
   },
