@@ -1,7 +1,6 @@
-import { IConsultant } from "@/types/consultant";
 import { MutationTree } from "vuex";
 
-import { Consultant, state } from "./state";
+import { IConsultant, state, Consultant } from "@/types/consultant";
 
 const mutations: MutationTree<state> = {
   setActive(state: state, payload) {

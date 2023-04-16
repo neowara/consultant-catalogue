@@ -1,5 +1,4 @@
-import { IConsultant } from "@/types/consultant";
-import { state } from "./state";
+import { IConsultant, state, Filter } from "@/types/consultant";
 
 export default {
   active(state: state) {
@@ -17,7 +16,7 @@ export default {
   filters(state: state) {
     return state.filters;
   },
-  filterByName(state: state, filterType: string): IConsultant[] {
+  filterBy(state: state): IConsultant[] {
     return state.consultants.filter((consultant) => {
       // Loop through each property in the consultantDetails object.
       for (const key in consultant.consultantDetails) {
@@ -46,4 +45,7 @@ export default {
       return false;
     });
   },
+  filterData(state: state): Filter {
+    return state.filters[0];
+  }
 };

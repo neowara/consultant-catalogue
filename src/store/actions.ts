@@ -1,7 +1,7 @@
 import { ActionTree } from "vuex";
 import axios from "axios";
+import { IConsultant, state } from "@/types/consultant";
 
-import { state } from "./state";
 
 const actions: ActionTree<state, state> = {
   setActive(context, payload) {
