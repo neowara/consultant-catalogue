@@ -1,7 +1,11 @@
 <template>
   <div class="btn-wrapper">
     <div v-if="buttonType === 'clickable'" class="btn-with-plus">
-      <button class="filter-btn" @click="showModal = true" @change="onChange($event)">
+      <button
+        class="filter-btn"
+        @click="showModal = true"
+        @change="onChange($event)"
+      >
         <span>{{ buttonText }}</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -25,13 +29,16 @@
       >
         <div class="filter-modal-content">
           <ul class="filter-list">
-            <li v-for="(filter, index) in value" :key="index">
+            <li v-for="(option, index) in value" :key="index">
               <input
-                :id="index.toString()"
-                :value="filter"
+                :id="'filter-' + index.toString()"
+                v-model="selectedFilters"
                 type="checkbox"
+                :value="option.value"
               />
-              <label :for="'filter-' + index.toString()">{{ filter }}</label>
+              <label :for="'filter-' + index.toString()">{{
+                option.label
+              }}</label>
             </li>
           </ul>
         </div>
@@ -55,7 +62,7 @@
         type="checkbox"
         class="filter-btn"
         name="checkBtn"
-        @change="onChange($event)"
+        @input="onChange($event)"
       />
     </div>
   </div>
@@ -73,6 +80,8 @@ export default defineComponent({
   data() {
     return {
       showModal: false,
+      filterWord: "",
+      selectedFilters: [],
     };
   },
   props: {
@@ -85,7 +94,7 @@ export default defineComponent({
       required: true,
     },
     value: {
-      type: [String, Number, Boolean, Array, Object],
+      type: Object,
       required: false,
       default: () => {},
     },
@@ -104,9 +113,14 @@ export default defineComponent({
       this.$emit("input", value);
     },
     applyFilters() {
+      this.$store.commit("setKeyword", this.filterWord);
     },
-    resetFilters() {
+    resetFilters() {},
+    updateSelectedFilters() {
+      this.$emit("input", this.selectedFilters);
     },
+  },
+  computed: {
   },
 });
 </script>

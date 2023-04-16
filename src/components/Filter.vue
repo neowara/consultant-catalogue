@@ -3,9 +3,11 @@
     <ul class="filter-list">
       <li v-for="(filter, index) in filters" :key="index" class="btn-wrapper">
         <FilterButton
-          v-model="filter.options"
+          :checked="getObjectByKey(filter.key)"
+          :value="getObjectByKey(filter.key)"
           :buttonText="filter.name"
-          :buttonType="filter.btnType" @click="(name) => openModal(filter.btnType, filter.options)"
+          :buttonType="filter.btnType"
+          @change="selectedFilters = [$event]"
         />
       </li>
     </ul>
@@ -16,14 +18,6 @@
 import FilterButton from "@/components/FilterButton.vue";
 import { defineComponent } from "vue";
 import { mapGetters } from "vuex";
-
-export interface selectedFilters {
-  location: Array<string>;
-  businessArea: Array<string>;
-  workingTitles: Array<string>;
-  canTravel: boolean;
-  availableType: Array<string>;
-}
 
 export default defineComponent({
   name: "FilterComponent",
@@ -43,29 +37,29 @@ export default defineComponent({
   },
   data() {
     return {
-      showModal: false,
-      modalTitle: "Filters",
-      selectedFilters: Array<selectedFilters>(
-        {
-          location: [
-
+      selectedFilters: {},
+    };
+  },
+  methods: {},
+  computed: {
+    ...mapGetters(["filters"]),
+    getObjectByKey() {
+      return function (key) {
+        const obj = {
+          location: [],
+          businessArea: [
+            { value: "technology", label: "Technology" },
+            { value: "finance", label: "Finance" },
+            { value: "marketing", label: "Marketing" },
+            { value: "sales", label: "Sales" },
           ],
-          businessArea: [],
           workingTitles: [],
           canTravel: false,
           availableType: [],
-        }
-      ),
-      filterWord: "",
-    };
-  },
-  methods: {
-    setKeyword() {
-      this.$store.commit("setKeyword", this.filterWord);
+        };
+        return obj[key];
+      };
     },
-  },
-  computed: {
-    ...mapGetters(["filters"]),
   },
 });
 </script>
