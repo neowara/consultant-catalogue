@@ -25,8 +25,9 @@ export default defineComponent({
   },
   computed: {
     ...mapGetters(["consultants"]),
-    ...mapGetters(["filterByName"]),
+    ...mapGetters(["filterBy"]),
     ...mapGetters(["keyword"]),
+    ...mapGetters(["filterData"]),
   },
   mounted() {
     this.$store.dispatch("getConsultants");

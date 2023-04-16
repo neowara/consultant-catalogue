@@ -27,7 +27,7 @@ export default defineComponent({
   },
 
   computed: {
-    //...mapGetters(["filterByName"]),
+    //...mapGetters(["filterBy"]),
   },
   methods: {
   },

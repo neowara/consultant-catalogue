@@ -9,7 +9,7 @@ sortable by clicking on the column header.
     <ul class="responsive-table-wrapper">
       <ResponsiveTitleRow />
       <ResponsiveTableRow
-        v-for="(data, index) of filterByName"
+        v-for="(data, index) of filterBy"
         :id="data.consultantDetails.id"
         :key="index"
         :name="data.consultantDetails.name"
@@ -44,7 +44,7 @@ export default defineComponent({
     return {};
   },
   computed: {
-    ...mapGetters(["filterByName"]),
+    ...mapGetters(["filterBy"]),
   },
   methods: {},
 });

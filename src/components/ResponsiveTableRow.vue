@@ -1,8 +1,10 @@
 <template>
   <li class="responsive-table-row">
     <div class="name">
-      <router-link :to="`consultant/${id}`">{{ name }}
-      <span>{{ businessArea }}</span></router-link>
+      <router-link :to="`consultant/${id}`">
+{{ name }}
+      <span>{{ businessArea }}</span>
+</router-link>
     </div>
     <div class="titles" @click="goToConsultant">
       {{ workingTitles.join(", ") }} 
@@ -83,7 +85,7 @@ export default defineComponent({
   },
 
   computed: {
-    //...mapGetters(["filterByName"]),
+    //...mapGetters(["filterBy"]),
   },
   methods: {
     goToConsultant() {
