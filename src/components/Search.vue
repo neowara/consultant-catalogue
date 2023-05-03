@@ -17,7 +17,7 @@ term.
         v-model="searchTerm"
         type="text"
         placeholder="Search by Name or Work Title"
-        @keydown="search"
+        @keyup="search"
       />
     </div>
   </div>

@@ -110,12 +110,14 @@ export default defineComponent({
       } else {
         value = event.target.value;
       }
-      this.$emit("input", value);
+      this.applyFilters();
     },
     applyFilters() {
-      this.$store.commit("setKeyword", this.filterWord);
+      this.$store.commit("setKeyword", this.selectedFilters);
     },
-    resetFilters() {},
+    resetFilters() {
+      this.$store.commit("setKeyword", []);
+    },
     updateSelectedFilters() {
       this.$emit("input", this.selectedFilters);
     },

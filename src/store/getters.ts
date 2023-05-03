@@ -21,17 +21,18 @@ export default {
       // Loop through each property in the consultantDetails object.
       for (const key in consultant.consultantDetails) {
         // Check if the property is not null or undefined.
+        let index = 0;
         if (consultant.consultantDetails[key]) {
           // Check if the name or workingTitles property contains the keyword.
-          if (
+          if (state.keyword.length &&
             consultant.consultantDetails.name
               .toLowerCase()
-              .includes(state.keyword.toLowerCase())
+              .includes(state.keyword[index].toLowerCase())
           ) {
             return true;
-          } else if (
+          } else if (state.keyword.length &&
             consultant.consultantDetails.workingTitles.filter((titles) =>
-              titles.toLowerCase().includes(state.keyword.toLowerCase())
+              titles.toLowerCase().includes(state.keyword[index].toLowerCase())
             ).length > 0
           ) {
             return true;
@@ -40,6 +41,7 @@ export default {
           ) {
             return true;
           }
+          index++;
         }
       }
       return false;

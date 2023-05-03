@@ -37,7 +37,7 @@ export default defineComponent({
   },
   data() {
     return {
-      selectedFilters: {},
+      selectedFilters: [],
     };
   },
   methods: {},
@@ -46,16 +46,48 @@ export default defineComponent({
     getObjectByKey() {
       return function (key) {
         const obj = {
-          location: [],
+          location: [
+            { value: "göteborg", label: "Göteborg" },
+            { value: "stockholm", label: "Stockholm" },
+            { value: "malmö", label: "Malmö" },
+          ],
           businessArea: [
             { value: "technology", label: "Technology" },
             { value: "finance", label: "Finance" },
             { value: "marketing", label: "Marketing" },
             { value: "sales", label: "Sales" },
           ],
-          workingTitles: [],
+          workingTitles: [
+            { value: "frontend", label: "Frontend" },
+            { value: "backend", label: "Backend" },
+            { value: "fullstack", label: "Fullstack" },
+            { value: "ux", label: "UX" },
+            { value: "ui", label: "UI" },
+            { value: "qa", label: "QA" },
+            { value: "devops", label: "DevOps" },
+            { value: "data", label: "Data" },
+            { value: "product", label: "Product" },
+            { value: "project", label: "Project" },
+            { value: "scrum", label: "Scrum" },
+            { value: "agile", label: "Agile" },
+            { value: "growth", label: "Growth" },
+            { value: "sales", label: "Sales" },
+            { value: "marketing", label: "Marketing" },
+            { value: "finance", label: "Finance" },
+            { value: "hr", label: "HR" },
+            { value: "legal", label: "Legal" },
+            { value: "support", label: "Support" },
+            { value: "other", label: "Other" },
+          ],
           canTravel: false,
-          availableType: [],
+          availableType: [
+            { value: "fulltime", label: "Fulltime" },
+            { value: "parttime", label: "Parttime" },
+            { value: "internship", label: "Internship" },
+            { value: "contract", label: "Contract" },
+            { value: "project", label: "Project" },
+            { value: "freelance", label: "Freelance" },
+          ],
         };
         return obj[key];
       };

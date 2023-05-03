@@ -54,10 +54,6 @@ export interface Filter {
   name: string;
   key: string;
   btnType: string;
-  options: {
-    value: string | number | boolean;
-    label: string;
-  }[];
 }
 
 export interface state {
@@ -65,6 +61,6 @@ export interface state {
   active: object,
   menuOpen: boolean,
   consultants: Array<Consultant>,
-  keyword: string,
+  keyword: string | Array<string>,
   filters: Array<Filter>,
 }
