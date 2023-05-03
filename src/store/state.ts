@@ -4,7 +4,7 @@ export const state = {
   active: {},
   menuOpen: false,
   consultants: [],
-  keyword: [],
+  keyword: "",
   filters: [
     {
       name: 'Location',

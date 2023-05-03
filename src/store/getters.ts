@@ -19,32 +19,59 @@ export default {
   filterBy(state: state): IConsultant[] {
     return state.consultants.filter((consultant) => {
       // Loop through each property in the consultantDetails object.
-      for (const key in consultant.consultantDetails) {
-        // Check if the property is not null or undefined.
-        let index = 0;
-        if (consultant.consultantDetails[key]) {
-          // Check if the name or workingTitles property contains the keyword.
-          if (state.keyword.length &&
-            consultant.consultantDetails.name
-              .toLowerCase()
-              .includes(state.keyword[index].toLowerCase())
-          ) {
-            return true;
-          } else if (state.keyword.length &&
-            consultant.consultantDetails.workingTitles.filter((titles) =>
-              titles.toLowerCase().includes(state.keyword[index].toLowerCase())
-            ).length > 0
-          ) {
-            return true;
-          } else if (
-            consultant.consultantDetails.canTravel.toString() === state.keyword
-          ) {
-            return true;
+      if (typeof state.keyword === "string") {
+        for (const key in consultant.consultantDetails) {
+          // Check if the property is not null or undefined.
+          let index = 0;
+          if (consultant.consultantDetails[key]) {
+            if (state.keyword === "") {
+              return true;
+            }
+            // Check if the name or workingTitles property contains the keyword.
+            if (state.keyword.length &&
+              consultant.consultantDetails.name
+                .toLowerCase()
+                .includes(state.keyword[index].toLowerCase())
+            ) {
+              return true;
+            }
+            index++;
           }
-          index++;
         }
+        return false;
+      } else if (typeof state.keyword === "object") {
+        for (const key in consultant.consultantDetails) {
+          // Check if the property is not null or undefined.
+          let index = 0;
+          if (consultant.consultantDetails[key]) {
+            if (state.keyword.length &&
+              consultant.consultantDetails.workingTitles.filter((titles) =>
+                titles.toLowerCase().includes(state.keyword[index].toLowerCase())
+              ).length > 0
+            ) {
+              return true;
+            } else if (
+              consultant.consultantDetails.canTravel.toString() === state.keyword[index]
+            ) {
+              return true;
+            }
+            index++;
+          }
+        }
+        return false;
+      } else if (typeof state.keyword === "boolean") {
+        for (const key in consultant.consultantDetails) {
+          // Check if the property is not null or undefined.
+          if (consultant.consultantDetails[key]) {
+            if (
+              consultant.consultantDetails.canTravel === state.keyword
+            ) {
+              return true;
+            }
+          }
+        }
+        return false;
       }
-      return false;
     });
   },
   filterData(state: state): Filter {
