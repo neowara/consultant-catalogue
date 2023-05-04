@@ -116,6 +116,7 @@ export default defineComponent({
       this.$store.commit("setKeyword", this.selectedFilters);
     },
     resetFilters() {
+      this.selectedFilters = [];
       this.$store.commit("setKeyword", []);
     },
     updateSelectedFilters() {
