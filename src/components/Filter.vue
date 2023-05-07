@@ -114,7 +114,7 @@ export default defineComponent({
     gap: 1rem;
   }
 
-  .filter-modal-content {
+  ::v-deep .filter-modal-content {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -129,7 +129,7 @@ export default defineComponent({
       font-size: var(--font-m);
     }
 
-    .filter-list {
+    ul.filter-list {
       margin: 0;
       padding: 0;
       list-style: none;
@@ -197,7 +197,7 @@ export default defineComponent({
     }
   }
 
-  .filter-actions {
+  ::v-deep .filter-actions {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
