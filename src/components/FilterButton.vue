@@ -1,11 +1,7 @@
 <template>
-  <div class="btn-wrapper">
+  <div class="btn-wrapper" @click="$emit('inputClick'), $event">
     <div v-if="buttonType === 'clickable'" class="btn-with-plus">
-      <button
-        class="filter-btn"
-        @click="showModal = true"
-        @change="onChange($event)"
-      >
+      <button class="filter-btn" :class="{ 'selected': selected }">
         <span>{{ buttonText }}</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -20,49 +16,17 @@
           />
         </svg>
       </button>
-
-      <modal
-        v-if="showModal"
-        :title="buttonText"
-        :fullscreen="true"
-        @close="showModal = false"
-      >
-        <div class="filter-modal-content">
-          <ul class="filter-list">
-            <li v-for="(option, index) in value" :key="index">
-              <input
-                :id="'filter-' + index.toString()"
-                v-model="selectedFilters"
-                type="checkbox"
-                :value="option.value"
-              />
-              <label :for="'filter-' + index.toString()">{{
-                option.label
-              }}</label>
-            </li>
-          </ul>
-        </div>
-
-        <div class="filter-actions">
-          <button class="filter-button primary" @click="applyFilters">
-            Apply Filters
-          </button>
-          <button class="filter-button" @click="resetFilters">
-            Reset Filters
-          </button>
-        </div>
-      </modal>
     </div>
 
-    <div v-if="buttonType === 'checkbox'" class="btn-with-chkmrk">
-      <label for="checkBtn">{{ buttonText }}</label>
+    <div v-if="buttonType === 'checkbox'" class="btn-with-chkmrk" :class="{ 'selected': selected }">
+      <label for="checkBtn">{{ label }}</label>
       <input
         id="checkBtn"
         :value="value"
+        :checked="selected"
         type="checkbox"
         class="filter-btn"
-        name="checkBtn"
-        @input="onChange($event)"
+        @change="onChange($event)"
       />
     </div>
   </div>
@@ -70,18 +34,15 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Modal from "@/components/Modal.vue";
 
 export default defineComponent({
   name: "FilterButton",
   components: {
-    Modal,
   },
   data() {
     return {
-      showModal: false,
-      filterWord: "",
-      selectedFilters: [],
+      content: this.value,
+      selected: false,
     };
   },
   props: {
@@ -93,34 +54,23 @@ export default defineComponent({
       type: String,
       required: true,
     },
-    value: {
-      type: Object,
+    label: {
+      type: [String, Number, Boolean, Array, Object],
       required: false,
-      default: () => {},
+      default: () => null,
+    },
+    value: {
+      type: [String, Number, Boolean, Array, Object],
+      required: false,
+      default: () => {
+      },
     },
   },
   methods: {
-    clickAction(name: unknown) {
-      this.$emit("click", name);
-    },
-    onChange(event) {
-      let value = undefined;
-      if (event.target.type === "checkbox") {
-        value = event.target.checked;
-      } else {
-        value = event.target.value;
-      }
-      this.applyFilters();
-    },
-    applyFilters() {
-      this.$store.commit("setKeyword", this.selectedFilters);
-    },
-    resetFilters() {
-      this.selectedFilters = [];
-      this.$store.commit("setKeyword", []);
-    },
-    updateSelectedFilters() {
-      this.$emit("input", this.selectedFilters);
+    onChange(e) {
+      console.log("onChange", e.target.checked);
+      this.selected = e.target.checked;
+      this.$emit("input", e.target.checked);
     },
   },
   computed: {
@@ -193,6 +143,14 @@ export default defineComponent({
       display: inline-block;
       padding: 3px;
       cursor: pointer;
+    }
+  }
+
+  .selected {
+    border: 1px solid rgb(90, 30, 160) !important;
+
+    svg path {
+      fill: white;
     }
   }
 }

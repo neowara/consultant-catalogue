@@ -6,7 +6,10 @@ sortable by clicking on the column header.
 <template>
   <div class="table-wrapper">
     <SearchComponent />
-    <ul class="responsive-table-wrapper">
+    <ul v-if="!filterBy">
+      <p>No results found</p>
+    </ul>
+    <ul v-else class="responsive-table-wrapper">
       <ResponsiveTitleRow />
       <ResponsiveTableRow
         v-for="(data, index) of filterBy"

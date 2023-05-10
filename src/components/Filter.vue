@@ -1,16 +1,49 @@
 <template>
   <div class="filter-container">
     <ul class="filter-list">
-      <li v-for="(filter, index) in filters" :key="index" class="btn-wrapper">
+      <li v-for="(filter, i) in filterData" :key="i" class="btn-wrapper">
         <FilterButton
-          :checked="getObjectByKey(filter.key)"
-          :value="getObjectByKey(filter.key)"
+          :value="filter.values"
+          :label="filter.labels[i] || filter.labels[0]"
           :buttonText="filter.name"
           :buttonType="filter.btnType"
-          @change="selectedFilters = [$event]"
+          @inputClick="applyFilters($event)"
         />
       </li>
     </ul>
+
+    <modal
+      v-if="showModal"
+      :title="buttonText"
+      :fullscreen="true"
+      @close="showModal = false"
+    >
+      <div class="filter-modal-content">
+        <ul>
+          <li
+            v-for="(data, index) in filterData[selectedFilters].values"
+            :key="index"
+          >
+            <FilterButton
+              :value="data"
+              :label="filterData[selectedFilters].labels[index]"
+              :buttonText="filterData[selectedFilters].name"
+              buttonType="checkbox"
+              @inputClick="applyFilters($event)"
+            />
+          </li>
+        </ul>
+      </div>
+
+      <div class="filter-actions">
+        <button class="filter-button primary" @click="applyFilters">
+          Apply Filters
+        </button>
+        <button class="filter-button" @click="resetFilters">
+          Reset Filters
+        </button>
+      </div>
+    </modal>
   </div>
 </template>
 
@@ -18,11 +51,21 @@
 import FilterButton from "@/components/FilterButton.vue";
 import { defineComponent } from "vue";
 import { mapGetters } from "vuex";
+import Modal from "@/components/Modal.vue";
+
+export interface selectedFilters {
+  location: string[];
+  businessArea: string[];
+  workingTitles: string[];
+  canTravel: boolean;
+  availableType: string[];
+}
 
 export default defineComponent({
   name: "FilterComponent",
   components: {
     FilterButton,
+    Modal,
   },
   props: {
     buttonText: {
@@ -37,60 +80,101 @@ export default defineComponent({
   },
   data() {
     return {
-      selectedFilters: [],
+      showModal: false,
+      selectedFilters: null,
+      filterData: [
+        {
+          name: "Location",
+          btnType: "clickable",
+          labels: ["Stockholm", "Göteborg", "Malmö"],
+          values: ["Stockholm", "Göteborg", "Malmö"],
+          selectedValues: [],
+        },
+        {
+          name: "Bussiness Area",
+          btnType: "clickable",
+          labels: ["Technology", "Finance", "Marketing", "Sales"],
+          values: ["Technology", "Finance", "Marketing", "Sales"],
+          selectedValues: [],
+        },
+        {
+          name: "Working Titles",
+          btnType: "clickable",
+          labels: [
+            "Frontend",
+            "Backend",
+            "Fullstack",
+            "UX",
+            "UI",
+            "QA",
+            "DevOps",
+            "Data",
+            "Product",
+            "Project",
+            "Scrum",
+            "Agile",
+            "Growth",
+            "Sales",
+            "Marketing",
+            "Finance",
+            "HR",
+            "Legal",
+            "Support",
+            "Other",
+          ],
+          values: [
+            "Frontend",
+            "Backend",
+            "Fullstack",
+            "UX",
+            "UI",
+            "QA",
+            "DevOps",
+            "Data",
+            "Product",
+            "Project",
+            "Scrum",
+            "Agile",
+            "Growth",
+            "Sales",
+            "Marketing",
+            "Finance",
+            "HR",
+            "Legal",
+            "Support",
+            "Other",
+          ],
+          selectedValues: [],
+        },
+        {
+          name: "Can Travel",
+          btnType: "checkbox",
+          labels: ["Can Travel"],
+          values: false,
+          selectedValues: [],
+        },
+        {
+          name: "Available Type",
+          btnType: "clickable",
+          labels: ["Fulltime", "Parttime", "Internship", "Contract"],
+          values: ["Fulltime", "Parttime", "Internship", "Contract"],
+          selectedValues: [],
+        },
+      ],
     };
   },
-  methods: {},
-  computed: {
-    ...mapGetters(["filters"]),
-    getObjectByKey() {
-      return function (key) {
-        const obj = {
-          location: [
-            { value: "göteborg", label: "Göteborg" },
-            { value: "stockholm", label: "Stockholm" },
-            { value: "malmö", label: "Malmö" },
-          ],
-          businessArea: [
-            { value: "technology", label: "Technology" },
-            { value: "finance", label: "Finance" },
-            { value: "marketing", label: "Marketing" },
-            { value: "sales", label: "Sales" },
-          ],
-          workingTitles: [
-            { value: "frontend", label: "Frontend" },
-            { value: "backend", label: "Backend" },
-            { value: "fullstack", label: "Fullstack" },
-            { value: "ux", label: "UX" },
-            { value: "ui", label: "UI" },
-            { value: "qa", label: "QA" },
-            { value: "devops", label: "DevOps" },
-            { value: "data", label: "Data" },
-            { value: "product", label: "Product" },
-            { value: "project", label: "Project" },
-            { value: "scrum", label: "Scrum" },
-            { value: "agile", label: "Agile" },
-            { value: "growth", label: "Growth" },
-            { value: "sales", label: "Sales" },
-            { value: "marketing", label: "Marketing" },
-            { value: "finance", label: "Finance" },
-            { value: "hr", label: "HR" },
-            { value: "legal", label: "Legal" },
-            { value: "support", label: "Support" },
-            { value: "other", label: "Other" },
-          ],
-          canTravel: false,
-          availableType: [
-            { value: "fulltime", label: "Fulltime" },
-            { value: "parttime", label: "Parttime" },
-            { value: "internship", label: "Internship" },
-            { value: "contract", label: "Contract" },
-            { value: "project", label: "Project" },
-            { value: "freelance", label: "Freelance" },
-          ],
-        };
-        return obj[key];
-      };
+  methods: {
+    applyFilters(e) {
+      if (e.btnType === "clickable") {
+        this.selectedFilters = this.filterData.indexOf(e);
+        this.showModal = true;
+        console.log(e);
+      } 
+      console.log(e);
+    },
+    resetFilters() {
+      this.selectedFilters = [];
+      this.$store.commit("setKeyword", []);
     },
   },
 });

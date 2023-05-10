@@ -19,14 +19,14 @@ export default {
   filterBy(state: state): IConsultant[] {
     return state.consultants.filter((consultant) => {
       // Loop through each property in the consultantDetails object.
-      if (typeof state.keyword === "string") {
+      if (state.keyword !== null && typeof state.keyword === "string" ) {
         for (const key in consultant.consultantDetails) {
           // Check if the property is not null or undefined.
           let index = 0;
           if (consultant.consultantDetails[key]) {
-            if (state.keyword === "") {
+            if (state.keyword === "" || state.keyword.length === 0) {
               return true;
-            }
+            } 
             // Check if the name or workingTitles property contains the keyword.
             if (state.keyword.length &&
               consultant.consultantDetails.name
@@ -39,7 +39,7 @@ export default {
           }
         }
         return false;
-      } else if (typeof state.keyword === "object") {
+      } else if (state.keyword !== null && typeof state.keyword === "object") {
         for (const key in consultant.consultantDetails) {
           // Check if the property is not null or undefined.
           let index = 0;
